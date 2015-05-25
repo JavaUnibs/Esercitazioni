@@ -29,17 +29,17 @@ public class TamagotchiMain {
 		int i = 0, j = 0;
 
 		System.out.println(messaggio);
-		String nome = TamagotchiUtility.stringa();
+		String nome = LeggiInput.stringa();
 
 		// ciclo per il controllo dei valori inseriti dall'utente
 
 		do {
 
 			System.out.println(messaggio2);
-			sazieta = TamagotchiUtility.doppio();
+			sazieta = LeggiInput.doppio();
 
 			System.out.println(messaggio3);
-			felicita = TamagotchiUtility.doppio();
+			felicita = LeggiInput.doppio();
 
 			if (sazieta <= 0 || felicita <= 0)
 				System.out.println("Valori errati");
@@ -55,9 +55,9 @@ public class TamagotchiMain {
 
 		do {
 
-			TamagotchiUtility.menu(MENU);
+			LeggiInput.menu(MENU);
 
-			scelta = TamagotchiUtility.intero();
+			scelta = LeggiInput.intero();
 
 			if (scelta == 1) {
 				i++;
@@ -75,7 +75,7 @@ public class TamagotchiMain {
 			case 1: {
 				System.out.println("Quanti biscotti??");
 
-				int biscotti = TamagotchiUtility.intero();
+				int biscotti = LeggiInput.intero();
 
 				tamag.daiBiscotti(biscotti, i);
 				System.out.println(tamag.stringaOutput());
@@ -87,7 +87,7 @@ public class TamagotchiMain {
 			case 2: {
 				System.out.println("Quante carezze??");
 
-				int carezze = TamagotchiUtility.intero();
+				int carezze = LeggiInput.intero();
 
 				tamag.daiCarezze(carezze, j);
 				System.out.println(tamag.stringaOutput());

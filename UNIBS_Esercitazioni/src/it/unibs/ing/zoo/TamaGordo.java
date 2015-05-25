@@ -9,16 +9,16 @@ public class TamaGordo extends Tamagotchi {
 	private double gradoAffettivo;
 	private double gradoSazietà;
 
-	public TamaGordo(String nome, int gradoAffettivo, int gradoSazietà) {
+	public TamaGordo(String _nome, double _gradoAffettivo, double _gradoSazietà) {
 		
-		super(nome, gradoAffettivo, gradoSazietà);
+		super(_nome, _gradoAffettivo, _gradoSazietà);
 
 	}
 
 	@Override
 	public void riceviCarezze(int numCarezze)
 	{
-		super.riceviCarezze(numCarezze);
+		
 		
 	} 
 }

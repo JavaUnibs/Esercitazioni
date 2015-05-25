@@ -2,7 +2,7 @@ package it.unibs.ing.tamag;
 
 import java.util.Scanner;
 
-public class TamagotchiUtility {
+public class LeggiInput {
 
 	private static Scanner in = new Scanner(System.in);
 

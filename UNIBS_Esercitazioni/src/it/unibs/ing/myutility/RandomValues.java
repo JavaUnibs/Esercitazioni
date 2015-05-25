@@ -32,12 +32,35 @@ public class RandomValues {
 		
 	}
 	
-public static int ranIntLimite (int min, int max){
+	/**
+	 * Genera un numero intero copreso in un range personalizzabile 
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+
+	public static int ranIntLimite (int min, int max){
 		
 	    int limite = max - min;
 		int i = min + random.nextInt(limite);
 		return i;
 		
 	}
+
+/**
+ * Genera un numero double compreso in un range personalizzabile
+ * 
+ * @param min
+ * @param max
+ * @return i
+ */
+
+public static double ranDoubleLimite (double min, double max){
+	
+		double limite = max - min;
+		double i = min + random.nextDouble();
+		return i;
+}
 
 }
