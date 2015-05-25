@@ -12,8 +12,9 @@ public class LeggiInput {
 	 * @return input
 	 */
 
-	public static String stringa() {
+	public static String stringa(String domanda) {
 
+		System.out.println(domanda);
 		String input = in.next();
 		return input;
 	}
@@ -24,9 +25,9 @@ public class LeggiInput {
 	 * @return input
 	 */
 
-	public static String riga() {
+	public static String riga(String domanda) {
 
-		
+		System.out.println(domanda);
 		String input = in.nextLine();
 		return input;
 
@@ -57,8 +58,9 @@ public class LeggiInput {
 	 * @return input
 	 */
 
-	public static int intero() {
+	public static int intero(String domanda) {
 		
+		System.out.println(domanda);
 		int input = in.nextInt();
 		return input;
 
@@ -91,8 +93,9 @@ public class LeggiInput {
 	 * @return input
 	 */
 
-	public static double doppio() {
+	public static double doppio(String domanda) {
 
+		System.out.println(domanda);
 		double input = in.nextDouble();
 		return input;
 
