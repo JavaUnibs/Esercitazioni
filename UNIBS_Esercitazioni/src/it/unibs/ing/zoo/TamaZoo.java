@@ -1,3 +1,5 @@
+import it.unibs.ing.tamag.*;
+
 public class TamaZoo 
 {
   // definire come attributo una struttura dati destinata a contenere i vari Tamagotchi presenti;
