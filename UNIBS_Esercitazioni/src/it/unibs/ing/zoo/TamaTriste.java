@@ -8,6 +8,44 @@ public class TamaTriste extends Tamagotchi {
 		
 	}
 	
+	public void daiCarezze(int carezze, int eff_carezze) {
+
+		if ((sazieta - (carezze * DIM_SAZIETA)) > MIN_SAZIETA)
+			sazieta -= (carezze * DIM_SAZIETA);
+		else
+			sazieta = MIN_SAZIETA;
+
+	}
+	
+	public void daiBiscotti(int biscotti, int eff_biscotti) {
+
+		if ((sazieta + (biscotti * INC_SAZIETA) * eff_biscotti) <= MAX_SAZIETA)
+			sazieta += (biscotti * INC_SAZIETA) * eff_biscotti;
+		else
+			sazieta = MAX_SAZIETA;
+
+	}
+	
+	public void stato() {
+
+	   System.out.println("Il Tamagotchi e' infelice (proprieta' intrinseca");
+		
+
+		if (sazieta < SOGLIA_SAZ_MIN)
+			System.out.println("Il Tamagotchi ha fame");
+		else if (sazieta > SOGLIA_SAZ_MAX)
+			System.out.println("Il tamagotchi e' gonfio");
+		else
+			System.out.println("Il tamagotchi non ha fame");
+
+		if (sazieta <= 0 || sazieta >= MAX_SAZIETA)
+			System.out.println("Il Tamagotchi e' morto");
+	}
+   
+	public boolean vita(){
+		if (sazieta <= 0 || sazieta >= MAX_SAZIETA) return false;
+		else return true;
+	}
 	
 	
 }

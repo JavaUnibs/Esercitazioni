@@ -25,31 +25,29 @@ import java.util.ArrayList;
 	  public boolean ciSonoVivi ()
 	  {
 		  // verificare se nello zoo c'e' almeno un Tamagotchi vivo (la classe Tamagotchi offre un metodo utile a tale scopo)
-		  boolean stato = false;
+		  boolean stato;
 		  
-		  while(!stato){
-			  
-			  
-	  }
-	  
-	  public void daiBiscotti (int quantiBiscotti, int eff_biscotti)
-	  {
-		  // somministrare il numero di biscotti specificato ai Tamagotchi presenti (la classe Tamagotchi offre un metodo utile a tale scopo)
-			// ovviamente la somministrazione puo' avvenire solo per Tamagotchi vivi
-			// per ogni Tamagotchi si stampa la sua nuova situazione
-		
-		  while(tamazoo.Size()) 
-		  tamazoo.daiBiscotti(quantiBiscotti, eff_biscotti);
+		  
+		  for(Tamagotchi a: tamazoo){ stato = a.vita();
+		  if (stato) return stato;
+		  }
+		  return false;
 		  
 	  }
 	  
-	  public void daiCarezze (int quanteCarezze)
+	  public void daiBiscotti (int quantiBiscotti)
 	  {
-		  // somministrare il numero di carezze specificato ai Tamagotchi presenti (la classe Tamagotchi offre un metodo utile a tale scopo)
-			// ovviamente la somministrazione puo' avvenire solo per Tamagotchi vivi
-		  // per ogni Tamagotchi si stampa la sua nuova situazione
+		  int eff_biscotti = 1;
+		  
+		  for(Tamagotchi a: tamazoo){ a.daiBiscotti(quantiBiscotti, eff_biscotti);
 
-		  tamazoo.daiCarezze (quanteCarezze, eff_carezze);
+	  }
+	  
+	  public void daiCarezze (int quanteCarezze){
+	  
+		  int eff_carezze = 1;
+		  for(Tamagotchi a: tamazoo){ a.daiCarezze(quanteCarezze, eff_carezze);}
+
 	  }
 	  
 	    

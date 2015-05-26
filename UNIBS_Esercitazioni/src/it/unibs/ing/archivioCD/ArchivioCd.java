@@ -59,8 +59,7 @@ public class ArchivioCd {
 
 	public Cd ricerca() {
 
-		System.out.println("Inserisci titolo del CD: ");
-		String in_titolo = LeggiInput.riga();
+		String in_titolo = LeggiInput.riga("Inserisci titolo del CD: ");
 		Cd b = new Cd(null, null);
 
 		for (Cd a : elencoCD) {

@@ -32,30 +32,27 @@ public class Menu {
 			switch(selezione){
 			
 			case 0: break;
-			case 1: {System.out.println("Inserire il titolo del CD: ");
-			         String nome_cd = LeggiInput.riga();
-			         System.out.println("Inserisci l'autore del CD: ");
-			 		 String nome_autore = LeggiInput.riga();
+			case 1: {
+			         String nome_cd = LeggiInput.riga("Inserire il titolo del CD: ");
+			        
+			 		 String nome_autore = LeggiInput.riga("Inserisci l'autore del CD: ");
 				     archivio.aggiungiCd(new Cd(nome_cd, nome_autore));
 			         }
 					break;
 			case 2: {
 				     
-				     System.out.println("Inserire il titolo e la durata del brano:");
-			         System.out.println("Titolo:");	
-                     String titolo = LeggiInput.riga();
-                     System.out.println("Minuti:");
-                     int minuti = LeggiInput.intero();
-                     System.out.println("Secondi:");
-                     int secondi = LeggiInput.intero();
+				     
+                     String titolo = LeggiInput.riga("Inserire il titolo e la durata del brano:\nTitolo:");
+                     int minuti = LeggiInput.intero("Minuti:");
+                     int secondi = LeggiInput.intero("Secondi:");
                      LeggiInput.terminaRiga();
                      archivio.ricerca().aggiungiBrano(new Brano(titolo, minuti, secondi));
 					}
 					break;
 			case 3: archivio.showCD(archivio.ricerca());
 					break;
-			case 4: {System.out.printf("Inserire il titolo del CD da eliminare:");
-					String nomecd = LeggiInput.riga();
+			case 4: {
+					String nomecd = LeggiInput.riga("Inserire il titolo del CD da eliminare:");
 					archivio.eliminaCd(nomecd);
 			}
 					break;

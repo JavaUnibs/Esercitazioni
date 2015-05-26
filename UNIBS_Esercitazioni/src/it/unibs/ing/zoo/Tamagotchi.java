@@ -117,7 +117,12 @@ public class Tamagotchi {
 		if (felicita <= 0 || sazieta <= 0 || sazieta >= MAX_SAZIETA)
 			System.out.println("Il Tamagotchi e' morto");
 	}
-
+   
+	public boolean vita(){
+		if (felicita <= 0 || sazieta <= 0 || sazieta >= MAX_SAZIETA) return false;
+		else return true;
+	}
+	
 	/**
 	 * Metodo per la restituzione di una stringa contenente i dati del
 	 * tamagotchi

@@ -59,7 +59,8 @@ public class RandomValues {
 public static double ranDoubleLimite (double min, double max){
 	
 		double limite = max - min;
-		double i = min + random.nextDouble();
+		double i = min + (limite) * random.nextDouble();
+		
 		return i;
 }
 

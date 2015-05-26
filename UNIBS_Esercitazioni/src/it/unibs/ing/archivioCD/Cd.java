@@ -65,8 +65,7 @@ public class Cd {
 
 	public void searchBrano() {
 
-		System.out.println("Inserisci titolo del brano: ");
-		String in_titolo = LeggiInput.riga();
+		String in_titolo = LeggiInput.riga("Inserisci titolo del brano: ");
 
 		for (Brano a : elencoBrani) {
 			if (a.titolo.equals(in_titolo))

@@ -6,14 +6,19 @@ public class GestoreTamaZoo {
 
 	private static final String messaggio = "Inserire il numero di Tamagotchi da creare";
 	private static final String messaggio1 = "Inserire nome Tamagotchi";
+	private static final String [] elenco = {"Dai carezze", "Dai biscotti"};
 
-	public static String nome = null;
-	public static double felicita, sazieta;
+	public static  String nome = null;
+	public  static double felicita, sazieta;
 
 	public static final double MAX_FELICITA = 100, MIN_FELICITA = 0,
 			MAX_SAZIETA = 100, MIN_SAZIETA = 0;
+	// Numeri stabiliti per dare un senso al metodo e non generare numeri troppo alti
+	public static final int MIN_BISCOTTI = 1, MAX_BISCOTTI = 75;         
 	public static final int MIN_SCELTA = 1, MAX_SCELTA = 3;
 	public static final double FELICITA_GORDO = 100, FELICITA_TRISTE = 10;
+	
+	
 
 	// DEFINIRE UN ATTRIBUTO static DI TIPO TamaZoo
 
@@ -33,8 +38,8 @@ public class GestoreTamaZoo {
 			
 			switch(scelta){
 			//Tamabase
-			case 1: { felicita = RandomValues.ranDouble(MIN_FELICITA, MAX_FELICITA);
-					sazieta = RandomValues.ranDouble(MIN_SAZIETA, MAX_SAZIETA);
+			case 1: { felicita = RandomValues.ranDoubleLimite(MIN_FELICITA, MAX_FELICITA);
+					sazieta = RandomValues.ranDoubleLimite(MIN_SAZIETA, MAX_SAZIETA);
 					Tamagotchi tamag = new Tamagotchi(nome, felicita, sazieta);
 					tamazoo.inserisci(tamag);
 					
@@ -43,17 +48,18 @@ public class GestoreTamaZoo {
 			//Tamagordo
 			case 2: {
 					felicita = FELICITA_GORDO;
-					sazieta = RandomValues.ranDouble(MIN_SAZIETA, MAX_SAZIETA);
+					sazieta = RandomValues.ranDoubleLimite(MIN_SAZIETA, MAX_SAZIETA);
 					Tamagotchi tamag = new TamaGordo(nome, felicita, sazieta );
-					tamazoo.add(tamag);
+					tamazoo.inserisci(tamag);
 					
 			}break;
 			
 			//Tamatriste
 			case 3: {
 						felicita = FELICITA_TRISTE;
-						sazieta = RandomValues.ranLimitiDouble(MIN_SAZIETA, MAX_SAZIETA);
-						tamazoo.add(tamag);
+						sazieta = RandomValues.ranDoubleLimite(MIN_SAZIETA, MAX_SAZIETA);
+						Tamagotchi tamag = new TamaTriste (nome, felicita, sazieta);
+						tamazoo.inserisci(tamag);
 			}
 				
 			}break;
@@ -61,13 +67,14 @@ public class GestoreTamaZoo {
 			// e inserirlo nello zoo (usando l'apposito metodo della classe TamaZoo)
 		}
 		
-		MyMenu principale= // creare un menu con le scelte a disposizione dell'utente
+		Menu principale= new Menu(elenco);// creare un menu con le scelte a disposizione dell'utente
 		
     boolean fine = false;
 		
 		do 
 		{
-		 int voceSelezionata = principale.scegli();
+		 
+			int voceSelezionata = principale.stampaMenu();
 			
 	     switch ( voceSelezionata ) 
 	      {
@@ -81,6 +88,9 @@ public class GestoreTamaZoo {
 			    default:
 				   // MESSAGGIO DI ERRORE
 				 break;
+			    //Biscotti
+			    case 1:  
+			    	daiBiscotti();
 			}//switch
 		 
 	     
