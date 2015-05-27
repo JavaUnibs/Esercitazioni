@@ -1,4 +1,4 @@
-package it.unibs.ing.myutility;
+ package it.unibs.ing.myutility;
 
 import java.util.Random;
 
@@ -42,7 +42,7 @@ public class RandomValues {
 
 	public static int ranIntLimite (int min, int max){
 		
-	    int limite = max - min;
+	    int limite = max - min +1;
 		int i = min + random.nextInt(limite);
 		return i;
 		

@@ -8,6 +8,11 @@ public class TamaTriste extends Tamagotchi {
 		
 	}
 	
+	/**
+	 * Metodo per dare le carezze e che sovrascrive il metodo della superclasse
+	 */
+	
+	@Override
 	public void daiCarezze(int carezze, int eff_carezze) {
 
 		if ((sazieta - (carezze * DIM_SAZIETA)) > MIN_SAZIETA)
@@ -17,6 +22,11 @@ public class TamaTriste extends Tamagotchi {
 
 	}
 	
+	/**
+	 * Metodo per dare i biscotti e che sovrascrive il metodo della superclasse
+	 */
+	
+	@Override
 	public void daiBiscotti(int biscotti, int eff_biscotti) {
 
 		if ((sazieta + (biscotti * INC_SAZIETA) * eff_biscotti) <= MAX_SAZIETA)
@@ -26,6 +36,11 @@ public class TamaTriste extends Tamagotchi {
 
 	}
 	
+	/**
+	 * Metodo per verificare lo stato del tamagordo e che sovrascrive il metodo della superclasse
+	 */
+	
+	@Override
 	public void stato() {
 
 	   System.out.println("Il Tamagotchi e' infelice (proprieta' intrinseca");
@@ -40,8 +55,13 @@ public class TamaTriste extends Tamagotchi {
 
 		if (sazieta <= 0 || sazieta >= MAX_SAZIETA)
 			System.out.println("Il Tamagotchi e' morto");
+		System.out.println(" ");
+		
 	}
    
+	/**
+	 * Metodo per verificare se il tamagordo e' vivo o morto
+	 */
 	public boolean vita(){
 		if (sazieta <= 0 || sazieta >= MAX_SAZIETA) return false;
 		else return true;
