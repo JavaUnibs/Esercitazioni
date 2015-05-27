@@ -27,7 +27,7 @@ public class Tamagotchi {
 	/**
 	 * Valori del tamagotchi
 	 */
-	
+
 	public int carezze;
 	public int biscotti;
 	public int i, j;
@@ -100,29 +100,35 @@ public class Tamagotchi {
 	 */
 
 	public void stato() {
-
+		if (felicita <= 0 || sazieta <= 0 || sazieta >= MAX_SAZIETA)
+			System.out.println("Il Tamagotchi è morto.\n");
+		else{
 		if (felicita < SOGLIA_FEL_MIN || sazieta > SOGLIA_SAZ_MAX
 				|| sazieta < SOGLIA_SAZ_MIN)
-			System.out.println("Il Tamagotchi e' infelice");
+			System.out.println("Il Tamagotchi è infelice.");
 		else if (felicita > SOGLIA_FEL_MIN || sazieta < SOGLIA_SAZ_MAX)
-			System.out.println("Il Tamagotchi e' felice");
+			System.out.println("Il Tamagotchi è felice.");
 
 		if (sazieta < SOGLIA_SAZ_MIN)
-			System.out.println("Il Tamagotchi ha fame");
+			System.out.println("Il Tamagotchi ha fame.\n");
 		else if (sazieta > SOGLIA_SAZ_MAX)
-			System.out.println("Il tamagotchi e' gonfio");
+			System.out.println("Il tamagotchi è gonfio.\n");
 		else
-			System.out.println("Il tamagotchi non ha fame");
-
-		if (felicita <= 0 || sazieta <= 0 || sazieta >= MAX_SAZIETA)
-			System.out.println("Il Tamagotchi e' morto");
-	}
-   
-	public boolean vita(){
-		if (felicita <= 0 || sazieta <= 0 || sazieta >= MAX_SAZIETA) return false;
-		else return true;
+			System.out.println("Il tamagotchi non ha fame.\n");
+		}
 	}
 	
+	/**
+	 * Metodo per verificare se il tamagotchi e' vivo o morto
+	 */
+
+	public boolean vita() {
+		if (felicita <= 0 || sazieta <= 0 || sazieta >= MAX_SAZIETA)
+			return false;
+		else
+			return true;
+	}
+
 	/**
 	 * Metodo per la restituzione di una stringa contenente i dati del
 	 * tamagotchi
@@ -132,9 +138,9 @@ public class Tamagotchi {
 
 		String out_messaggio = String.format(
 				("I valori di %s sono: \nFelicita: %3.1f\nSazieta: %3.1f"),
-				this.nome, this.felicita, this.sazieta);  // puo' essere fatto anche con variabili senza il this.
+				this.nome, this.felicita, this.sazieta); 
 		return out_messaggio;
 
 	}
-	
+
 }

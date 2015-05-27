@@ -4,11 +4,11 @@ import it.unibs.ing.myutility.*;
 
 public class GestoreTamaZoo {
 
-	// QUI SERVIRANNO UN PO' DI COSTANTI DI VARIO TIPO
-
-	private static final String messaggio = "Inserire il numero di Tamagotchi da creare";
-	private static final String messaggio1 = "Inserire nome Tamagotchi";
-	private static final String[] elenco = { "Dai biscotti", "Dai carezze" };
+	private static final String MESSAGGIO = "Inserire il numero di Tamagotchi da creare:";
+	private static final String MESSAGGIO1 = "Inserire nome Tamagotchi:";
+	private static final String MORTI ="Tutti i tamagotchi sono morti.";
+	private static final String[] ELENCO = { "Dai biscotti", "Dai carezze" };
+	private static final String[] NOMI_TAMAGOTCHI = {"È un tamagotchi normale!" , "È un tamagordo!" , "È un tamatriste!"};
 
 	public static String nome = null;
 	public static double felicita, sazieta;
@@ -19,24 +19,20 @@ public class GestoreTamaZoo {
 	public static final int MIN_SCELTA = 1, MAX_SCELTA = 3;
 	public static final double FELICITA_GORDO = 100, FELICITA_TRISTE = 10;
 
-	// DEFINIRE UN ATTRIBUTO static DI TIPO TamaZoo
-
 	public static void main(String[] args) {
 
-		int numeroTamagotchi = LeggiInput.intero(messaggio); // richiedere il
-																// numero
-																// all'utente
+		int numeroTamagotchi = LeggiInput.intero(MESSAGGIO);
 
 		TamaZoo zoo = new TamaZoo();
 
 		for (int i = 1; i <= numeroTamagotchi; i++) {
-			
-			nome = LeggiInput.stringa(messaggio1);
+
+			nome = LeggiInput.stringa(MESSAGGIO1);
 
 			int scelta = RandomValues.ranIntLimite(MIN_SCELTA, MAX_SCELTA);
-System.out.println(scelta);
+			System.out.println(NOMI_TAMAGOTCHI[scelta-1] + "\n");
 			switch (scelta) {
-			// Tamabase
+
 			case 1: {
 				felicita = RandomValues.ranDoubleLimite(MIN_FELICITA,
 						MAX_FELICITA);
@@ -69,13 +65,10 @@ System.out.println(scelta);
 			}
 				break;
 
-			// e inserirlo nello zoo (usando l'apposito metodo della classe
-			// TamaZoo)
 			}
 		}
 
-		Menu principale = new Menu(elenco);// creare un menu con le scelte a
-											// disposizione dell'utente
+		Menu principale = new Menu(ELENCO);
 
 		boolean fine = false;
 
@@ -84,11 +77,6 @@ System.out.println(scelta);
 			int voceSelezionata = principale.stampaMenu();
 
 			switch (voceSelezionata) {
-			// i casi da gestire sono la somministrazione
-			// di biscotti e carezze. In entrambi i casi si estrae un numero
-			// casuale e
-			// si invoca l'apposito metodo per la somministrazione nella classe
-			// TamaZoo
 
 			case 0:
 				fine = true;
@@ -110,8 +98,9 @@ System.out.println(scelta);
 					if (!zoo.tamazoo.get(i).vita())
 						zoo.tamazoo.remove(i);
 				}
-				
-			}break;
+
+			}
+				break;
 
 			// Carezze
 			case 2: {
@@ -126,25 +115,18 @@ System.out.println(scelta);
 					if (!zoo.tamazoo.get(i).vita())
 						zoo.tamazoo.remove(i);
 				}
-				
-			}break;
+
+			}
+				break;
 			}
 
 			if (!zoo.ciSonoVivi()) {
-				System.out.println("Tutti i tamagotchi sono morti");
+				System.out.println(MORTI);
 				fine = true;
 			}
-			// controllare se nello zoo c'e' almeno un Tamagotchi vivo
-			// in caso contrario bisogna terminare il programma
 
 		} while (!fine);
 
 	}
 
-	/*
-	 * public static Tamagotchi creaTamagotchi() { String nome = // chiedere il
-	 * nome all'utente int affetto = // estrarre a caso il valore iniziale di
-	 * affetto int sazieta = // estrarre a caso il valore iniziale di sazieta'
-	 * // restituire un nuovo Tamagotchi }
-	 */
 }
