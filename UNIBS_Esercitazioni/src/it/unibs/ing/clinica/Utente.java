@@ -1,4 +1,5 @@
-package clinica;
+package it.unibs.ing.clinica;
+import it.unibs.ing.myutility.*;
 
 public class Utente {
 
@@ -17,7 +18,7 @@ public class Utente {
 		}
 		codiceFiscale=_codiceFiscale;
 	}
-	public void modificaVisite(String campo, String input){
+	public void modificaDatiUtente(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;

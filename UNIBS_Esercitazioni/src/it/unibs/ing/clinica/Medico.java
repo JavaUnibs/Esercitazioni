@@ -1,4 +1,4 @@
-package clinica;
+package it.unibs.ing.clinica;
 
 public class Medico extends Utente{
 	
@@ -17,7 +17,7 @@ public class Medico extends Utente{
 		areaCompetenza=_areaCompetenza;
 	}
 	
-	public void modificaVisite(String campo, String input){
+	public void modificaDatiMedico(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;

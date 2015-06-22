@@ -1,4 +1,4 @@
-package clinica;
+package it.unibs.ing.clinica;
 import java.util.*;
 public class Clinica {
 	
