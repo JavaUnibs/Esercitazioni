@@ -17,7 +17,7 @@ public class Medico extends Utente{
 		areaCompetenza=_areaCompetenza;
 	}
 	
-	public void modificaDatiMedico(String campo, String input){
+	public void modificaVisite(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;

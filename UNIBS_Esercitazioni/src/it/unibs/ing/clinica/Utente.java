@@ -18,7 +18,7 @@ public class Utente {
 		}
 		codiceFiscale=_codiceFiscale;
 	}
-	public void modificaDatiUtente(String campo, String input){
+	public void modificaVisite(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;
