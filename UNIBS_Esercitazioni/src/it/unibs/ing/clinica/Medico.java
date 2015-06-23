@@ -1,5 +1,6 @@
 package it.unibs.ing.clinica;
 
+
 public class Medico extends Utente{
 	
 	public String tipo, areaCompetenza, codiceAlbo;
@@ -17,7 +18,7 @@ public class Medico extends Utente{
 		areaCompetenza=_areaCompetenza;
 	}
 	
-	public void modificaDatiMedico(String campo, String input){
+	public void modificaMedico(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;
@@ -30,7 +31,7 @@ public class Medico extends Utente{
 		break;
 		case "sesso": sesso=input;
 		break;
-		case "numero di telefono": numTelefono=input;
+		case "telefono": numTelefono=input;
 		break;
 		case "codice fiscale": codiceFiscale=input;
 		break;
@@ -42,7 +43,22 @@ public class Medico extends Utente{
 		break;
 		}
 		}
-
+    public String toString(){
+    	String descrizione="-----------\n"
+    			+ "Nome: "+nome+"\n"
+    			+ "Cognome: "+cognome+"\n"
+    			+ "Data di nascita: "+dataNascita+"\n"
+    			+ "Luogo di nascita: "+luogoNascita+"\n"
+    			+ "Sesso: "+sesso+"\n"
+    			+ "Telefono: "+numTelefono+"\n"
+    			+ "Codice fiscale "+codiceFiscale+"\n"
+    			+ "Codice albo: "+codiceAlbo+"\n"
+    			+ "Tipo: "+tipo+"\n"
+    			+ "Area di competenza: "+areaCompetenza+"\n"
+    			+"-----------\n";
+    	return descrizione;
+    	
+    }
 
 
 

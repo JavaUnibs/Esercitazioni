@@ -1,96 +1,74 @@
 package it.unibs.ing.clinica;
 import java.util.*;
-public class Clinica {
+import it.unibs.ing.myutility.*;
+
+public class Archivio {
 	
 ArrayList<Utente> elencoUtenti = new ArrayList<Utente>();
 ArrayList<Medico> elencoMedici = new ArrayList<Medico>();
 
 
-
-
-/*metodo per la ricerca di singoli utenti*/
-public Utente ricercaUtenti(String generico){
-	int cont=0;
-	Utente copia= null;
-	boolean condizione=false;
-
-	
-	while(!condizione) {
-	for (Utente utente: elencoUtenti){
-		if (generico.equals(utente.codiceFiscale)||generico.equals(utente.cognome)||generico.equals(utente.dataNascita)||
-				generico.equals(utente.luogoNascita)||generico.equals(utente.nome)||generico.equals(utente.numTelefono)) {
-			cont++;
-			copia=utente;
-		};
-	}
-		if(cont>=2) System.out.println("Più utenti trovati, usare un altro criterio");
-		if(cont<1) {
-			System.out.println("Nessun utente trovato");
-			return copia;
-		}
-		if(cont==1) condizione=true;
-		}
-	return copia;
-	}	
-
-
-/*metodo per la ricerca di più utenti*/
-public ArrayList<Utente> ricercaUtenti(String generico, boolean opzione){
-
+/*metodo per la ricerca di utenti*/
+public Utente ricercaUtenti(String generico, boolean opzione){
+Utente nullo=null;
 ArrayList<Utente> temp = new ArrayList<Utente>();
 	for (Utente utente: elencoUtenti){
 		if (generico.equals(utente.codiceFiscale)||generico.equals(utente.cognome)||generico.equals(utente.dataNascita)||
-				generico.equals(utente.luogoNascita)||generico.equals(utente.nome)||generico.equals(utente.numTelefono)) {
+				generico.equals(utente.luogoNascita)||generico.equals(utente.nome)||generico.equals(utente.numTelefono)||
+				generico.equals(utente.cognomeNome)) {
              temp.add(utente);
 		};
 	}
-       if(temp.size()<1) System.out.println("Nessun utente trovato");
-		return temp;
+       if(temp.isEmpty()) { 
+    	   System.out.println("Nessun utente trovato");
+    	   return nullo;
+       }
+       
+       if(temp.size()>1) {
+    	   System.out.println("*******"+temp.size()+" utenti trovati:*******\n");
+    	   for(Utente utente: temp){
+    		   System.out.println(utente.toString());
+    	   }
+    	int scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+    	return temp.get(scelta);
+    	
+       }
+       
+       return temp.get(0);
+	   
 }
-			
 
-
-	
-/*metodo per la ricerca di singoli medici*/
-public Utente ricercaMedici(String generico){
-	int cont=0;
-	Utente copia= null;
-	boolean condizione=false;
-
-	
-	while(!condizione) {
-	for (Medico medico: elencoMedici){
-		if (generico.equals(medico.codiceFiscale)||generico.equals(medico.cognome)||generico.equals(medico.dataNascita)||
-				generico.equals(medico.luogoNascita)||generico.equals(medico.nome)||generico.equals(medico.numTelefono)
-				||generico.equals(medico.numTelefono)) {
-			cont++;
-			copia=medico;
-		};
-	}
-		if(cont>=2) System.out.println("Più utenti trovati, usare un altro criterio");
-		if(cont<1) {
-			System.out.println("Nessun utente trovato");
-			return copia;
-		}
-		if(cont==1) condizione=true;
-		}
-	return copia;
-	}	
 
 
 /*metodo per la ricerca di più medici*/
-public ArrayList<Medico> ricercaMedici(String generico, boolean opzione){
-
+public Medico ricercaMedici(String generico, boolean opzione){
+Medico nullo=null;
 ArrayList<Medico> temp = new ArrayList<Medico>();
 	for (Medico medico: elencoMedici){
 		if (generico.equals(medico.codiceFiscale)||generico.equals(medico.cognome)||generico.equals(medico.dataNascita)||
 				generico.equals(medico.luogoNascita)||generico.equals(medico.nome)||generico.equals(medico.numTelefono)||
-				generico.equals(medico.codiceAlbo)||generico.equals(medico.tipo)||generico.equals(medico.areaCompetenza)) {
+				generico.equals(medico.cognomeNome)||generico.equals(medico.codiceAlbo)||generico.equals(medico.tipo)||
+				generico.equals(medico.areaCompetenza)) {
              temp.add(medico);
 		};
 	}
-       if(temp.size()<1) System.out.println("Nessun medico trovato");
-		return temp;
+       if(temp.isEmpty()) { 
+    	   System.out.println("Nessun medico trovato");
+    	   return nullo;
+       }
+       
+       if(temp.size()>1) {
+    	   System.out.println("*******"+temp.size()+" medici trovati:*******\n");
+    	   for(Medico medico: temp){
+    		   System.out.println(medico.toString());
+    	   }
+    	int scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+    	return temp.get(scelta);
+    	
+       }
+       
+       return temp.get(0);
+	   
 }	
 
 
@@ -108,18 +86,6 @@ public void inserimentoMedico(String nome, String cognome, String dataNascita, S
 	
 }
 
-
-public static void orariVisita(String medico){
-	/*
-	 * stampa gli orari di visita di un medico
-	 */
-}
-
-public static void disponibilità(String giorno, String ora){
-	/*
-	 * stampa i medici disponibili in quell'orario
-	 */
-}
 
 public static void inserimentoVisite(int codice, String orario, String tipo){
 	/*

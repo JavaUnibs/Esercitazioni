@@ -8,7 +8,7 @@ public class Visita {
 		
 	}
 	
-	public void modificaVisite(String campo, String input){
+	public void modificaVisita(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
 		case "motivo": motivoVisita=input;
@@ -26,4 +26,17 @@ public class Visita {
 		}
 		
 	}
+	
+	public String toString(){
+    	String descrizione="-----------\n"
+    			+ "Motivo: "+motivoVisita+"\n"
+    			+ "Tipo: "+tipoVisita+"\n"
+    			+ "Area di competenza: "+areaCompetenza+"\n"
+    			+ "Referto Medico: "+refertoMedico+"\n"
+    			+ "Prescrizione medica: "+prescrizioneMedica+"\n"
+    			+ "Stato: "+statoVisita+"\n"
+    			+"-----------\n";
+    	return descrizione;
+    	
+    }
 }
