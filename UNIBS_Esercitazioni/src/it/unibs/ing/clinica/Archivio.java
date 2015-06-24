@@ -101,6 +101,7 @@ public static void ricercaVisiteMedico(Medico medico){
 	/*
 	 * visualizza le visite prenotate di questo medico
 	 */
+	
 }
 
 public static void ricercaVisiteUtente(Utente utente){
