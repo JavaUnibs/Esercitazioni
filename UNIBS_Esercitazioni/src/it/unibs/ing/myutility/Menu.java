@@ -21,11 +21,10 @@ public class Menu {
 		}
 		System.out.println(" ");
 		System.out.println(USCITA);
-		int decisione;
-		return decisione= LeggiInput.intero(SCELTA);
+		return LeggiInput.intero(SCELTA);
 		
 	}
 	
-	
+
 
 }
