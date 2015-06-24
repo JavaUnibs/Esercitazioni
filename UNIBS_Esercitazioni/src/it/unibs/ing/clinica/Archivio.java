@@ -8,7 +8,7 @@ ArrayList<Utente> elencoUtenti = new ArrayList<Utente>();
 ArrayList<Medico> elencoMedici = new ArrayList<Medico>();
 
 
-/*metodo per la ricerca di utentiuuuuuuu*/
+/*metodo per la ricerca di utenti*/
 public Utente ricercaUtenti(String generico){
 Utente nullo=null;
 ArrayList<Utente> temp = new ArrayList<Utente>();
