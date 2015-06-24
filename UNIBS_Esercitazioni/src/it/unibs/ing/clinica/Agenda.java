@@ -3,7 +3,7 @@ import java.time.*;
 import java.util.*;
 
 public class Agenda {
-	Slot[][] settimana = new Slot[6][20];
+	Slot[][] settimana = new Slot[20][6];
 	
 	
 /**
@@ -17,7 +17,7 @@ public class Agenda {
 		int i,j;
 		for(i=0;i<6;i++){
 			for (j=0;j<20;j++){
-				settimana[i][j]=new Slot(Date.incrementoOra(temp, j));
+				settimana[j][i]=new Slot(Date.incrementoOra(temp, j));
 			}
 		}
 	}
@@ -50,10 +50,10 @@ public class Agenda {
 		for(data1=Date.indiceGiorno(giornoIniziale);data1<=data2;data1++){
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp=new Giorno(medico, Date.incrementoGiorno(giornoIniziale, cont));
-				for(Giorno giorno: settimana[data1][ora1].giorni){
+				for(Giorno giorno: settimana[ora1][data1].giorni){
 					if(!confrontaDisp(giorno, temp)) valore=true;
 				}
-				if(!valore) settimana[data1][ora1].aggiungiGiorno(temp);
+				if(!valore) settimana[ora1][data1].aggiungiGiorno(temp);
 				}
 			cont++;
 		}
@@ -75,10 +75,10 @@ public class Agenda {
 			data=Date.indiceGiorno(giorniVari[i]);
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp= new Giorno(medico, giorniVari[i]);
-				for(Giorno giorno: settimana[data][ora1].giorni){
+				for(Giorno giorno: settimana[ora1][data].giorni){
 					if(!confrontaDisp(giorno, temp)) valore=true;
 				}
-				if(!valore) settimana[data][ora1].aggiungiGiorno(temp);
+				if(!valore) settimana[ora1][data].aggiungiGiorno(temp);
 				}
 			}
 		}
@@ -96,10 +96,10 @@ public class Agenda {
 		
 		for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 			Giorno temp= new Giorno(medico, giorno);
-			for(Giorno giorno2: settimana[Date.indiceGiorno(giorno)][ora1].giorni){
+			for(Giorno giorno2: settimana[ora1][Date.indiceGiorno(giorno)].giorni){
 				if(!confrontaDisp(giorno2, temp)) valore=true;
 			}
-			if(!valore) settimana[Date.indiceGiorno(giorno)][ora1].aggiungiGiorno(temp);
+			if(!valore) settimana[ora1][Date.indiceGiorno(giorno)].aggiungiGiorno(temp);
 			}
 			
 		}
@@ -114,8 +114,8 @@ public class Agenda {
 	
 		for(int i=0;i<6;i++){
 			for(int j=0;j<20;j++){
-				for(Giorno giorno: settimana[i][j].giorni){
-					if(giorno.medico==medico) orari.add(LocalDateTime.of(giorno.data, settimana[i][j].ora));
+				for(Giorno giorno: settimana[j][i].giorni){
+					if(giorno.medico==medico) orari.add(LocalDateTime.of(giorno.data, settimana[j][i].ora));
 				}
 			}
 		}
@@ -136,7 +136,7 @@ public class Agenda {
 	public void mediciDisponibili(LocalDate data, LocalTime ora){
 		int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
 		System.out.println("Medici disponibili:");
-		for(Giorno giorno: settimana[i][k].giorni){
+		for(Giorno giorno: settimana[k][i].giorni){
 			if(giorno.data.equals(data)) System.out.println(giorno.medico.toString());
 		}
 	}
@@ -151,7 +151,7 @@ public class Agenda {
    public Visita selezionaVisita(Medico medico, LocalDate data, LocalTime ora){
 	   Visita nullo=null;
 	   int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
-	   for(Giorno giorno: settimana[i][k].giorni){
+	   for(Giorno giorno: settimana[k][i].giorni){
 		   if(giorno.data.equals(data)&giorno.visita!=null) return giorno.visita;
 	   }
 	   return nullo;
