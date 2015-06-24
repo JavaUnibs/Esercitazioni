@@ -1,6 +1,8 @@
 package it.unibs.ing.clinica;
 import it.unibs.ing.myutility.*;
 import java.lang.String;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class MenuMain {
 	
@@ -21,6 +23,8 @@ public class MenuMain {
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
 		
 		Archivio archivio = new Archivio();
+		
+		Agenda agenda = new Agenda();
 		
 		scelta = elenco.stampaMenu();
 		
@@ -75,12 +79,12 @@ public class MenuMain {
 					// Modifica dati utente
 					case 3:{
 								String dato = LeggiInput.stringa("Inserire dato ricerca: ");
-						    	Utente modifica = ricercaUtenti(dato);
+						    	Utente da_modificare = archivio.ricercaUtenti(dato);
 						     
 						    	String campo = LeggiInput.stringa("Campo da modificare: ");
 						    	String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
 						 
-						    	modifica.modificaUtente(campo, dato_modifica);
+						    	da_modificare.modificaUtente(campo, dato_modifica);
 						  	
 					};
 					break;
@@ -88,12 +92,12 @@ public class MenuMain {
 					// Modifica dati medico
 					case 4:{
 								String dato = LeggiInput.stringa("Inserire dato ricerca: ");
-								Utente modifica = ricercaMedici(dato);
+								Medico da_modificare = archivio.ricercaMedici(dato);
 				     
 								String campo = LeggiInput.stringa("Campo da modificare: ");
 								String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
 				 
-								modifica.modificaUtente(campo, dato_modifica);
+								da_modificare.modificaMedico(campo, dato_modifica);
 						
 					};
 					break;
@@ -119,7 +123,24 @@ public class MenuMain {
 			 			break;
 				
 			 			// modificare visita
-			 			case 2:{};
+			 			case 2:{
+			 				
+			 					String campo = LeggiInput.stringa("Dato medico: ");
+			 					Medico medico = archivio.ricercaMedici(campo);
+			 					int giorno = LeggiInput.intero("Inserire giorno: ");
+			 					int mese = LeggiInput.intero("Inserire mese: ");
+			 					int anno = LeggiInput.intero("Inserire anno: ");
+			 					int ora = LeggiInput.intero("Inserire ora: ");
+			 					int minuti = LeggiInput.intero("Inserire minuti: ");
+			 					LocalDate data = LocalDate.of(anno, mese, giorno);
+			 					LocalTime orario = LocalTime.of(ora, minuti);
+		 				     
+			 					Visita da_modificare = agenda.selezionaVisita(medico, data, orario);
+			 					String campo_visita = LeggiInput.riga("Inserire campo da modificare: ");
+			 					String input = LeggiInput.riga("Inserire nuovo dato: ");
+			 					da_modificare.modificaVisita(campo, input);
+			 				
+			 			};
 			 			break;
 				
 			 			// cancellazione visita
@@ -127,7 +148,23 @@ public class MenuMain {
 			 			break;
 				
 			 		    // aggiunta referto
-			 			case 4:{};
+			 			case 4:{
+			 					 String campo = LeggiInput.stringa("Dato medico: ");
+			 				     Medico medico = archivio.ricercaMedici(campo);
+			 				     int giorno = LeggiInput.intero("Inserire giorno: ");
+			 				     int mese = LeggiInput.intero("Inserire mese: ");
+			 				     int anno = LeggiInput.intero("Inserire anno: ");
+			 				     int ora = LeggiInput.intero("Inserire ora: ");
+			 				     int minuti = LeggiInput.intero("Inserire minuti: ");
+			 				     LocalDate data = LocalDate.of(anno, mese, giorno);
+			 				     LocalTime orario = LocalTime.of(ora, minuti);
+			 				     
+			 				     Visita da_modificare = agenda.selezionaVisita(medico, data, orario);
+			 				     String campo_visita = "referto medico";
+			 				     String input = LeggiInput.riga("Inserire referto: ");
+			 				     da_modificare.modificaVisita(campo, input);
+			 					
+			 			};
 			 			break;
 			 			
 			 			// Uscita
@@ -146,17 +183,31 @@ public class MenuMain {
 					
 					// Ricerca giorni di lavoro medici
 					case 1:{
+								String campo = LeggiInput.stringa("Dato medico: ");
+								Medico cercato = archivio.ricercaMedici(campo);
+								agenda.orariVisita(cercato);
 							 
 					};
 					break;
 					
 					// Ricerca medico disponibile per orario
-					case 2:{};
+					case 2:{
+						        int giorno = LeggiInput.intero("Inserire giorno: ");
+						        int mese = LeggiInput.intero("Inserire mese: ");
+						        int anno = LeggiInput.intero("Inserire anno: ");
+						        int ora = LeggiInput.intero("Inserire ora: ");
+						        int minuti = LeggiInput.intero("Inserire minuti: ");
+						        LocalDate data = LocalDate.of(anno, mese, giorno);
+						        LocalTime orario = LocalTime.of(ora, minuti);
+								agenda.mediciDisponibili(data, orario);
+						
+					};
 					break;
 					
 					// Ricerca visite per medico
 					case 3:{
-						
+								String campo = LeggiInput.stringa("Dato medico: ");
+								Medico cercato = archivio.ricercaMedici(campo);
 								ricercaVisiteMedico();
 						
 					};
