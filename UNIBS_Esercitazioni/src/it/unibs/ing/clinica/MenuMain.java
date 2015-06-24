@@ -20,6 +20,8 @@ public class MenuMain {
 		Menu elenco_visita = new Menu(MENU_VISITA);
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
 		
+		Archivio archivio = new Archivio();
+		
 		scelta = elenco.stampaMenu();
 		
 		
@@ -43,7 +45,7 @@ public class MenuMain {
 							 codiceFiscale = LeggiInput.stringa("CF: ");
 							 numTelefono = LeggiInput.stringa("Numero di telefono: ");
 							 
-							 Archivio.elencoUtenti.inserimentoUtente(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale);
+							 archivio.inserimentoUtente(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale);
 							
 					};
 					break;
@@ -63,13 +65,14 @@ public class MenuMain {
 							 areaCompetenza = LeggiInput.stringa("Area di competenza: ");
 						     codiceAlbo = LeggiInput.stringa("Codice albo: ");
 						
-						     Archivio.elencoMedici.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
+						     archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
 						     
 					};
 					break;
 					
 					// Modifica dati utente
 					case 3:{
+						    	Utente modifica = new Utente();
 						     
 						
 						  	
