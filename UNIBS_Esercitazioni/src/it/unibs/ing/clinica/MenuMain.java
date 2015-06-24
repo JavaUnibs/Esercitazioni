@@ -53,7 +53,7 @@ public class MenuMain {
 					// Inserimento dati dottore
 					case 2:{
 							 String nome, cognome, dataNascita, luogoNascita, sesso, codiceFiscale, numTelefono, cognomeNome, tipo, areaCompetenza, codiceAlbo;
-						
+						     String[] giorni;
 							 nome = LeggiInput.stringa("Nome: ");
 							 cognome = LeggiInput.stringa("Cognome: ");
 							 dataNascita = LeggiInput.stringa("Data di nascita: ");
@@ -67,20 +67,35 @@ public class MenuMain {
 						
 						     archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
 						     
+						     
+						     
 					};
 					break;
 					
 					// Modifica dati utente
 					case 3:{
-						    	Utente modifica = new Utente();
+								String dato = LeggiInput.stringa("Inserire dato ricerca: ");
+						    	Utente modifica = ricercaUtenti(dato);
 						     
-						
+						    	String campo = LeggiInput.stringa("Campo da modificare: ");
+						    	String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
+						 
+						    	modifica.modificaUtente(campo, dato_modifica);
 						  	
 					};
 					break;
 					
 					// Modifica dati medico
-					case 4:{};
+					case 4:{
+								String dato = LeggiInput.stringa("Inserire dato ricerca: ");
+								Utente modifica = ricercaMedici(dato);
+				     
+								String campo = LeggiInput.stringa("Campo da modificare: ");
+								String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
+				 
+								modifica.modificaUtente(campo, dato_modifica);
+						
+					};
 					break;
 					
 					// Uscita
@@ -130,7 +145,9 @@ public class MenuMain {
 					switch(scelta_ricerca){
 					
 					// Ricerca giorni di lavoro medici
-					case 1:{};
+					case 1:{
+							 
+					};
 					break;
 					
 					// Ricerca medico disponibile per orario
@@ -138,11 +155,19 @@ public class MenuMain {
 					break;
 					
 					// Ricerca visite per medico
-					case 3:{};
+					case 3:{
+						
+								ricercaVisiteMedico();
+						
+					};
 					break;
 					
 					// Ricerca visite per utente
-					case 4:{};
+					case 4:{
+						
+								ricervaVisiteUtente
+						
+					};
 					break;
 					
 					// Uscita
