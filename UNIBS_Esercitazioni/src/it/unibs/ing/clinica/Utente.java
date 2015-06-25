@@ -5,7 +5,7 @@ public class Utente {
 
 	public String nome, cognome, dataNascita, luogoNascita, sesso, codiceFiscale, numTelefono, cognomeNome;
 	
-	
+
 	Utente(String _nome, String _cognome, String _dataNascita, String _luogoNascita, String _sesso, String _numTelefono, String _codiceFiscale) {
 		nome=_nome;
 		cognome=_cognome;
@@ -19,6 +19,13 @@ public class Utente {
 		codiceFiscale=_codiceFiscale;
 		cognomeNome=cognome+nome;
 	}
+	
+/**
+ * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
+ * @param campo La variabile che si vuole modificare
+ * @param input Il nuovo valore da assegnare
+ * @author Andrea Ferrari
+ */
 	public void modificaUtente(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
@@ -39,7 +46,12 @@ public class Utente {
 		}
 		}
 	
-	
+/**
+ * Verifica che la stringa in ingresso abbia un ordine di numeri e caratteri uguale ai codici fiscali. 	
+ * @param codiceFiscale la stringa da verificare
+ * @return vero o falso
+ * @author Andrea Ferrari
+ */
 	public static boolean verificaCodice(String codiceFiscale){
 		if(codiceFiscale.length()==16){
 			int i;
@@ -54,7 +66,11 @@ public class Utente {
 		else return false;
 		
 	}
-	
+
+/**
+ * Sovrascrive il metodo toString.
+ * @author Andrea Ferrari
+ */
 	public String toString(){
     	String descrizione="-----------\n"
     			+ "Nome: "+nome+"\n"

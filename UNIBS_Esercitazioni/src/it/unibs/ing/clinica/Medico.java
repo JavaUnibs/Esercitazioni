@@ -18,6 +18,13 @@ public class Medico extends Utente{
 		areaCompetenza=_areaCompetenza;
 	}
 	
+/**
+* Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
+* @param campo La variabile che si vuole modificare
+* @param input Il nuovo valore da assegnare
+* @author Andrea Ferrari
+*/
+
 	public void modificaMedico(String campo, String input){
 		campo.toLowerCase();
 		switch (campo){
@@ -43,6 +50,11 @@ public class Medico extends Utente{
 		break;
 		}
 		}
+	
+/**
+* Sovrascrive il metodo toString.
+* @author Andrea Ferrari
+*/
     public String toString(){
     	String descrizione="-----------\n"
     			+ "Nome: "+nome+"\n"
