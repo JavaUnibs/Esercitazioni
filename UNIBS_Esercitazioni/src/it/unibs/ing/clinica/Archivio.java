@@ -19,9 +19,7 @@ public Utente ricercaUtenti(String generico){
 Utente nullo=null;
 ArrayList<Utente> temp = new ArrayList<Utente>();
 	for (Utente utente: elencoUtenti){
-		if (generico.equals(utente.codiceFiscale)||generico.equals(utente.cognome)||generico.equals(utente.dataNascita)||
-				generico.equals(utente.luogoNascita)||generico.equals(utente.nome)||generico.equals(utente.numTelefono)||
-				generico.equals(utente.cognomeNome)) {
+		if (utente.datoUguale(generico)) {
              temp.add(utente);
 		};
 	}
@@ -57,10 +55,7 @@ public Medico ricercaMedici(String generico){
 Medico nullo=null;
 ArrayList<Medico> temp = new ArrayList<Medico>();
 	for (Medico medico: elencoMedici){
-		if (generico.equals(medico.codiceFiscale)||generico.equals(medico.cognome)||generico.equals(medico.dataNascita)||
-				generico.equals(medico.luogoNascita)||generico.equals(medico.nome)||generico.equals(medico.numTelefono)||
-				generico.equals(medico.cognomeNome)||generico.equals(medico.codiceAlbo)||generico.equals(medico.tipo)||
-				generico.equals(medico.areaCompetenza)) {
+		if (medico.datoUguale(generico)) {
              temp.add(medico);
 		};
 	}

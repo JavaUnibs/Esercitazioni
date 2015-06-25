@@ -2,7 +2,7 @@ package it.unibs.ing.clinica;
 
 public class Visita {
 	 
-	public String motivoVisita, refertoMedico, prescrizioneMedica, statoVisita, tipoVisita, areaCompetenza;
+	private String motivoVisita, refertoMedico, prescrizioneMedica, statoVisita, tipoVisita, areaCompetenza;
 	
 	Visita(String motivoVisita, String statoVisita, String tipoVisita, String areaCompetenza){
 		
@@ -44,8 +44,7 @@ public class Visita {
     			+ "Area di competenza: "+areaCompetenza+"\n"
     			+ "Referto Medico: "+refertoMedico+"\n"
     			+ "Prescrizione medica: "+prescrizioneMedica+"\n"
-    			+ "Stato: "+statoVisita+"\n"
-    			+"-----------\n";
+    			+ "Stato: "+statoVisita+"\n";
     	return descrizione;
     	
     }

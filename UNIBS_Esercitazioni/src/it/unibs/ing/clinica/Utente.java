@@ -3,7 +3,7 @@ import it.unibs.ing.myutility.*;
 
 public class Utente {
 
-	public String nome, cognome, dataNascita, luogoNascita, sesso, codiceFiscale, numTelefono, cognomeNome;
+	private String nome, cognome, dataNascita, luogoNascita, sesso, codiceFiscale, numTelefono, cognomeNome;
 	
 
 	Utente(String _nome, String _cognome, String _dataNascita, String _luogoNascita, String _sesso, String _numTelefono, String _codiceFiscale) {
@@ -79,11 +79,22 @@ public class Utente {
     			+ "Luogo di nascita: "+luogoNascita+"\n"
     			+ "Sesso: "+sesso+"\n"
     			+ "Telefono: "+numTelefono+"\n"
-    			+ "Codice fiscale "+codiceFiscale+"\n"
-    			+"-----------\n";
+    			+ "Codice fiscale "+codiceFiscale+"\n";
     	return descrizione;
     	
     }
+/**
+ * Verifica se la stringa in ingresso ha nome uguale a una variabile anagrafica.	
+ * @param generico una stringa generica
+ * @return vero o falso
+ * @author Andrea Ferrari
+ */
+	public boolean datoUguale(String generico){
+		if (generico.equals(codiceFiscale)||generico.equals(cognome)||generico.equals(dataNascita)||
+				generico.equals(luogoNascita)||generico.equals(nome)||generico.equals(numTelefono)||
+				generico.equals(cognomeNome)) return true;
+		return false;
+	}
 	
 
 }
