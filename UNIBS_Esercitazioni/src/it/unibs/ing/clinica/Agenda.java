@@ -30,7 +30,7 @@ public class Agenda {
  * @author Andrea Ferrari
  */
 	public boolean confrontaDisp(Giorno giorno, Giorno giorno2){
-		if(giorno.medico==giorno2.medico&giorno.data.equals(giorno2.data)) return true;
+		if(giorno.getMedico()==giorno2.getMedico()&giorno.getData().equals(giorno2.getData())) return true;
 		else return false;
 	}
 	
@@ -53,7 +53,7 @@ public class Agenda {
 				for(Giorno giorno: settimana[ora1][data1].giorni){
 					if(!confrontaDisp(giorno, temp)) valore=true;
 				}
-				if(!valore) settimana[ora1][data1].aggiungiGiorno(temp);
+				if(valore) settimana[ora1][data1].aggiungiGiorno(temp);
 				}
 			cont++;
 		}
@@ -78,10 +78,11 @@ public class Agenda {
 				for(Giorno giorno: settimana[ora1][data].giorni){
 					if(!confrontaDisp(giorno, temp)) valore=true;
 				}
-				if(!valore) settimana[ora1][data].aggiungiGiorno(temp);
+				if(valore) settimana[ora1][data].aggiungiGiorno(temp);
 				}
 			}
 		}
+	
 /**
  * Inserisce un medico nel giorno e nell'intervallo di orari voluto, a meno che non sia già presente.
  * @param medico      il medico da inserire
@@ -99,7 +100,7 @@ public class Agenda {
 			for(Giorno giorno2: settimana[ora1][Date.indiceGiorno(giorno)].giorni){
 				if(!confrontaDisp(giorno2, temp)) valore=true;
 			}
-			if(!valore) settimana[ora1][Date.indiceGiorno(giorno)].aggiungiGiorno(temp);
+			if(valore) settimana[ora1][Date.indiceGiorno(giorno)].aggiungiGiorno(temp);
 			}
 			
 		}
@@ -115,7 +116,7 @@ public class Agenda {
 		for(int i=0;i<6;i++){
 			for(int j=0;j<20;j++){
 				for(Giorno giorno: settimana[j][i].giorni){
-					if(giorno.medico==medico) orari.add(LocalDateTime.of(giorno.data, settimana[j][i].ora));
+					if(giorno.getMedico()==medico) orari.add(LocalDateTime.of(giorno.getData(), settimana[j][i].getOra()));
 				}
 			}
 		}
@@ -137,9 +138,75 @@ public class Agenda {
 		int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
 		System.out.println("Medici disponibili:");
 		for(Giorno giorno: settimana[k][i].giorni){
-			if(giorno.data.equals(data)) System.out.println(giorno.medico.toString());
+			if(giorno.getData().equals(data)) System.out.println(giorno.getMedico().toString());
 		}
 	}
+	
+/**
+* Cancella un medico nell'intervallo di giorni e di orari voluti (cancella anche le visite correlate).
+* @param medico          il medico da cancellare
+* @param giornoIniziale  il primo giorno dell'intervallo
+* @param giornoFinale    l'ultimo giorno dell'intervallo
+* @param oraIniziale     la prima ora dell'intervallo
+* @param oraFinale       l'ultima ora dell'intervallo
+* @author Andrea Ferrari
+*/
+	public void cancellaDisp(Medico medico, LocalDate giornoIniziale, LocalDate giornoFinale, LocalTime oraIniziale, LocalTime oraFinale){
+		int data1, data2=Date.indiceGiorno(giornoFinale), ora1, ora2=Date.indiceOra(oraFinale), i, cont=0;
+		
+		for(data1=Date.indiceGiorno(giornoIniziale);data1<=data2;data1++){
+			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
+				Giorno temp=new Giorno(medico, Date.incrementoGiorno(giornoIniziale, cont));
+				for(i=0;i<settimana[ora1][data1].giorni.size();i++){
+					if(confrontaDisp(settimana[ora1][data1].giorni.get(i), temp)) settimana[ora1][data1].giorni.remove(i);
+				}
+				}
+			cont++;
+		}
+	}
+	
+/**
+* Cancella un medico nei giorni specifici e nell'intervallo di orari voluti (cancella anche le visite ad esso correlate).	
+* @param medico      il medico da cancellare
+* @param oraIniziale la prima ora dell'intervallo 
+* @param oraFinale   l'ultima ora dell'intervallo
+* @param giorniVari  array variabile dei giorni scelti
+* @author Andrea Ferrari
+*/
+	public void cancellaDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate... giorniVari){
+		int i, j, ora1, ora2=Date.indiceOra(oraFinale), data;
+		
+		for(i=0;i<giorniVari.length;i++){
+			data=Date.indiceGiorno(giorniVari[i]);
+			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
+				Giorno temp= new Giorno(medico, giorniVari[i]);
+				for(j=0;j<settimana[ora1][data].giorni.size();j++){
+					if(confrontaDisp(settimana[ora1][data].giorni.get(j), temp)) settimana[ora1][data].giorni.remove(j);
+				}
+				}
+			}
+		}	
+
+/**
+* Cancella un medico nel giorno e nell'intervallo di orari voluto (cancella anche le visite ad esso correlate).
+* @param medico      il medico da cancellare
+* @param giorno      il giorno scelto
+* @param oraIniziale la prima ora dell'intervallo
+* @param oraFinale   l'ultima ora dell'intervallo
+* @author Andrea Ferrari
+*/
+	public void cancellaDisp(Medico medico, LocalDate giorno, LocalTime oraIniziale, LocalTime oraFinale){
+		int ora1, ora2=Date.indiceOra(oraFinale), i, data=Date.indiceGiorno(giorno);
+		
+		for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
+			Giorno temp= new Giorno(medico, giorno);
+			for(i=0;i<settimana[ora1][data].giorni.size();i++){
+				if(confrontaDisp(settimana[ora1][data].giorni.get(i), temp)) settimana[ora1][data].giorni.remove(i);
+			}
+			}
+			
+		}
+
 /**
  * Restituisce la visita corrispondente	al medico, alla data e all'orario scelti.
  * @param medico il medico scelto
@@ -152,7 +219,7 @@ public class Agenda {
 	   Visita nullo=null;
 	   int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
 	   for(Giorno giorno: settimana[k][i].giorni){
-		   if(giorno.data.equals(data)&giorno.visita!=null) return giorno.visita;
+		   if(giorno.getData().equals(data)&giorno.getVisita()!=null) return giorno.getVisita();
 	   }
 	   return nullo;
    }

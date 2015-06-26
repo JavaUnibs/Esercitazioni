@@ -3,7 +3,7 @@ import java.util.*;
 import java.time.*;
 
 public class Slot {
-	LocalTime ora;
+	private LocalTime ora;
 /**
  * Il costruttore necessita di un'orario in ingresso, corrispondente alla riga in cui si trova l'oggetto( per comodità di reperimento)
  * @param _ora 
@@ -23,4 +23,10 @@ public class Slot {
 	public void aggiungiGiorno(Giorno giorno){
 		giorni.add(giorno);
 	}
+	
+	public LocalTime getOra(){
+		return ora;
+	}
+	
+	
 }
