@@ -2,11 +2,14 @@ package it.unibs.ing.clinica;
 
 public class Visita {
 	 
-	private String motivoVisita, refertoMedico, prescrizioneMedica, statoVisita, tipoVisita, areaCompetenza;
+	private String motivoVisita, refertoMedico, prescrizioneMedica, tipoVisita, areaCompetenza="";
 	
-	Visita(String motivoVisita, String statoVisita, String tipoVisita, String areaCompetenza){
-		
+	Visita(String _motivoVisita, String _tipoVisita, String _areaCompetenza){
+		motivoVisita=_motivoVisita;
+		tipoVisita=_tipoVisita;
+		areaCompetenza=_areaCompetenza;
 	}
+	
 
 /**
 * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
@@ -22,8 +25,6 @@ public class Visita {
         case "referto medico": refertoMedico=input;
 		break;
 		case "prescrizione": prescrizioneMedica=input;
-		break;
-		case "stato": statoVisita=input;
 		break;
 		case "tipo": tipoVisita=input;
 		break;
@@ -43,8 +44,7 @@ public class Visita {
     			+ "Tipo: "+tipoVisita+"\n"
     			+ "Area di competenza: "+areaCompetenza+"\n"
     			+ "Referto Medico: "+refertoMedico+"\n"
-    			+ "Prescrizione medica: "+prescrizioneMedica+"\n"
-    			+ "Stato: "+statoVisita+"\n";
+    			+ "Prescrizione medica: "+prescrizioneMedica+"\n";
     	return descrizione;
     	
     }

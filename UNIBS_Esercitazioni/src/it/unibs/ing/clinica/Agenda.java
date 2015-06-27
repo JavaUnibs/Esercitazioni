@@ -1,4 +1,6 @@
 package it.unibs.ing.clinica;
+import it.unibs.ing.myutility.LeggiInput;
+
 import java.time.*;
 import java.util.*;
 
@@ -21,18 +23,7 @@ public class Agenda {
 			}
 		}
 	}
-	
-/**
- * Confronta due classi Giorno e verifica se possiedono lo stesso medico e la stessa data.
- * @param giorno  il primo giorno da confrontare
- * @param giorno2 il secondo giorno da confrontare
- * @return        vero o falso
- * @author Andrea Ferrari
- */
-	public boolean confrontaDisp(Giorno giorno, Giorno giorno2){
-		if(giorno.getMedico()==giorno2.getMedico()&giorno.getData().equals(giorno2.getData())) return true;
-		else return false;
-	}
+
 	
 /**
  * Inserisce un medico nell'intervallo di giorni e di orari voluti, a meno che esso non sia già presente.
@@ -45,15 +36,11 @@ public class Agenda {
  */
 	public void inserimentoDisp (Medico medico, LocalDate giornoIniziale, LocalDate giornoFinale, LocalTime oraIniziale, LocalTime oraFinale){
 		int data1, data2=Date.indiceGiorno(giornoFinale), ora1, ora2=Date.indiceOra(oraFinale), cont=0;
-		boolean valore=false;
 		
 		for(data1=Date.indiceGiorno(giornoIniziale);data1<=data2;data1++){
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp=new Giorno(medico, Date.incrementoGiorno(giornoIniziale, cont));
-				for(Giorno giorno: settimana[ora1][data1].giorni){
-					if(!confrontaDisp(giorno, temp)) valore=true;
-				}
-				if(valore) settimana[ora1][data1].aggiungiGiorno(temp);
+				settimana[ora1][data1].ciclaElencoIns(temp);
 				}
 			cont++;
 		}
@@ -69,18 +56,14 @@ public class Agenda {
  */
 	public void inserimentoDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate... giorniVari){
 		int i, ora1, ora2=Date.indiceOra(oraFinale), data;
-		boolean valore=false;
 		
 		for(i=0;i<giorniVari.length;i++){
 			data=Date.indiceGiorno(giorniVari[i]);
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp= new Giorno(medico, giorniVari[i]);
-				for(Giorno giorno: settimana[ora1][data].giorni){
-					if(!confrontaDisp(giorno, temp)) valore=true;
-				}
-				if(valore) settimana[ora1][data].aggiungiGiorno(temp);
-				}
+				settimana[ora1][data].ciclaElencoIns(temp);
 			}
+		  }
 		}
 	
 /**
@@ -93,17 +76,12 @@ public class Agenda {
  */
 	public void inserimentoDisp(Medico medico, LocalDate giorno, LocalTime oraIniziale, LocalTime oraFinale){
 		int ora1, ora2=Date.indiceOra(oraFinale);
-		boolean valore=false;
 		
 		for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 			Giorno temp= new Giorno(medico, giorno);
-			for(Giorno giorno2: settimana[ora1][Date.indiceGiorno(giorno)].giorni){
-				if(!confrontaDisp(giorno2, temp)) valore=true;
-			}
-			if(valore) settimana[ora1][Date.indiceGiorno(giorno)].aggiungiGiorno(temp);
-			}
-			
+			settimana[ora1][Date.indiceGiorno(giorno)].ciclaElencoIns(temp);
 		}
+	}
 	
 /**
  * Stampa gli orari di visita di un medico in formato giorno-mese-anno-orario, in ordine cronologico ascendente.
@@ -152,15 +130,13 @@ public class Agenda {
 * @author Andrea Ferrari
 */
 	public void cancellaDisp(Medico medico, LocalDate giornoIniziale, LocalDate giornoFinale, LocalTime oraIniziale, LocalTime oraFinale){
-		int data1, data2=Date.indiceGiorno(giornoFinale), ora1, ora2=Date.indiceOra(oraFinale), i, cont=0;
+		int data1, data2=Date.indiceGiorno(giornoFinale), ora1, ora2=Date.indiceOra(oraFinale), cont=0;
 		
 		for(data1=Date.indiceGiorno(giornoIniziale);data1<=data2;data1++){
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp=new Giorno(medico, Date.incrementoGiorno(giornoIniziale, cont));
-				for(i=0;i<settimana[ora1][data1].giorni.size();i++){
-					if(confrontaDisp(settimana[ora1][data1].giorni.get(i), temp)) settimana[ora1][data1].giorni.remove(i);
-				}
-				}
+				settimana[ora1][data1].ciclaElencoDel(temp);	
+			}
 			cont++;
 		}
 	}
@@ -174,15 +150,13 @@ public class Agenda {
 * @author Andrea Ferrari
 */
 	public void cancellaDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate... giorniVari){
-		int i, j, ora1, ora2=Date.indiceOra(oraFinale), data;
+		int i, ora1, ora2=Date.indiceOra(oraFinale), data;
 		
 		for(i=0;i<giorniVari.length;i++){
 			data=Date.indiceGiorno(giorniVari[i]);
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp= new Giorno(medico, giorniVari[i]);
-				for(j=0;j<settimana[ora1][data].giorni.size();j++){
-					if(confrontaDisp(settimana[ora1][data].giorni.get(j), temp)) settimana[ora1][data].giorni.remove(j);
-				}
+				settimana[ora1][data].ciclaElencoDel(temp);	
 				}
 			}
 		}	
@@ -196,16 +170,13 @@ public class Agenda {
 * @author Andrea Ferrari
 */
 	public void cancellaDisp(Medico medico, LocalDate giorno, LocalTime oraIniziale, LocalTime oraFinale){
-		int ora1, ora2=Date.indiceOra(oraFinale), i, data=Date.indiceGiorno(giorno);
+		int ora1, ora2=Date.indiceOra(oraFinale), data=Date.indiceGiorno(giorno);
 		
 		for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 			Giorno temp= new Giorno(medico, giorno);
-			for(i=0;i<settimana[ora1][data].giorni.size();i++){
-				if(confrontaDisp(settimana[ora1][data].giorni.get(i), temp)) settimana[ora1][data].giorni.remove(i);
+			settimana[ora1][data].ciclaElencoDel(temp);
 			}
 			}
-			
-		}
 
 /**
  * Restituisce la visita corrispondente	al medico, alla data e all'orario scelti.
@@ -223,14 +194,85 @@ public class Agenda {
 	   }
 	   return nullo;
    }
-		
-	
-	
-	}
-	
-	
 
-
+/**
+ * Restituisce la data maggiore di disponibilità di tutto il calendario.
+ * @return
+ * @author Andrea Ferrari
+ */
+   public LocalDate massimaData(){
+	LocalDate data=settimana[0][0].massimaData();
+	   for(int i=0;i<6;i++){
+		   for (int j=0;j<20;j++){
+			   if(settimana[j][i].massimaData().isAfter(data)) data=settimana[j][i].massimaData();
+		   }
+	   }
+	   return data;
+	   }
+   
+   
+/**
+ * Verifica se nella data e ora inseriti ci sono uno o più medici adatti alle caratteristiche della visita. Se non ci sono, stampa 
+ * la prossima data e ora in cui ve n'è uno adatto.
+ * @param utente         l'utente che vuole fissare la visita
+ * @param motivoVisita   il motivo per la prenotazione della visita
+ * @param data           la data specificata
+ * @param ora            l'ora specificata
+ * @param tipoVisita     la tipologia della visita
+ * @author Andrea Ferrari
+ */
+   public void inserimentoVisita(Utente utente, String motivoVisita, LocalDate data, LocalTime ora, String tipoVisita){
+	   int scelta, ora1=Date.indiceOra(ora), data1=Date.indiceGiorno(data), i, j;
+	   String areaCompetenza="";
+	   tipoVisita.toLowerCase();
+	   if(tipoVisita.equals("specialistica")) areaCompetenza=LeggiInput.stringa("Inserire l'area di competenza richiesta");
+	   
+	   ArrayList<Giorno> elencoTemp= settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);
+	   System.out.println("Medici disponibili il "+data.toString()+" alle "+settimana[ora1][data1].getOra().toString()+" :");
+	   if(elencoTemp.size()==0) System.out.println("Nessun medico disponibile in questa data.");
+	   else {
+		   for(Giorno giorno: elencoTemp){
+	       System.out.println(giorno.getMedico().toString());
+	   }
+	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
+	   elencoTemp.get(scelta).setUtente(utente);
+	   elencoTemp.get(scelta).setStato(statoVisita.Prenotata);
+	   elencoTemp.get(scelta).setVisita(new Visita(motivoVisita, tipoVisita, areaCompetenza));
+	   return;
+	   }
+	   
+	   //Questo ciclo finisce la restante settimana in cerca del prossimo giorno adatto alla visita
+	   int cont=0;
+	   for(data1=Date.indiceGiorno(data);data1<6;data1++){
+	       for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
+	       elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
+	       if (elencoTemp.size()>0){
+	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[data1][ora1].getOra().toString());  
+	    	return;  
+	       }
+	     }
+	       cont++;
+	   }
+	   
+	   LocalDate maxData=massimaData();
+	   //Questo ciclo cerca un nuovo giorno disponibile fino alla massima data di disponibilità in tutto il calendario.
+	   while(data.isBefore(maxData)||data.isEqual(maxData)){
+	   for(i=0;i<6;i++){
+		   for(j=0;j<20;j++){
+		   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
+		   if (elencoTemp.size()>0){
+		    System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
+		    return; 
+		   }
+	      }
+		   cont++;
+	    }   
+	   }
+      }
+   
+   
+   
+}
 
 		
 

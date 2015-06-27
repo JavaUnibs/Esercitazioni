@@ -3,7 +3,7 @@ package it.unibs.ing.clinica;
 
 public class Medico extends Utente{
 	
-	private String tipo, areaCompetenza, codiceAlbo;
+	private String tipo, areaCompetenza="", codiceAlbo;
 	
 	Medico(String _nome, String _cognome, String _dataNascita, String _luogoNascita, String _sesso, String _numTelefono, String _codiceFiscale, String _codiceAlbo, String _tipo){
 		super(_nome, _cognome, _dataNascita, _luogoNascita, _sesso, _numTelefono, _codiceFiscale);
@@ -52,7 +52,7 @@ public class Medico extends Utente{
     }
 
 /**
-* Verifica se la stringa in ingresso ha nome uguale a una variabile anagrafica.	
+* Verifica se la stringa in ingresso è uguale a una variabile anagrafica.	
 * @param generico una stringa generica
 * @return vero o falso
 * @author Andrea Ferrari

@@ -3,6 +3,8 @@ import java.time.*;
 
 public class Date {
 	
+	private final static int MEZZORA=30;
+	
 /**
  * Restituisce in base al giorno della settimana della data scelta un indice numerico, da lunedì(0) a venerdì(5).
  * @param data la data scelta
@@ -44,6 +46,6 @@ public class Date {
  * @author Andrea Ferrari
  */	
 	public static LocalTime incrementoOra(LocalTime ora, int incr){
-		return ora.plusMinutes(incr*30);
+		return ora.plusMinutes(incr*MEZZORA);
 	}
 }

@@ -4,8 +4,8 @@ import it.unibs.ing.myutility.*;
 
 public class Archivio {
 	
-ArrayList<Utente> elencoUtenti = new ArrayList<Utente>();
-ArrayList<Medico> elencoMedici = new ArrayList<Medico>();
+private ArrayList<Utente> elencoUtenti = new ArrayList<Utente>();
+private ArrayList<Medico> elencoMedici = new ArrayList<Medico>();
 
 
 /**
@@ -129,41 +129,8 @@ public void inserimentoMedico(String nome, String cognome, String dataNascita, S
 }
 
 
-public static void inserimentoVisite(int codice, String orario, String tipo){
-	/*
-	 * si chiede il codice utente, l’orario, il tipo di visita e l'area di competenza
-e il programma deve proporre, se esistono, i medici disponibili. Se per quella data non ci sono medici disponibili, 
-il programma deve richiedere di indicare una nuova data per la visita, suggerendo la prima data/ora successiva disponibile 
-per la prenotazione Superati i controlli, alla visita sarà assegnato il medico di riferimento individuato.
-
-	 */
-}
-
-public static void ricercaVisiteMedico(Medico medico){
-	/*
-	 * visualizza le visite prenotate di questo medico
-	 */
-	
-}
-
-public static void ricercaVisiteUtente(Utente utente){
-	/*
-	 * visualizza le visite effettuate da questo utente
-	 */
-}
-
-public static void ricercaVisiteData(String giorno, String ora){
-	/*
-	 * richiede di indicare data e ora di visita e restituisce la visita corrispondente
-	 */
-}
-
-public static void ricercaVisiteTipo(String tipo){
-	/*
-	 * richiede di indicare se è una visita generica o specialistica, l'eventuale area di competenza e restituisce le visite corrispondenti.
-	 */
 }
 
 
 
-}
+
