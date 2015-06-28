@@ -80,9 +80,7 @@ public class Slot {
  */
    public ArrayList<Giorno> verificaDisp(LocalDate data, String tipoVisita, String areaCompetenza){
 	   ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
-	   tipoVisita.toLowerCase();
-	   areaCompetenza.toLowerCase();
-	   if(tipoVisita.equals("generica")) tipoVisita="generico"; else tipoVisita="specialista";
+	   if(tipoVisita.toLowerCase().equals("generica")) tipoVisita="Generico"; else tipoVisita="Specialista";
 	   
 	   for(Giorno giorno: giorni){
 		   if(giorno.getData().equals(data)&giorno.getVisita()==null&giorno.getMedico().datoUguale(tipoVisita)&giorno.getMedico().datoUguale(areaCompetenza))
@@ -93,6 +91,7 @@ public class Slot {
 /**
  * Restituisce la data maggiore nell'elenco di Giorni.	
  * @return
+ * @author Andrea Ferrari
  */
    public LocalDate massimaData(){
 	   LocalDate data= giorni.get(0).getData();
@@ -101,6 +100,47 @@ public class Slot {
 	   }
 	   
 	   return data;
+   }
+/**
+ * Restituisce un arraylist contenente i giorni di questo slot con visite fissate dall'utente inserito.   
+ * @param utente l'utente di cui cercare le visite
+ * @return       
+ * @author Andrea Ferrari
+ */
+   public ArrayList<Giorno> visiteUtenteSlot(Utente utente){
+	   ArrayList<Giorno> temp= new ArrayList<Giorno>();
+	   for(Giorno giorno: giorni){
+		   if(giorno.getUtente()==utente) temp.add(giorno);
+	   }
+	   return temp;
+   }
+   
+   
+/**
+* Restituisce un arraylist contenente i giorni di questo slot con visite a cura del medico inserito.   
+* @param medico il medico di cui cercare le visite
+* @return       
+* @author Andrea Ferrari
+*/
+   public ArrayList<Giorno> visiteMedicoSlot(Medico medico){
+   	   ArrayList<Giorno> temp= new ArrayList<Giorno>();
+   	   for(Giorno giorno: giorni){
+   		   if(giorno.getMedico()==medico) temp.add(giorno);
+   	   }
+   	   return temp;
+      }
+/**
+ * Restituisce un arraylist contenente i giorni di questi slot con visite del tipo e area di competenza inseriti.      
+ * @param tipoVisita
+ * @param areaCompetenza
+ * @return
+ */
+   public ArrayList<Giorno> visiteTipoSlot(String tipoVisita, String areaCompetenza){
+	   ArrayList<Giorno> temp= new ArrayList<Giorno>();
+	   for(Giorno giorno: giorni){
+   		   if(giorno.getVisita().getTipo().equals(tipoVisita)&giorno.getVisita().getAreaComp().equals(areaCompetenza)) temp.add(giorno);
+   	   }
+	   return temp;
    }
 	
 }

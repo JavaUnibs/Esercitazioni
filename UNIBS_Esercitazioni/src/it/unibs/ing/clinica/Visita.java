@@ -10,6 +10,14 @@ public class Visita {
 		areaCompetenza=_areaCompetenza;
 	}
 	
+	
+	public String getTipo(){
+		return tipoVisita;
+	}
+	
+	public String getAreaComp(){
+		return areaCompetenza;
+	}
 
 /**
 * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.

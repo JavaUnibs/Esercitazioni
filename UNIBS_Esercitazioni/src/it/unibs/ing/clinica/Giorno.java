@@ -73,5 +73,23 @@ public class Giorno {
 	public void rimuoviVisita(){
 		visita=null;
 	}
+/**
+ * Cambia la variabile stato di questo oggetto in base al riscontro di una stringa generica in ingresso.	
+ * @param generico
+ */
+	public void cambiaStato(String generico){
+		switch(generico.toLowerCase()){
+		case "prenotata": stato=statoVisita.Prenotata;
+		break;
+		case "conclusa": stato=statoVisita.Conclusa;
+		break;
+		case "non prenotabile":stato=statoVisita.Non_prenotabile;
+		break;
+		case "refertata":stato=statoVisita.Refertata;
+		break;
+		case "prenotabile":stato=statoVisita.Prenotabile;
+		break;
+		}
+	}
 	
 }

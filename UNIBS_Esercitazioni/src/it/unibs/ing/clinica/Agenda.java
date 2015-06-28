@@ -224,8 +224,7 @@ public class Agenda {
    public void inserimentoVisita(Utente utente, String motivoVisita, LocalDate data, LocalTime ora, String tipoVisita){
 	   int scelta, ora1=Date.indiceOra(ora), data1=Date.indiceGiorno(data), i, j;
 	   String areaCompetenza="";
-	   tipoVisita.toLowerCase();
-	   if(tipoVisita.equals("specialistica")) areaCompetenza=LeggiInput.stringa("Inserire l'area di competenza richiesta");
+	   if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.stringa("Inserire l'area di competenza richiesta");
 	   
 	   ArrayList<Giorno> elencoTemp= settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);
 	   System.out.println("Medici disponibili il "+data.toString()+" alle "+settimana[ora1][data1].getOra().toString()+" :");
@@ -241,10 +240,18 @@ public class Agenda {
 	   return;
 	   }
 	   
-	   //Questo ciclo finisce la restante settimana in cerca del prossimo giorno adatto alla visita
-	   int cont=0;
-	   for(data1=Date.indiceGiorno(data);data1<6;data1++){
-	       for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
+	   //Questo ciclo finisce i restanti orari del giorno in cerca del prossimo giorno adatto alla visita
+	   for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
+		   elencoTemp=settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);   
+	       if (elencoTemp.size()>0){
+	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[data1][ora1].getOra().toString());  
+	    	return;  
+	   }
+	   
+	   //Questo ciclo finisce i restanti giorni della settimana in cerca del prossimo giorno adatto alla visita
+	   int cont=1;
+	   for(data1=Date.indiceGiorno(data)+1;data1<6;data1++){
+	       for(ora1=0;ora1<20;ora1++){
 	       elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
 	       if (elencoTemp.size()>0){
 	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[data1][ora1].getOra().toString());  
@@ -257,7 +264,8 @@ public class Agenda {
 	   LocalDate maxData=massimaData();
 	   //Questo ciclo cerca un nuovo giorno disponibile fino alla massima data di disponibilità in tutto il calendario.
 	   while(data.isBefore(maxData)||data.isEqual(maxData)){
-	   for(i=0;i<6;i++){
+	       if(data.getDayOfWeek().getValue()==6) cont+=2; else if(data.getDayOfWeek().getValue()==7) cont++;
+		   for(i=0;i<6;i++){
 		   for(j=0;j<20;j++){
 		   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
 		   if (elencoTemp.size()>0){
@@ -269,12 +277,63 @@ public class Agenda {
 	    }   
 	   }
       }
+     }
    
    
-   
-}
+/**
+ * Restituisce gli oggetti Giorno contententi le visite fissate dall'utente inserito.
+ * @param utente   l'utente di cui cercare le visite
+ * @return         gli oggetti Giorno in cui vi è la visita
+ * @author Andrea Ferrari
+ */
+   public ArrayList<Giorno> visiteUtente(Utente utente){
+	   ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
+	   for(int i=0;i<6;i++){
+		   for(int j=0;j<20;j++){
+			   elencoTemp.addAll(settimana[j][i].visiteUtenteSlot(utente));
+		   }
+	   }
+	   return elencoTemp;
+   }
 
-		
+/**
+* Restituisce gli oggetti Giorno contenenti le visite a cura del medico inserito.
+* @param utente   il medico di cui cercare le visite
+* @return         gli oggetti Giorno in cui vi è la visita
+* @author Andrea Ferrari
+*/
+   public ArrayList<Giorno> visiteMedico(Medico medico){
+   	   ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
+   	   for(int i=0;i<6;i++){
+   		   for(int j=0;j<20;j++){
+   			   elencoTemp.addAll(settimana[j][i].visiteMedicoSlot(medico));
+   		   }
+   	   }
+   	   return elencoTemp;
+      }   
+/**
+ * Restituisce gli oggetti Giorno contenenti le visite del tipo e area di competenza inseriti.      
+ * @param tipoVisita
+ * @return
+ */
+  public ArrayList<Giorno> visiteTipo(String tipoVisita){
+	  ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
+	  String areaCompetenza="";
+	  if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.stringa("Inserire l'area di competenza richiesta");
+	  for(int i=0;i<6;i++){
+  		   for(int j=0;j<20;j++){
+  			   elencoTemp.addAll(settimana[j][i].visiteTipoSlot(tipoVisita, areaCompetenza));
+  		   }
+  	   }
+  	   return elencoTemp;
+      }
+  
+  
+  
+}
+      
+      
+	
 
 
 
