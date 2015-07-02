@@ -141,7 +141,7 @@ public class MenuMain {
 			 					LocalDate data = LocalDate.of(anno, mese, giorno);
 			 					LocalTime orario = LocalTime.of(ora, minuti);
 		 				     
-			 					Visita da_modificare = agenda.selezionaVisita(medico, data, orario);
+			 					Visita da_modificare = agenda.specificaVisita(medico, data, orario);
 			 					String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
 			 					String input = LeggiInput.riga("Inserire nuovo dato: ");
 			 					da_modificare.modificaVisita(campo, input);
@@ -165,7 +165,7 @@ public class MenuMain {
 			 				     LocalDate data = LocalDate.of(anno, mese, giorno);
 			 				     LocalTime orario = LocalTime.of(ora, minuti);
 			 				     
-			 				     Visita da_modificare = agenda.selezionaVisita(medico, data, orario);
+			 				     Visita da_modificare = agenda.specificaVisita(medico, data, orario);
 			 				     String campo_visita = "referto medico";
 			 				     String input = LeggiInput.riga("Inserire referto: ");
 			 				     da_modificare.modificaVisita(campo, input);
