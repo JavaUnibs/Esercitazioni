@@ -186,11 +186,11 @@ public class Agenda {
  * @return     la visita corrispondente
  * @author Andrea Ferrari
  */
-   public Visita selezionaVisita(Medico medico, LocalDate data, LocalTime ora){
-	   Visita nullo=null;
+   public Giorno selezionaVisita(Medico medico, LocalDate data, LocalTime ora){
+	   Giorno nullo=null;
 	   int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
 	   for(Giorno giorno: settimana[k][i].giorni){
-		   if(giorno.getData().equals(data)&giorno.getVisita()!=null) return giorno.getVisita();
+		   if(giorno.getData().equals(data)&giorno.getVisita()!=null) return giorno;
 	   }
 	   return nullo;
    }
