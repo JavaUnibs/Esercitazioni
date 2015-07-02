@@ -179,7 +179,7 @@ public class Agenda {
 			}
 
 /**
- * Restituisce la visita corrispondente	al medico, alla data e all'orario scelti.
+ * Restituisce la visita corrispondente	al medico, alla data e all'orario scelti..
  * @param medico il medico scelto
  * @param data il giorno scelto
  * @param ora  l'orario scelto
