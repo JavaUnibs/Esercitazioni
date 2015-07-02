@@ -4,6 +4,12 @@ import java.lang.String;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Classe main che costituisce il menu del programma e che consente l'interazione con l'utente
+ * @author Riccardo Grespan
+ *
+ */
+
 public class MenuMain {
 	
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca"};
@@ -136,7 +142,7 @@ public class MenuMain {
 			 					LocalTime orario = LocalTime.of(ora, minuti);
 		 				     
 			 					Visita da_modificare = agenda.selezionaVisita(medico, data, orario);
-			 					String campo_visita = LeggiInput.riga("Inserire campo da modificare: ");
+			 					String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
 			 					String input = LeggiInput.riga("Inserire nuovo dato: ");
 			 					da_modificare.modificaVisita(campo, input);
 			 				
@@ -208,7 +214,7 @@ public class MenuMain {
 					case 3:{
 								String campo = LeggiInput.stringa("Dato medico: ");
 								Medico cercato = archivio.ricercaMedici(campo);
-								ricercaVisiteMedico();
+								agenda.visiteMedico(cercato);
 						
 					};
 					break;
@@ -216,7 +222,9 @@ public class MenuMain {
 					// Ricerca visite per utente
 					case 4:{
 						
-								ricervaVisiteUtente
+						String campo = LeggiInput.stringa("Dato utente: ");
+						Utente cercato = archivio.ricercaUtenti(campo);
+						agenda.visiteUtente(cercato);
 						
 					};
 					break;
