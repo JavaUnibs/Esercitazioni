@@ -244,8 +244,9 @@ public class Agenda {
 	   for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
 		   elencoTemp=settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);   
 	       if (elencoTemp.size()>0){
-	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[data1][ora1].getOra().toString());  
+	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
 	    	return;  
+	     }
 	   }
 	   
 	   //Questo ciclo finisce i restanti giorni della settimana in cerca del prossimo giorno adatto alla visita
@@ -254,7 +255,7 @@ public class Agenda {
 	       for(ora1=0;ora1<20;ora1++){
 	       elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
 	       if (elencoTemp.size()>0){
-	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[data1][ora1].getOra().toString());  
+	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
 	    	return;  
 	       }
 	     }
@@ -277,7 +278,7 @@ public class Agenda {
 	    }   
 	   }
       }
-     }
+     
    
    
 /**
