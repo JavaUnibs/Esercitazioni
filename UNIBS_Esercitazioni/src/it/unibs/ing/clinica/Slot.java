@@ -53,11 +53,10 @@ public class Slot {
  * @author Andrea Ferrari
  */
 	public void ciclaElencoIns(Giorno giorno2){
-		boolean valore=true;
 		for(Giorno giorno: giorni){
-			if(confrontaDisp(giorno, giorno2)) {valore=false; break;}
+			if(confrontaDisp(giorno, giorno2)) return;
 		}
-		if(valore) aggiungiGiorno(giorno2);
+		aggiungiGiorno(giorno2);
 	}
 
 /**
@@ -142,5 +141,57 @@ public class Slot {
    	   }
 	   return temp;
    }
+/**
+ * Restituisce un array in cui il primo elemento è il numero di visite prenotate e il secondo il numero di visite concluse nello Slot.   
+ * @return
+ */
+   public int[] numVisite(){
+	   int prenotate=0, concluse=0;
+	   for(Giorno giorno: giorni){
+		   if(giorno.getStato().equals(statoVisita.Prenotata)) prenotate++;
+		   if(giorno.getStato().equals(statoVisita.Conclusa)) concluse++;   
+	   }
+	   int[] contatore= {prenotate, concluse};
+	   return contatore;
+    }
+/**
+ * Restituisce un array in cui il primo elemento è il numero di visite prenotate generiche, il secondo di prenotate specialistiche,
+ * il terzo di concluse generiche, il quarto di concluse specialistiche.
+ * @return
+ */
+  public int[] numVisiteTipo(){
+	  int prenotateGeneriche=0, prenotateSpecialistiche=0, concluseGeneriche=0, concluseSpecialistiche=0;
+	  for(Giorno giorno: giorni){
+		  if(giorno.getStato().equals(statoVisita.Prenotata)){
+			  if(giorno.getVisita().getTipo().toLowerCase().equals("generica")) prenotateGeneriche++; else prenotateSpecialistiche++;
+		  }
+		  
+		  if(giorno.getStato().equals(statoVisita.Conclusa)){
+			  if(giorno.getVisita().getTipo().toLowerCase().equals("generica")) concluseGeneriche++; else concluseSpecialistiche++;
+		  }
+		  
+	  }
+	  
+	  int[] contatore= {prenotateGeneriche, prenotateSpecialistiche, concluseGeneriche, concluseSpecialistiche};
+	  return contatore;
+  }
+  
+/**
+ *Restituisce un array bidimensionale, dove la prima riga rappresenta le visite prenotate, la seconda quelle concluse, e le colonne l'appartenenza ad un area di competenza specifica.   
+ * @param aree un arrayList contenente tutti le aree di competenza dei medici della clinica.
+ * @return
+ */
+  public int[][] numVisiteArea(ArrayList<String> aree){
+	  int[][] contatore= new int[2][aree.size()];
+	  for(Giorno giorno: giorni){
+		  for(int i=0;i<aree.size();i++){
+			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Prenotata)) contatore[1][i]++;
+			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Conclusa)) contatore[2][i]++;
+		  }
+	  }
+	  return contatore;
+  }
+  
+  
 	
 }

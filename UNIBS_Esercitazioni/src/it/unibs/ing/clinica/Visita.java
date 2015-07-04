@@ -56,4 +56,13 @@ public class Visita {
     	return descrizione;
     	
     }
+	
+	public String getMotivo(){
+		return "Motivo: "+motivoVisita+"\n";
+	}
+	
+	public String getRefertoPrescrizione(){
+		return "Referto Medico: "+refertoMedico+"\n"
+    			+ "Prescrizione medica: "+prescrizioneMedica+"\n";	
+	}
 }

@@ -18,6 +18,10 @@ public class Medico extends Utente{
 		areaCompetenza=_areaCompetenza;
 	}
 	
+	public String getArea(){
+		return areaCompetenza;
+	}
+	
 /**
 * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
 * @param campo La variabile che si vuole modificare
@@ -61,6 +65,12 @@ public class Medico extends Utente{
     	if (super.datoUguale(generico)||generico.equals(codiceAlbo)||generico.equals(tipo)||
 				generico.equals(areaCompetenza)) return true;
     	return false;
+    }
+    
+    public String toStringNomeCognomeAlbo(){
+    	String descrizione=super.toStringNomeCognome()
+    			+ "Codice albo: "+codiceAlbo+"\n";
+    	return descrizione;
     }
 
 

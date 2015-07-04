@@ -128,6 +128,22 @@ public void inserimentoMedico(String nome, String cognome, String dataNascita, S
 	
 }
 
+/**
+ * Restituisce un ArrayList contenente tutte le aree di competenza riscontrate nei medici dell'archivio, non contando i doppioni.
+ * @return
+ */
+public ArrayList<String> areeCompetenzaTot(){
+	boolean valore=true;
+	ArrayList<String> temp= new ArrayList<String>();
+	for(Medico medico: elencoMedici){
+		for(String stringa: temp){
+			if(medico.getArea().equals(stringa)||medico.getArea().equals("")) valore=false; break;
+		}
+		if(valore) temp.add(medico.getArea());
+	}
+	return temp;
+}
+
 
 }
 

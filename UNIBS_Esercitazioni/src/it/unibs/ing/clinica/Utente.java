@@ -17,7 +17,7 @@ public class Utente {
 		_codiceFiscale=LeggiInput.stringa("Codice Fiscale non valido, inserire quello corretto");
 		}
 		codiceFiscale=_codiceFiscale;
-		cognomeNome=cognome+nome;
+		cognomeNome=cognome+" "+ nome;
 	}
 	
 /**
@@ -95,7 +95,17 @@ public class Utente {
 				generico.equals(cognomeNome)) return true;
 		return false;
 	}
+
+	public String toStringNomeCognome(){
+		String descrizione="-----------\n"
+    			+ "Nome: "+nome+"\n"
+    			+ "Cognome: "+cognome+"\n";
+		return descrizione;
+	}
 	
+	public String toStringCodiceFiscale(){
+		return codiceFiscale;
+	}
 
 }
 
