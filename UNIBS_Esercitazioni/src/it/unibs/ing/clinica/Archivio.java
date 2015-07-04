@@ -133,9 +133,10 @@ public void inserimentoMedico(String nome, String cognome, String dataNascita, S
  * @return
  */
 public ArrayList<String> areeCompetenzaTot(){
-	boolean valore=true;
+	boolean valore;
 	ArrayList<String> temp= new ArrayList<String>();
 	for(Medico medico: elencoMedici){
+		valore=true;
 		for(String stringa: temp){
 			if(medico.getArea().equals(stringa)||medico.getArea().equals("")) valore=false; break;
 		}

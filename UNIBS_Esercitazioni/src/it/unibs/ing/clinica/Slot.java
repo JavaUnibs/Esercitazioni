@@ -185,8 +185,8 @@ public class Slot {
 	  int[][] contatore= new int[2][aree.size()];
 	  for(Giorno giorno: giorni){
 		  for(int i=0;i<aree.size();i++){
-			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Prenotata)) contatore[1][i]++;
-			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Conclusa)) contatore[2][i]++;
+			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Prenotata)) { contatore[1][i]++; break;}
+			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Conclusa)) { contatore[2][i]++; break; }
 		  }
 	  }
 	  return contatore;
