@@ -145,6 +145,11 @@ public ArrayList<String> areeCompetenzaTot(){
 	return temp;
 }
 
+public ArrayList<Medico> getElencoMedici(){
+	return elencoMedici;
+}
+
+
 
 }
 

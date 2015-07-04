@@ -178,20 +178,20 @@ public class Slot {
   
 /**
  *Restituisce un array bidimensionale, dove la prima riga rappresenta le visite prenotate, la seconda quelle concluse, e le colonne l'appartenenza ad un area di competenza specifica.   
- * @param aree un arrayList contenente tutti le aree di competenza dei medici della clinica.
+ * @param elencoAree un arrayList contenente tutti le aree di competenza dei medici della clinica.
  * @return
  */
-  public int[][] numVisiteArea(ArrayList<String> aree){
-	  int[][] contatore= new int[2][aree.size()];
+  public int[][] numVisiteArea(ArrayList<String> elencoAree){
+	  int[][] contatore= new int[2][elencoAree.size()];
 	  for(Giorno giorno: giorni){
-		  for(int i=0;i<aree.size();i++){
-			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Prenotata)) { contatore[1][i]++; break;}
-			  if(giorno.getVisita().getAreaComp().equals(aree.get(i))&giorno.getStato().equals(statoVisita.Conclusa)) { contatore[2][i]++; break; }
+		  for(int i=0;i<elencoAree.size();i++){
+			  if(giorno.getVisita().getAreaComp().equals(elencoAree.get(i))&giorno.getStato().equals(statoVisita.Prenotata)) { contatore[0][i]++; break;}
+			  if(giorno.getVisita().getAreaComp().equals(elencoAree.get(i))&giorno.getStato().equals(statoVisita.Conclusa)) { contatore[1][i]++; break; }
 		  }
 	  }
 	  return contatore;
   }
   
   
-	
+
 }
