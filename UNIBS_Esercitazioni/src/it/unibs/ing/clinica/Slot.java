@@ -15,7 +15,7 @@ public class Slot {
 		ora=_ora;
 	}
 
-	ArrayList<Giorno> giorni = new ArrayList<Giorno>();
+	private ArrayList<Giorno> giorni = new ArrayList<Giorno>();
 
 /**
  * Aggiunge all'elenco un nuovo oggetto di tipo Giorno.	
@@ -33,6 +33,9 @@ public class Slot {
 	 */
 	public LocalTime getOra(){
 		return ora;
+	}
+	public ArrayList<Giorno> getGiorni(){
+		return giorni;
 	}
 	
 /**

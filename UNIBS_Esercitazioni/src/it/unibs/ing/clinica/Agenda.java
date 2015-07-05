@@ -93,7 +93,7 @@ public class Agenda {
 	
 		for(int i=0;i<6;i++){
 			for(int j=0;j<20;j++){
-				for(Giorno giorno: settimana[j][i].giorni){
+				for(Giorno giorno: settimana[j][i].getGiorni()){
 					if(giorno.getMedico()==medico) orari.add(LocalDateTime.of(giorno.getData(), settimana[j][i].getOra()));
 				}
 			}
@@ -115,7 +115,7 @@ public class Agenda {
 	public void mediciDisponibili(LocalDate data, LocalTime ora){
 		int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
 		System.out.println("Medici disponibili:");
-		for(Giorno giorno: settimana[k][i].giorni){
+		for(Giorno giorno: settimana[k][i].getGiorni()){
 			if(giorno.getData().equals(data)) System.out.println(giorno.getMedico().toString());
 		}
 	}
@@ -189,7 +189,7 @@ public class Agenda {
    public Giorno specificaVisita(Medico medico, LocalDate data, LocalTime ora){
 	   Giorno nullo=null;
 	   int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
-	   for(Giorno giorno: settimana[k][i].giorni){
+	   for(Giorno giorno: settimana[k][i].getGiorni()){
 		   if(giorno.getData().equals(data)&giorno.getVisita()!=null) return giorno;
 	   }
 	   return nullo;
