@@ -1,7 +1,7 @@
 package it.unibs.ing.clinica;
 import java.time.*;
 
-enum statoVisita {
+enum StatoVisita {
 	Prenotata, Prenotabile, Conclusa, Refertata, Non_prenotabile
 }
 
@@ -10,7 +10,7 @@ public class Giorno {
 	private Visita visita;
 	private LocalDate data;
 	private Utente utente;
-	private statoVisita stato;
+	private StatoVisita stato;
 	
 	
 /**
@@ -22,7 +22,7 @@ public class Giorno {
 	Giorno(Medico _medico, LocalDate _data){
 		medico=_medico;
 		data=_data;
-		stato=statoVisita.Prenotabile;
+		stato=StatoVisita.Prenotabile;
 	}
 	
 	public Medico getMedico(){
@@ -41,7 +41,7 @@ public class Giorno {
 		return utente;
 	}
 	
-	public statoVisita getStato(){
+	public StatoVisita getStato(){
 		return stato;
 	}
 	
@@ -62,7 +62,7 @@ public class Giorno {
 		utente=_utente;
 	}
 
-	public void setStato(statoVisita _stato){
+	public void setStato(StatoVisita _stato){
 		stato=_stato;
 	}
 	
@@ -79,15 +79,15 @@ public class Giorno {
  */
 	public void cambiaStato(String generico){
 		switch(generico.toLowerCase()){
-		case "prenotata": stato=statoVisita.Prenotata;
+		case "prenotata": stato=StatoVisita.Prenotata;
 		break;
-		case "conclusa": stato=statoVisita.Conclusa;
+		case "conclusa": stato=StatoVisita.Conclusa;
 		break;
-		case "non prenotabile":stato=statoVisita.Non_prenotabile;
+		case "non prenotabile":stato=StatoVisita.Non_prenotabile;
 		break;
-		case "refertata":stato=statoVisita.Refertata;
+		case "refertata":stato=StatoVisita.Refertata;
 		break;
-		case "prenotabile":stato=statoVisita.Prenotabile;
+		case "prenotabile":stato=StatoVisita.Prenotabile;
 		break;
 		}
 	}

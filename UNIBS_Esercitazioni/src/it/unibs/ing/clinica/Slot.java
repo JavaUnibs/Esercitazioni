@@ -151,8 +151,8 @@ public class Slot {
    public int[] numVisite(){
 	   int prenotate=0, concluse=0;
 	   for(Giorno giorno: giorni){
-		   if(giorno.getStato().equals(statoVisita.Prenotata)) prenotate++;
-		   if(giorno.getStato().equals(statoVisita.Conclusa)) concluse++;   
+		   if(giorno.getStato().equals(StatoVisita.Prenotata)) prenotate++;
+		   if(giorno.getStato().equals(StatoVisita.Conclusa)) concluse++;   
 	   }
 	   int[] contatore= {prenotate, concluse};
 	   return contatore;
@@ -165,11 +165,11 @@ public class Slot {
   public int[] numVisiteTipo(){
 	  int prenotateGeneriche=0, prenotateSpecialistiche=0, concluseGeneriche=0, concluseSpecialistiche=0;
 	  for(Giorno giorno: giorni){
-		  if(giorno.getStato().equals(statoVisita.Prenotata)){
+		  if(giorno.getStato().equals(StatoVisita.Prenotata)){
 			  if(giorno.getVisita().getTipo().toLowerCase().equals("generica")) prenotateGeneriche++; else prenotateSpecialistiche++;
 		  }
 		  
-		  if(giorno.getStato().equals(statoVisita.Conclusa)){
+		  if(giorno.getStato().equals(StatoVisita.Conclusa)){
 			  if(giorno.getVisita().getTipo().toLowerCase().equals("generica")) concluseGeneriche++; else concluseSpecialistiche++;
 		  }
 		  
@@ -188,8 +188,8 @@ public class Slot {
 	  int[][] contatore= new int[2][elencoAree.size()];
 	  for(Giorno giorno: giorni){
 		  for(int i=0;i<elencoAree.size();i++){
-			  if(giorno.getVisita().getAreaComp().equals(elencoAree.get(i))&giorno.getStato().equals(statoVisita.Prenotata)) { contatore[0][i]++; break;}
-			  if(giorno.getVisita().getAreaComp().equals(elencoAree.get(i))&giorno.getStato().equals(statoVisita.Conclusa)) { contatore[1][i]++; break; }
+			  if(giorno.getVisita().getAreaComp().equals(elencoAree.get(i))&giorno.getStato().equals(StatoVisita.Prenotata)) { contatore[0][i]++; break;}
+			  if(giorno.getVisita().getAreaComp().equals(elencoAree.get(i))&giorno.getStato().equals(StatoVisita.Conclusa)) { contatore[1][i]++; break; }
 		  }
 	  }
 	  return contatore;

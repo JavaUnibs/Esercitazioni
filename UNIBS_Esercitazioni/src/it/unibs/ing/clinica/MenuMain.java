@@ -141,7 +141,7 @@ public class MenuMain {
 			 					LocalDate data = LocalDate.of(anno, mese, giorno);
 			 					LocalTime orario = LocalTime.of(ora, minuti);
 		 				     
-			 					Visita da_modificare = agenda.specificaVisita(medico, data, orario);
+			 					Visita da_modificare = agenda.specificaVisita(medico, data, orario); //ricky il metodo specificaVisita non restituisce un oggetto visita, ma un oggetto Giorno con dentro la Visita che si sta cercando
 			 					String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
 			 					String input = LeggiInput.riga("Inserire nuovo dato: ");
 			 					da_modificare.modificaVisita(campo, input);

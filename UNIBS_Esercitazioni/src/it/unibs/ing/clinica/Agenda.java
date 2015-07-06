@@ -235,7 +235,7 @@ public class Agenda {
 	   }
 	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
 	   elencoTemp.get(scelta).setUtente(utente);
-	   elencoTemp.get(scelta).setStato(statoVisita.Prenotata);
+	   elencoTemp.get(scelta).setStato(StatoVisita.Prenotata);
 	   elencoTemp.get(scelta).setVisita(new Visita(motivoVisita, tipoVisita, areaCompetenza));
 	   return;
 	   }
@@ -361,11 +361,11 @@ public class Agenda {
 			concluseSpecialistiche+=array[3];
 		 }	 
 	  }
-	  System.out.print("Visite totali generiche: "+(prenotateGeneriche+prenotateSpecialistiche));
-	  System.out.print("Visite totali specialistiche: "+(concluseGeneriche+concluseSpecialistiche));
-	  System.out.print("Visite prenotate generiche: "+prenotateGeneriche);
-	  System.out.print("Visite prenotate specialistiche: "+prenotateSpecialistiche);
-	  System.out.print("Visite concluse generiche: "+concluseGeneriche);
+	  System.out.println("Visite totali generiche: "+(prenotateGeneriche+prenotateSpecialistiche));
+	  System.out.println("Visite totali specialistiche: "+(concluseGeneriche+concluseSpecialistiche));
+	  System.out.println("Visite prenotate generiche: "+prenotateGeneriche);
+	  System.out.println("Visite prenotate specialistiche: "+prenotateSpecialistiche);
+	  System.out.println("Visite concluse generiche: "+concluseGeneriche);
 	  System.out.println("Visite concluse specialistiche: "+concluseSpecialistiche);
   }
 
@@ -389,8 +389,8 @@ public class Agenda {
 	  
 	  for(int x=0;x<contatore.length;x++){
 		  for(int y=0;y<2;y++){
-			  if(y==0)System.out.print("Visite prenotate di "+elencoAree.get(x)+": "+contatore[y][x]);
-			  else System.out.print("Visite concluse di "+elencoAree.get(x)+": "+contatore[y][x]);
+			  if(y==0)System.out.println("Visite prenotate di "+elencoAree.get(x)+": "+contatore[y][x]);
+			  else System.out.println("Visite concluse di "+elencoAree.get(x)+": "+contatore[y][x]);
 			  System.out.println("----");
 		  }
 	  }
@@ -427,7 +427,7 @@ public class Agenda {
 		 
 	  }
 	  
-	  System.out.print("Area di competenza con più visite: "+elencoAree.get(posizioneMax));
+	  System.out.println("Area di competenza con più visite: "+elencoAree.get(posizioneMax));
 	  System.out.println("Area di competenza con meno visite: "+elencoAree.get(posizioneMin));
   
    }
@@ -441,7 +441,7 @@ public class Agenda {
 	   int x=0;
 	   for(Medico medico: elencoMedici){
 		   contatore[x]=visiteMedico(medico).size();
-		   System.out.print(medico.toStringNomeCognome());
+		   System.out.println(medico.toStringNomeCognome());
 		   System.out.println("Visite assegnate: "+contatore[x]);
 		   x++;
 		   
