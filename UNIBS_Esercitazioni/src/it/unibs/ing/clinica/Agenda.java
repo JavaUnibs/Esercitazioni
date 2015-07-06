@@ -224,7 +224,7 @@ public class Agenda {
    public void inserimentoVisita(Utente utente, String motivoVisita, LocalDate data, LocalTime ora, String tipoVisita){
 	   int scelta, ora1=Date.indiceOra(ora), data1=Date.indiceGiorno(data), i, j;
 	   String areaCompetenza="";
-	   if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.stringa("Inserire l'area di competenza richiesta");
+	   if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
 	   
 	   ArrayList<Giorno> elencoTemp= settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);
 	   System.out.println("Medici disponibili il "+data.toString()+" alle "+settimana[ora1][data1].getOra().toString()+" :");
@@ -320,7 +320,7 @@ public class Agenda {
   public ArrayList<Giorno> visiteTipo(String tipoVisita){
 	  ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
 	  String areaCompetenza="";
-	  if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.stringa("Inserire l'area di competenza richiesta");
+	  if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
 	  for(int i=0;i<6;i++){
   		   for(int j=0;j<20;j++){
   			   elencoTemp.addAll(settimana[j][i].visiteTipoSlot(tipoVisita, areaCompetenza));
