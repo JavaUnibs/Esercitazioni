@@ -130,7 +130,7 @@ public class Slot {
    		   if(giorno.getMedico()==medico) temp.add(giorno);
    	   }
    	   return temp;
-      }
+   }
 /**
  * Restituisce un arraylist contenente i giorni di questi slot con visite del tipo e area di competenza inseriti.      
  * @param tipoVisita

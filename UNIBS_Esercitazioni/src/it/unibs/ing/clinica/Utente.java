@@ -44,7 +44,7 @@ public class Utente {
 		case "codice fiscale": codiceFiscale=input;
 		break;
 		}
-		}
+	}
 	
 /**
  * Verifica che la stringa in ingresso abbia un ordine di numeri e caratteri uguale ai codici fiscali. 	
@@ -104,7 +104,7 @@ public class Utente {
 	}
 	
 	public String toStringCodiceFiscale(){
-		return codiceFiscale;
+		return "Codice fiscale "+codiceFiscale+"\n";
 	}
 
 }

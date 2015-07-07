@@ -63,8 +63,8 @@ public class Agenda {
 				Giorno temp= new Giorno(medico, giorniVari[i]);
 				settimana[ora1][data].ciclaElencoIns(temp);
 			}
-		  }
 		}
+	}
 	
 /**
  * Inserisce un medico nel giorno e nell'intervallo di orari voluto, a meno che non sia già presente.
@@ -99,12 +99,14 @@ public class Agenda {
 			}
 		}
 		
-		if(orari.isEmpty()) {System.out.println("Questo medico non è disponibile in nessuna data."); return;}
+		if(orari.isEmpty()) {
+			System.out.println("Questo medico non è disponibile in nessuna data."); return;
+		}
 		Iterator<LocalDateTime> iterator=orari.iterator();
 		System.out.println("Orari disponibili:");
 	    while(iterator.hasNext()) System.out.println(iterator.next());
 	    
-	    }
+	}
 	
 /**
  * Stampa i medici disponibili nella data e orario scelti.
@@ -157,9 +159,9 @@ public class Agenda {
 			for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 				Giorno temp= new Giorno(medico, giorniVari[i]);
 				settimana[ora1][data].ciclaElencoDel(temp);	
-				}
 			}
-		}	
+		}
+	}	
 
 /**
 * Cancella un medico nel giorno e nell'intervallo di orari voluto (cancella anche le visite ad esso correlate).
@@ -175,8 +177,8 @@ public class Agenda {
 		for (ora1=Date.indiceOra(oraIniziale);ora1<=ora2;ora1++){
 			Giorno temp= new Giorno(medico, giorno);
 			settimana[ora1][data].ciclaElencoDel(temp);
-			}
-			}
+		}
+	}
 
 /**
  * Restituisce la visita corrispondente	al medico, alla data e all'orario scelti..
@@ -208,7 +210,7 @@ public class Agenda {
 		   }
 	   }
 	   return data;
-	   }
+   }
    
    
 /**
@@ -231,7 +233,7 @@ public class Agenda {
 	   if(elencoTemp.size()==0) System.out.println("Nessun medico disponibile in questa data.");
 	   else {
 		   for(Giorno giorno: elencoTemp){
-	       System.out.println(giorno.getMedico().toString());
+			   System.out.println(giorno.getMedico().toString());
 	   }
 	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
 	   elencoTemp.get(scelta).setUtente(utente);
@@ -246,19 +248,19 @@ public class Agenda {
 	       if (elencoTemp.size()>0){
 	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
 	    	return;  
-	     }
+	       }
 	   }
 	   
 	   //Questo ciclo finisce i restanti giorni della settimana in cerca del prossimo giorno adatto alla visita
 	   int cont=1;
 	   for(data1=Date.indiceGiorno(data)+1;data1<6;data1++){
 	       for(ora1=0;ora1<20;ora1++){
-	       elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
-	       if (elencoTemp.size()>0){
-	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
-	    	return;  
+	    	   	elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
+	       		if (elencoTemp.size()>0){
+	       			System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
+	       			return;  
+	       		}
 	       }
-	     }
 	       cont++;
 	   }
 	   
@@ -267,17 +269,17 @@ public class Agenda {
 	   while(data.isBefore(maxData)||data.isEqual(maxData)){
 	       if(data.getDayOfWeek().getValue()==6) cont+=2; else if(data.getDayOfWeek().getValue()==7) cont++;
 		   for(i=0;i<6;i++){
-		   for(j=0;j<20;j++){
-		   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
-		   if (elencoTemp.size()>0){
-		    System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
-		    return; 
-		   }
-	      }
+			   for(j=0;j<20;j++){
+			   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
+		       		if (elencoTemp.size()>0){
+		       		System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
+		       		return; 
+		       		}
+			   }
 		   cont++;
-	    }   
+		   }   
 	   }
-      }
+   }
      
    
    
@@ -311,7 +313,7 @@ public class Agenda {
    		   }
    	   }
    	   return elencoTemp;
-      }   
+   }   
 /**
  * Restituisce gli oggetti Giorno contenenti le visite del tipo e area di competenza inseriti.      
  * @param tipoVisita
@@ -327,7 +329,7 @@ public class Agenda {
   		   }
   	   }
   	   return elencoTemp;
-      }
+  }
 /**
  * Stampa il numero di visite prenotate, concluse e totali.  
  */
@@ -359,8 +361,8 @@ public class Agenda {
 			prenotateSpecialistiche+=array[1];
 			concluseGeneriche+=array[2];
 			concluseSpecialistiche+=array[3];
-		 }	 
-	  }
+			 }	 
+		 }
 	  System.out.println("Visite totali generiche: "+(prenotateGeneriche+prenotateSpecialistiche));
 	  System.out.println("Visite totali specialistiche: "+(concluseGeneriche+concluseSpecialistiche));
 	  System.out.println("Visite prenotate generiche: "+prenotateGeneriche);
@@ -411,7 +413,7 @@ public class Agenda {
 					contatore[x]+=contatoreSlot[y][x];
 				}
 			}
-		}
+		  }
 	  }
       int posizioneMax=0, posizioneMin=0, max=contatore[0], min=contatore[0];
 	  for(int x=0;x<contatore.length;x++){
@@ -430,7 +432,7 @@ public class Agenda {
 	  System.out.println("Area di competenza con più visite: "+elencoAree.get(posizioneMax));
 	  System.out.println("Area di competenza con meno visite: "+elencoAree.get(posizioneMin));
   
-   }
+  }
       
 /**
  * Stampa il numero di visite assegnate ad ogni medico della clinica.   
@@ -445,8 +447,8 @@ public class Agenda {
 		   System.out.println("Visite assegnate: "+contatore[x]);
 		   x++;
 		   
-		   }
 	   }
+   }
  
 
 }	
