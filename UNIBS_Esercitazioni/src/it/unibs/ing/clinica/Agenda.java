@@ -88,7 +88,7 @@ public class Agenda {
  * @param medico il medico di cui si vogliono vedere gli orari di visita
  * @author Andrea Ferrari
  */
-	public void orariVisita(Medico medico){
+	public String orariVisita(Medico medico){
 	Set<LocalDateTime> orari = new TreeSet<LocalDateTime>();
 	
 		for(int i=0;i<6;i++){
@@ -100,11 +100,13 @@ public class Agenda {
 		}
 		
 		if(orari.isEmpty()) {
-			System.out.println("Questo medico non è disponibile in nessuna data."); return;
+			return "Questo medico non è disponibile in nessuna data."; 
+			
 		}
 		Iterator<LocalDateTime> iterator=orari.iterator();
-		System.out.println("Orari disponibili:");
-	    while(iterator.hasNext()) System.out.println(iterator.next());
+		String stringa="Orari disponibili: \n";
+	    while(iterator.hasNext()) stringa=stringa.concat(iterator.next().toString()+"\n");
+	    return stringa;
 	    
 	}
 	
@@ -114,12 +116,13 @@ public class Agenda {
  * @param ora  l'orario scelto
  * @author Andrea Ferrari
  */
-	public void mediciDisponibili(LocalDate data, LocalTime ora){
+	public String mediciDisponibili(LocalDate data, LocalTime ora){
 		int i=Date.indiceGiorno(data), k=Date.indiceOra(ora);
-		System.out.println("Medici disponibili:");
+		String stringa="Medici disponibili: \n";
 		for(Giorno giorno: settimana[k][i].getGiorni()){
-			if(giorno.getData().equals(data)) System.out.println(giorno.getMedico().toString());
+			if(giorno.getData().equals(data)) stringa=stringa.concat(giorno.getMedico().toStringNomeCognomeAlbo());
 		}
+		return stringa;
 	}
 	
 /**
@@ -233,7 +236,7 @@ public class Agenda {
 	   if(elencoTemp.size()==0) System.out.println("Nessun medico disponibile in questa data.");
 	   else {
 		   for(Giorno giorno: elencoTemp){
-			   System.out.println(giorno.getMedico().toString());
+			   System.out.println(giorno.getMedico().toStringNomeCognomeAlbo());
 	   }
 	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
 	   elencoTemp.get(scelta).setUtente(utente);
@@ -267,7 +270,7 @@ public class Agenda {
 	   LocalDate maxData=massimaData();
 	   //Questo ciclo cerca un nuovo giorno disponibile fino alla massima data di disponibilità in tutto il calendario.
 	   while(data.isBefore(maxData)||data.isEqual(maxData)){
-	       if(data.getDayOfWeek().getValue()==6) cont+=2; else if(data.getDayOfWeek().getValue()==7) cont++;
+	       if(data.getDayOfWeek().getValue()==7) cont++;
 		   for(i=0;i<6;i++){
 			   for(j=0;j<20;j++){
 			   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
@@ -443,7 +446,7 @@ public class Agenda {
 	   int x=0;
 	   for(Medico medico: elencoMedici){
 		   contatore[x]=visiteMedico(medico).size();
-		   System.out.println(medico.toStringNomeCognome());
+		   System.out.println(medico.toStringNomeCognomeAlbo());
 		   System.out.println("Visite assegnate: "+contatore[x]);
 		   x++;
 		   

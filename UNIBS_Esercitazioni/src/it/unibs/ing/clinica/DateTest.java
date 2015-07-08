@@ -12,14 +12,14 @@ public class DateTest {
 
 	@Test
 	public void testIndiceGiorno() {
-		LocalDate data=LocalDate.of(2015, 7, 7); //martedì
-		assertSame(1, Date.indiceGiorno(data));
+		LocalDate data=LocalDate.of(2015, 7, 8); //martedì
+		assertSame(2, Date.indiceGiorno(data));
 	}
 
 	@Test
 	public void testIndiceOra() {
-		LocalTime ora=LocalTime.of(17, 30);
-		assertSame(19, Date.indiceOra(ora));
+		LocalTime ora=LocalTime.of(14, 30);
+		assertSame(13, Date.indiceOra(ora));
 	}
 
 	@Test

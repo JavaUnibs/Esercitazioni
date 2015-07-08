@@ -191,7 +191,7 @@ public class MenuMain {
 					case 1:{
 								String campo = LeggiInput.stringa("Dato medico: ");
 								Medico cercato = archivio.ricercaMedici(campo);
-								agenda.orariVisita(cercato);
+								System.out.println(agenda.orariVisita(cercato));
 							 
 					};
 					break;
@@ -205,7 +205,7 @@ public class MenuMain {
 						        int minuti = LeggiInput.intero("Inserire minuti: ");
 						        LocalDate data = LocalDate.of(anno, mese, giorno);
 						        LocalTime orario = LocalTime.of(ora, minuti);
-								agenda.mediciDisponibili(data, orario);
+								System.out.println(agenda.mediciDisponibili(data, orario));
 						
 					};
 					break;

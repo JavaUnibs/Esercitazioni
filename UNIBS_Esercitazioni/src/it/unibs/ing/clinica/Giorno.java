@@ -12,6 +12,25 @@ public class Giorno {
 	private Utente utente;
 	private StatoVisita stato;
 	
+/**
+ * Override di equals, per qualche motivo non funzionava.	
+ */
+	
+	public boolean equals(final Object obj)
+    {
+        if ( obj == null || obj == this || !(obj instanceof Giorno) ) 
+            return false;
+
+        Giorno altroGiorno = (Giorno) obj;
+
+        if (altroGiorno.medico != this.medico)       return false;
+        if (altroGiorno.visita != this.visita)     return false;
+        if (!altroGiorno.data.equals(this.data)) return false;
+        if (altroGiorno.utente != this.utente)   return false;
+        if (!altroGiorno.stato.equals(this.stato)) return false;
+
+        return true;
+    }
 	
 /**
  * Il costruttore necessita di un medico disponibile in una certa data.	

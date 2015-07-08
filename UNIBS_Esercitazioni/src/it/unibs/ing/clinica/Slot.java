@@ -96,7 +96,7 @@ public class Slot {
  * @author Andrea Ferrari
  */
    public LocalDate massimaData(){
-	   LocalDate data= giorni.get(0).getData();
+	   LocalDate data= LocalDate.of(-999999999, 1, 1);
 	   for(Giorno giorno: giorni){
 		   if (giorno.getData().isAfter(data)) data=giorno.getData();
 	   }
