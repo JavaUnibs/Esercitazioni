@@ -369,8 +369,8 @@ public class Agenda {
 			 }	 
 		 }
 	  String stringa=
-	  "Visite totali generiche: "+(prenotateGeneriche+prenotateSpecialistiche)+"\n"
-	  +"Visite totali specialistiche: "+(concluseGeneriche+concluseSpecialistiche)+"\n"
+	  "Visite totali generiche: "+(prenotateGeneriche+concluseGeneriche)+"\n"
+	  +"Visite totali specialistiche: "+(prenotateSpecialistiche+concluseSpecialistiche)+"\n"
 	  +"Visite prenotate generiche: "+prenotateGeneriche+"\n"
 	  +"Visite prenotate specialistiche: "+prenotateSpecialistiche+"\n"
 	  +"Visite concluse generiche: "+concluseGeneriche+"\n"
@@ -388,7 +388,7 @@ public class Agenda {
 	  for(int i=0;i<6;i++){
 		  for(int j=0;j<20;j++){
 			contatoreSlot=settimana[j][i].numVisiteArea(elencoAree);
-			for(int x=0;x<contatore.length;x++){
+			for(int x=0;x<elencoAree.size();x++){
 				for(int y=0;y<2;y++){
 					contatore[y][x]+=contatoreSlot[y][x];
 				}
@@ -396,7 +396,7 @@ public class Agenda {
 		}
 	  }
 	  String stringa="";
-	  for(int x=0;x<contatore.length;x++){
+	  for(int x=0;x<elencoAree.size();x++){
 		  for(int y=0;y<2;y++){
 			  if(y==0) stringa=stringa.concat("Visite prenotate di "+elencoAree.get(x)+": "+contatore[y][x]+"\n");
 			  else stringa=stringa.concat("Visite concluse di "+elencoAree.get(x)+": "+contatore[y][x])+"\n";
@@ -416,15 +416,21 @@ public class Agenda {
 	  for(int i=0;i<6;i++){
 		  for(int j=0;j<20;j++){
 			contatoreSlot=settimana[j][i].numVisiteArea(elencoAree);
-			for(int x=0;x<contatore.length;x++){
+			for(int x=0;x<elencoAree.size();x++){
 				for(int y=0;y<2;y++){
 					contatore[x]+=contatoreSlot[y][x];
 				}
 			}
 		  }
 	  }
+	  if(elencoAree.isEmpty()){
+		  String stringa="Area di competenza con più visite: nessuna\n"
+				  +"Area di competenza con meno visite: nessuna\n";
+				  return stringa;
+	  }
+	  
       int posizioneMax=0, posizioneMin=0, max=contatore[0], min=contatore[0];
-	  for(int x=0;x<contatore.length;x++){
+	  for(int x=0;x<elencoAree.size();x++){
 		 if(contatore[x]>max) {
 			 max=contatore[x];
 			 posizioneMax=x;
@@ -438,9 +444,9 @@ public class Agenda {
 	  }
 	  
 	  String stringa="Area di competenza con più visite: "+elencoAree.get(posizioneMax)+"\n"
-	  +"Area di competenza con meno visite: "+elencoAree.get(posizioneMin)+"\n";
+				 +"Area di competenza con meno visite: "+elencoAree.get(posizioneMin)+"\n";
 	  return stringa;
-  
+	  
   }
       
 /**
@@ -448,13 +454,12 @@ public class Agenda {
  * @param elencoMedici un arraylist di classi Medico contenente tutti i medici della clinica.
  */
    public String statisticheVisiteMedici(ArrayList<Medico> elencoMedici){
-	   int[] contatore=new int[elencoMedici.size()];
-	   int x=0;
+	   int x;
 	   String stringa="";
 	   for(Medico medico: elencoMedici){
-		   contatore[x]=visiteMedico(medico).size();
-		   stringa=stringa.concat(medico.toStringNomeCognomeAlbo()+"\n");
-		   stringa=stringa.concat("Visite assegnate: "+contatore[x]+"\n");
+		   x=visiteMedico(medico).size();
+		   stringa=stringa.concat(medico.toStringNomeCognomeAlbo());
+		   stringa=stringa.concat("Visite assegnate: "+x+"\n");
 		   x++;
 		   
 	   }

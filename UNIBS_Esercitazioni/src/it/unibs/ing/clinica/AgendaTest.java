@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -136,32 +137,71 @@ public class AgendaTest {
 		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
 		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
 		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
-		assertSame(1, agenda.visiteTipo("Specialistica").size());
+		assertSame(1, agenda.visiteTipo("Specialistica").size()); //Inserire Cardiologia
 	}
 
 	@Test
 	public void testStatisticheVisite() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		String test="Visite totali: 1\nVisite prenotate: 1\nVisite concluse: 0\n";
+		assertEquals(test, agenda.statisticheVisite());
 	}
 
 	@Test
 	public void testStatisticheVisiteTipo() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		String test="Visite totali generiche: 0\nVisite totali specialistiche: 1\nVisite prenotate generiche: 0\nVisite prenotate specialistiche: 1\n"
+				+ "Visite concluse generiche: 0\nVisite concluse specialistiche: 0\n";
+		assertEquals(test, agenda.statisticheVisiteTipo());
+		
 	}
 
 	@Test
 	public void testStatisticheVisiteArea() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		ArrayList<String> temp=new ArrayList<String>();
+		temp.add("Cardiologia");
+		String test="Visite prenotate di Cardiologia: 1\nVisite concluse di Cardiologia: 0\n";
+		assertEquals(test, agenda.statisticheVisiteArea(temp));
 	}
 
 	@Test
 	public void testStatisticheVisiteAreaMinMax() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		ArrayList<String> temp=new ArrayList<String>();
+		temp.add("Cardiologia");
+		String test="Area di competenza con più visite: Cardiologia\nArea di competenza con meno visite: Cardiologia\n";
+		assertEquals(test, agenda.statisticheVisiteAreaMinMax(temp));
 	}
 
 	@Test
 	public void testStatisticheVisiteMedici() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		ArrayList<Medico> temp=new ArrayList<Medico>();
+		temp.add(medico);
+		String test="-----------\nNome: Gino\nCognome: Pasquale\nCodice albo: 007\nVisite assegnate: 1\n";
+		assertEquals(test, agenda.statisticheVisiteMedici(temp));
+		
 	}
 
 }
