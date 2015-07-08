@@ -88,6 +88,7 @@ public class SlotTest {
 	public void testVisiteTipoSlot() {
 		Slot slot=new Slot(LocalTime.of(13, 30));
 		giorno.setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		giorno.cambiaStato("Prenotata");
 		slot.aggiungiGiorno(giorno);
 		slot.aggiungiGiorno(giorno2);
 		ArrayList<Giorno> temp=slot.visiteTipoSlot("Specialistica", "Cardiologia");
@@ -99,6 +100,7 @@ public class SlotTest {
 	public void testNumVisite() {
 		Slot slot=new Slot(LocalTime.of(13, 30));
 		giorno.setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		giorno.cambiaStato("Prenotata");
 		slot.aggiungiGiorno(giorno);
 		slot.aggiungiGiorno(giorno2);
 		int[] temp=slot.numVisite();
@@ -109,6 +111,7 @@ public class SlotTest {
 	public void testNumVisiteTipo() {
 		Slot slot=new Slot(LocalTime.of(13, 30));
 		giorno.setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		giorno.cambiaStato("Prenotata");
 		slot.aggiungiGiorno(giorno);
 		slot.aggiungiGiorno(giorno2);
 		int[] temp=slot.numVisiteTipo();
@@ -119,6 +122,7 @@ public class SlotTest {
 	public void testNumVisiteArea() {
 		Slot slot=new Slot(LocalTime.of(13, 30));
 		giorno.setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		giorno.cambiaStato("Prenotata");
 		slot.aggiungiGiorno(giorno);
 		slot.aggiungiGiorno(giorno2);
 		ArrayList<String> temp=new ArrayList<String>();
