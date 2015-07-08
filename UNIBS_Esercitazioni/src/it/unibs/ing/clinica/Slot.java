@@ -76,7 +76,7 @@ public class Slot {
  * Verifica quali sono i giorni dell'elenco potenzialmente adatti per una visita  tramite i campi inseriti e li restituisce in un ArrayList.	   
  * @param data            la data della visita
  * @param tipoVisita      la tipologia (generica o specialistica)
- * @param areaCompetenza
+ * @param areaCompetenza  l'area di competenza che si richiede dal medico
  * @return                la lista di giorni adatti alla visita
  * @author Andrea Ferrari
  */
