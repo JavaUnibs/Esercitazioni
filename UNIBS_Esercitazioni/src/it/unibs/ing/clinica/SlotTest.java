@@ -31,7 +31,7 @@ public class SlotTest {
 		slot.aggiungiGiorno(giorno2);
 		slot.ciclaElencoIns(giorno2);
 		int cont=0;
-		for(Giorno giorno:slot.getGiorni()){
+		for(Giorno giorno: slot.getGiorni()){
 			if(giorno.equals(giorno2))cont++;
 		}
 		assertSame(1, cont);

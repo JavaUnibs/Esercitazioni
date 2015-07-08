@@ -336,7 +336,7 @@ public class Agenda {
 /**
  * Stampa il numero di visite prenotate, concluse e totali.  
  */
-  public void statisticheVisite(){
+  public String statisticheVisite(){
 	 int[] array;
 	 int prenotate=0, concluse=0;
 	 for(int i=0;i<6;i++){
@@ -346,15 +346,17 @@ public class Agenda {
 			 concluse+=array[1];
 		 }
 	 }
-	 System.out.println("Visite totali: "+(prenotate+concluse));
-	 System.out.println("Visite prenotate: "+prenotate);
-	 System.out.println("Visite concluse: "+concluse);
+	 String stringa=
+	 "Visite totali: "+(prenotate+concluse)+"\n"
+	 +"Visite prenotate: "+prenotate+"\n"
+	 +"Visite concluse: "+concluse+"\n";
+	 return stringa;
 	 
   }
 /**
  * Stampa il numero di visite totali, prenotate e concluse suddivise per tipo.
  */
-  public void statisticheVisiteTipo(){
+  public String statisticheVisiteTipo(){
 	  int[] array;
 	  int prenotateGeneriche=0,  prenotateSpecialistiche=0, concluseGeneriche=0, concluseSpecialistiche=0;
 		 for(int i=0;i<6;i++){
@@ -366,19 +368,21 @@ public class Agenda {
 			concluseSpecialistiche+=array[3];
 			 }	 
 		 }
-	  System.out.println("Visite totali generiche: "+(prenotateGeneriche+prenotateSpecialistiche));
-	  System.out.println("Visite totali specialistiche: "+(concluseGeneriche+concluseSpecialistiche));
-	  System.out.println("Visite prenotate generiche: "+prenotateGeneriche);
-	  System.out.println("Visite prenotate specialistiche: "+prenotateSpecialistiche);
-	  System.out.println("Visite concluse generiche: "+concluseGeneriche);
-	  System.out.println("Visite concluse specialistiche: "+concluseSpecialistiche);
+	  String stringa=
+	  "Visite totali generiche: "+(prenotateGeneriche+prenotateSpecialistiche)+"\n"
+	  +"Visite totali specialistiche: "+(concluseGeneriche+concluseSpecialistiche)+"\n"
+	  +"Visite prenotate generiche: "+prenotateGeneriche+"\n"
+	  +"Visite prenotate specialistiche: "+prenotateSpecialistiche+"\n"
+	  +"Visite concluse generiche: "+concluseGeneriche+"\n"
+	  +"Visite concluse specialistiche: "+concluseSpecialistiche+"\n";
+	  return stringa;
   }
 
 /**
  * Stampa i numeri di visite prenotate e concluse suddivise per area di competenza.
  * @param elencoAree un arraylist di stringhe contenente tutte le aree di competenza dei medici della clinica.
  */
-  public void statisticheVisiteArea(ArrayList<String> elencoAree){
+  public String statisticheVisiteArea(ArrayList<String> elencoAree){
 	  int[][] contatore=new int[2][elencoAree.size()];
 	  int[][] contatoreSlot;
 	  for(int i=0;i<6;i++){
@@ -391,21 +395,22 @@ public class Agenda {
 			}
 		}
 	  }
-	  
+	  String stringa="";
 	  for(int x=0;x<contatore.length;x++){
 		  for(int y=0;y<2;y++){
-			  if(y==0)System.out.println("Visite prenotate di "+elencoAree.get(x)+": "+contatore[y][x]);
-			  else System.out.println("Visite concluse di "+elencoAree.get(x)+": "+contatore[y][x]);
-			  System.out.println("----");
+			  if(y==0) stringa=stringa.concat("Visite prenotate di "+elencoAree.get(x)+": "+contatore[y][x]+"\n");
+			  else stringa=stringa.concat("Visite concluse di "+elencoAree.get(x)+": "+contatore[y][x])+"\n";
 		  }
 	  }
+	  
+	  return stringa;
   }
 
 /**
  * Stampa le aree di competenza con il minor e il maggior numero di visite.
  * @param elencoAree un arraylist di stringhe contenente tutte le aree di competenza dei medici della clinica.
  */
-  public void statisticheVisiteAreaMinMax(ArrayList<String> elencoAree){
+  public String statisticheVisiteAreaMinMax(ArrayList<String> elencoAree){
 	  int[] contatore=new int[elencoAree.size()];
 	  int[][] contatoreSlot;
 	  for(int i=0;i<6;i++){
@@ -432,8 +437,9 @@ public class Agenda {
 		 
 	  }
 	  
-	  System.out.println("Area di competenza con più visite: "+elencoAree.get(posizioneMax));
-	  System.out.println("Area di competenza con meno visite: "+elencoAree.get(posizioneMin));
+	  String stringa="Area di competenza con più visite: "+elencoAree.get(posizioneMax)+"\n"
+	  +"Area di competenza con meno visite: "+elencoAree.get(posizioneMin)+"\n";
+	  return stringa;
   
   }
       
@@ -441,16 +447,18 @@ public class Agenda {
  * Stampa il numero di visite assegnate ad ogni medico della clinica.   
  * @param elencoMedici un arraylist di classi Medico contenente tutti i medici della clinica.
  */
-   public void statisticheVisiteMedici(ArrayList<Medico> elencoMedici){
+   public String statisticheVisiteMedici(ArrayList<Medico> elencoMedici){
 	   int[] contatore=new int[elencoMedici.size()];
 	   int x=0;
+	   String stringa="";
 	   for(Medico medico: elencoMedici){
 		   contatore[x]=visiteMedico(medico).size();
-		   System.out.println(medico.toStringNomeCognomeAlbo());
-		   System.out.println("Visite assegnate: "+contatore[x]);
+		   stringa=stringa.concat(medico.toStringNomeCognomeAlbo()+"\n");
+		   stringa=stringa.concat("Visite assegnate: "+contatore[x]+"\n");
 		   x++;
 		   
 	   }
+	   return stringa;
    }
  
 

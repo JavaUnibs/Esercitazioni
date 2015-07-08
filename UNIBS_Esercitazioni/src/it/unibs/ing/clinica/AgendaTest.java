@@ -111,17 +111,32 @@ public class AgendaTest {
 
 	@Test
 	public void testVisiteUtente() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		assertSame(1, agenda.visiteUtente(utente).size());
 	}
 
 	@Test
 	public void testVisiteMedico() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		assertSame(1, agenda.visiteMedico(medico).size());
 	}
 
 	@Test
 	public void testVisiteTipo() {
-		fail("Not yet implemented");
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		agenda.settimana[12][2].getGiorni().get(0).setVisita(new Visita("prova", "Specialistica", "Cardiologia"));
+		agenda.settimana[12][2].getGiorni().get(0).setUtente(utente);
+		agenda.settimana[12][2].getGiorni().get(0).cambiaStato("Prenotata");
+		assertSame(1, agenda.visiteTipo("Specialistica").size());
 	}
 
 	@Test
