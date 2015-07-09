@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MenuMain {
 	
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca"};
-	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "modifica dati medico"};
+	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
 	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita"};	
 	static final String[] MENU_RICERCA = {"Ricerca giorni di lavoro medici", "Ricerca medico disponibile per orario", "Ricerca visite per medico", "Ricerca visite per utente"};
 	static final String[] MENU_DISP = {"Giorni continuati e orari continuati", "Giorni specifici e ore specifiche", "Un giorno e orario continuato"};
