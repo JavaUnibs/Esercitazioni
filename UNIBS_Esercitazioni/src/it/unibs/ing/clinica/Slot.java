@@ -127,7 +127,7 @@ public class Slot {
    public ArrayList<Giorno> visiteMedicoSlot(Medico medico){
    	   ArrayList<Giorno> temp= new ArrayList<Giorno>();
    	   for(Giorno giorno: giorni){
-   		   if(giorno.getMedico()==medico) temp.add(giorno);
+   		   if(giorno.getMedico()==medico&giorno.getVisita()!=null) temp.add(giorno);
    	   }
    	   return temp;
    }
