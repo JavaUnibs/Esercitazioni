@@ -109,10 +109,6 @@ public class AgendaTest {
 		assertEquals(LocalDate.of(2015, 7, 10), agenda.massimaData());
 	}
 
-	@Test
-	public void testInserimentoVisita() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testVisiteUtente() {
