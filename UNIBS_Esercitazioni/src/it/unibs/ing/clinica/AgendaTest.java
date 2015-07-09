@@ -26,7 +26,8 @@ public class AgendaTest {
 	@Test
 	public void testInserimentoDispMedicoLocalTimeLocalTimeLocalDateArray() {
 		Agenda agenda=new Agenda();
-		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10));
+		LocalDate[] array= {LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10)};
+		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), array);
 		assertTrue(agenda.settimana[12][2].getGiorni().get(0).equals(new Giorno(medico, LocalDate.of(2015, 7, 8))));
 		assertTrue(agenda.settimana[13][2].getGiorni().get(0).equals(new Giorno(medico, LocalDate.of(2015, 7, 8))));
 		assertTrue(agenda.settimana[12][4].getGiorni().get(0).equals(new Giorno(medico, LocalDate.of(2015, 7, 10))));
@@ -74,8 +75,9 @@ public class AgendaTest {
 	@Test
 	public void testCancellaDispMedicoLocalTimeLocalTimeLocalDateArray() {
 		Agenda agenda=new Agenda();
-		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10));
-		agenda.cancellaDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10));
+		LocalDate[] array={LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10)};
+		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), array );;
+		agenda.cancellaDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), array);
 		assertSame(0,agenda.settimana[12][2].getGiorni().size());
 		assertSame(0,agenda.settimana[13][2].getGiorni().size());
 		assertSame(0,agenda.settimana[12][4].getGiorni().size());
@@ -94,14 +96,16 @@ public class AgendaTest {
 	@Test
 	public void testSpecificaVisita() {
 		Agenda agenda=new Agenda();
-		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), LocalDate.of(2015, 7, 8));
+		LocalDate[] array={LocalDate.of(2015, 7, 8)};
+		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), array);
 		assertNull(agenda.specificaVisita(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 30)));
 	}
 
 	@Test
 	public void testMassimaData() {
 		Agenda agenda=new Agenda();
-		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10));
+		LocalDate[] array= {LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 10)};
+		agenda.inserimentoDisp(medico, LocalTime.of(14, 0), LocalTime.of(14, 30), array);
 		assertEquals(LocalDate.of(2015, 7, 10), agenda.massimaData());
 	}
 

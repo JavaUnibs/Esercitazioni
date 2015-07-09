@@ -54,7 +54,7 @@ public class Agenda {
  * @param giorniVari  array variabile dei giorni scelti
  * @author Andrea Ferrari
  */
-	public void inserimentoDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate... giorniVari){
+	public void inserimentoDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate[] giorniVari){
 		int i, ora1, ora2=Date.indiceOra(oraFinale), data;
 		
 		for(i=0;i<giorniVari.length;i++){
@@ -154,7 +154,7 @@ public class Agenda {
 * @param giorniVari  array variabile dei giorni scelti
 * @author Andrea Ferrari
 */
-	public void cancellaDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate... giorniVari){
+	public void cancellaDisp(Medico medico, LocalTime oraIniziale, LocalTime oraFinale, LocalDate[] giorniVari){
 		int i, ora1, ora2=Date.indiceOra(oraFinale), data;
 		
 		for(i=0;i<giorniVari.length;i++){
