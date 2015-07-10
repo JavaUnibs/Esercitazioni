@@ -6,7 +6,6 @@ import java.lang.String;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 /**
  * Classe main che costituisce il menu del programma e che consente l'interazione con l'utente
  * @author Riccardo Grespan
@@ -14,6 +13,7 @@ import java.util.ArrayList;
  */
 
 public class MenuMain {
+<<<<<<< HEAD
 	
 	static final String NOMEFILECLINICA = "clinicamedica.dat";
 	static final String MSG_SALVA = "Salvataggio dati in corso!";
@@ -23,11 +23,27 @@ public class MenuMain {
     static final String MSG_SALUTO = "Arrivederci, grazie per aver usato il programma di gestione della clinica!";
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca"};
 	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
+=======
+
+	// Menu principale
+	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca", "Statistiche"};
+	// Sottomenu Prima scelta menu principale
+	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "modifica dati medico"};
+	// Sottomenu Seconda scelta menu principale
+>>>>>>> branch 'master' of https://github.com/JavaUnibs/Esercitazioni
 	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita"};	
-	static final String[] MENU_RICERCA = {"Ricerca giorni di lavoro medici", "Ricerca medico disponibile per orario", "Ricerca visite per medico", "Ricerca visite per utente"};
+	// Sottomenu Terza scelta menu principale
+	static final String[] MENU_RICERCA = {"Ricerca giorni di lavoro medici", "Ricerca medico disponibile per orario"};
+	// Sottomenu Quarta scelta menu principale
+	static final String[] MENU_STATISTICHE = {"Visite totali", "Visite totali per tipo", "Visite divise per competenza", "Min e Max area competenze", "Numero visite per medico"};
+	// Menu inserimento disponibilità
 	static final String[] MENU_DISP = {"Giorni continuati e orari continuati", "Giorni specifici e ore specifiche", "Un giorno e orario continuato"};
+	// Menu cancellazione disponibilità
 	static final String[] MENU_CANCELLADISP = {"Cancella giorni continuati e orari continuati", "Cancella giorni specifici e ore specifiche", "Cancella giorno e orario continuato"};
+	// Sottomenu del sottomenu della seconda e terza scelta
+	static final String[] MENU_SOTTOVISITA = {"Ricerca specifica", "Ricerca visite per medico", "Ricerca visite per utente", "Ricerca visite per tipo"};
 	
+
 	public static void main(String[] args) {
 		
 		//Inizio caricamento (il salvataggio è in fondo al main)
@@ -77,8 +93,17 @@ public class MenuMain {
 		Menu elenco_dati = new Menu(MENU_DATI);
 		Menu elenco_visita = new Menu(MENU_VISITA);
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
+<<<<<<< HEAD
 		
 		
+=======
+		Menu elenco_statistiche = new Menu(MENU_STATISTICHE);
+		Menu elenco_sottovisita = new Menu(MENU_SOTTOVISITA);
+		
+		Archivio archivio = new Archivio();
+		
+		Agenda agenda = new Agenda();
+>>>>>>> branch 'master' of https://github.com/JavaUnibs/Esercitazioni
 		
 		do{scelta = elenco.stampaMenu();
 		
@@ -119,13 +144,18 @@ public class MenuMain {
 							 codiceFiscale = LeggiInput.stringa("CF: ");
 							 numTelefono = LeggiInput.stringa("Numero di telefono: ");
 							 tipo = LeggiInput.stringa("Tipo: ");
+							 codiceAlbo = LeggiInput.stringa("Codice albo: ");
+						     
+							 boolean spec = LeggiInput.doppiaScelta("Specialista?");
+							 if(spec)
+							 {
 							 areaCompetenza = LeggiInput.stringa("Area di competenza: ");
-						     codiceAlbo = LeggiInput.stringa("Codice albo: ");
-						     
 						     archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo, areaCompetenza );
-						     
 						     Medico selezionato = new Medico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo, areaCompetenza );
-						    
+						     menuInserimentoDisp(selezionato, agenda);
+							 };
+							 archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
+						     Medico selezionato = new Medico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
 						     menuInserimentoDisp(selezionato, agenda);
 					};
 					break;
@@ -152,9 +182,11 @@ public class MenuMain {
 								
 								campo = campo.toLowerCase();
 								if(campo.equals("disponibilità")){
+								String dec_disp = LeggiInput.stringa("Aggiungere o cancellare?");
+								
 									
-								menuCancDisp(da_modificare, agenda);
-							
+								if (dec_disp.equalsIgnoreCase("cancellare")) menuCancDisp(da_modificare, agenda);
+								menuInserimentoDisp(da_modificare, agenda);
 								};
 								String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
 				 
@@ -162,6 +194,12 @@ public class MenuMain {
 						
 					};
 					break;
+					
+					// Visualizzazione visite utente
+					case 5:{
+						
+						
+					};
 					
 					// Uscita
 					case 0:{};
@@ -201,78 +239,199 @@ public class MenuMain {
 			 			break;
 				
 			 			// modificare visita
-			 			case 2:{
+			 			case 2:{ int scelta_sottovisita = elenco_sottovisita.stampaSottoMenu();
+
+			 					switch(scelta_sottovisita){
 			 				
-			 					String campo = LeggiInput.stringa("Dato medico: ");
-			 					Medico medico = archivio.ricercaMedici(campo);
-			 					int giorno = LeggiInput.intero("Inserire giorno: ");
-			 					int mese = LeggiInput.intero("Inserire mese: ");
-			 					int anno = LeggiInput.intero("Inserire anno: ");
-			 					int ora = LeggiInput.intero("Inserire ora: ");
-			 					int minuti = LeggiInput.intero("Inserire minuti: ");
-			 					LocalDate data = LocalDate.of(anno, mese, giorno);
-			 					LocalTime orario = LocalTime.of(ora, minuti);
+			 						// Ricerca Visita precisa
+			 						case 1: {
+			 								String campo = LeggiInput.stringa("Dato medico: ");
+			 						
+			 								Medico medico = archivio.ricercaMedici(campo);
+			 								int giorno = LeggiInput.intero("Inserire giorno: ");
+			 								int mese = LeggiInput.intero("Inserire mese: ");
+			 								int anno = LeggiInput.intero("Inserire anno: ");
+			 								int ora = LeggiInput.intero("Inserire ora: ");
+			 								int minuti = LeggiInput.intero("Inserire minuti: ");
+			 								LocalDate data = LocalDate.of(anno, mese, giorno);
+			 								LocalTime orario = LocalTime.of(ora, minuti);
 		 				     
-			 					Giorno giorno_visita = agenda.specificaVisita(medico, data, orario); 
-			 					String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
-			 					if(campo_visita.equalsIgnoreCase("stato")) 
-			 					{
-			 						String input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
-			 						giorno_visita.cambiaStato(input);
-			 					}
+			 								Giorno giorno_visita = agenda.specificaVisita(medico, data, orario); 
+			 								String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
+			 								if(campo_visita.equalsIgnoreCase("stato")) 
+			 								{
+			 									String input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
+			 									giorno_visita.cambiaStato(input);
+			 								}
 			 					
-			 					if(campo_visita.equalsIgnoreCase("referto medico"))
-			 					{
+			 								if(campo_visita.equalsIgnoreCase("referto medico"))
+			 								{
 			 						
-			 						String input = LeggiInput.riga("Inserire referto: ");
-				 				    Visita da_modificare = giorno_visita.getVisita();
-				 				    da_modificare.modificaVisita(campo, input);
-				 				    giorno_visita.cambiaStato("refertata");	
+			 									String input = LeggiInput.riga("Inserire referto: ");
+			 									Visita da_modificare = giorno_visita.getVisita();
+			 									da_modificare.modificaVisita(campo, input);
+			 									giorno_visita.cambiaStato("refertata");	
 			 						
-			 					}
+			 								}
 			 					
-			 					String input = LeggiInput.riga("Inserire nuovo dato: ");
-			 					Visita da_modificare = giorno_visita.getVisita();
-			 					da_modificare.modificaVisita(campo_visita, input);
-			 				
-			 			};
-			 			break;
-				
-			 			// cancellazione visita
-			 			case 3:{
-			 					String campo = LeggiInput.stringa("Dato medico: ");
-			 					Medico medico = archivio.ricercaMedici(campo);
-		 						int giorno = LeggiInput.intero("Inserire giorno: ");
-		 						int mese = LeggiInput.intero("Inserire mese: ");
-		 						int anno = LeggiInput.intero("Inserire anno: ");
-		 						int ora = LeggiInput.intero("Inserire ora: ");
-		 						int minuti = LeggiInput.intero("Inserire minuti: ");
-		 						LocalDate data = LocalDate.of(anno, mese, giorno);
-		 						LocalTime orario = LocalTime.of(ora, minuti);
-	 				     
-		 						Giorno giorno_visita = agenda.specificaVisita(medico, data, orario); 
-			 					boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
-			 					if (decisione) 
-			 					{ 
-			 						giorno_visita.rimuoviVisita();
-			 						giorno_visita.cambiaStato("prenotabile");
+			 								String input = LeggiInput.riga("Inserire nuovo dato: ");
+			 								Visita da_modificare = giorno_visita.getVisita();
+			 								da_modificare.modificaVisita(campo_visita, input);
+			 						}; break;
+			 					
+			 						// Ricerca visita per medico
+			 						case 2:{
+			 									String campo = LeggiInput.stringa("Dato medico: ");
+			 									Medico cercato = archivio.ricercaMedici(campo);
+			 									ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
+										
+			 									Giorno giorno_visita = selezionaVisita(giorni_visite);
+			 									Visita selezionata = giorno_visita.getVisita();	
+											
+										
+			 									String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
+			 									if(campo_visita.equalsIgnoreCase("stato")) 
+			 									{
+			 										String input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
+			 										giorno_visita.cambiaStato(input);
+			 									}
+						 					
+			 									if(campo_visita.equalsIgnoreCase("referto medico"))
+			 									{
+						 						
+			 										String input = LeggiInput.riga("Inserire referto: ");
+			 										selezionata.modificaVisita(campo, input);
+			 										giorno_visita.cambiaStato("refertata");	
+			 									
+			 									}
+						 					
+			 									String input = LeggiInput.riga("Inserire nuovo dato: ");
+			 									selezionata.modificaVisita(campo_visita, input);
 			 							
-			 					};
+			 							
+			 							}; break;
+			 							
+			 						// Ricerca visite per utente
+			 						case 3: {
+			 									String campo = LeggiInput.stringa("Dato utente: ");
+			 									Utente cercato = archivio.ricercaUtenti(campo);
+			 									ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
+			 									String input;
+			 									Giorno giorno_visita = selezionaVisita(giorni_visite);
+			 									Visita selezionata = giorno_visita.getVisita();	
+			 									String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
+			 									if(campo_visita.equalsIgnoreCase("stato")) 
+			 									{
+			 											input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
+			 											giorno_visita.cambiaStato(input);
+			 									}
+			 			 					
+			 									if(campo_visita.equalsIgnoreCase("referto medico"))
+			 									{
+			 			 						
+			 											input = LeggiInput.riga("Inserire referto: ");
+			 											selezionata.modificaVisita(campo, input);
+			 											giorno_visita.cambiaStato("refertata");	
+			 			 						
+			 									}
+			 			 					
+			 									input = LeggiInput.riga("Inserire nuovo dato: ");
+			 									selezionata.modificaVisita(campo_visita, input);
+			 	                       }; break;
+			 							
+			 	                      // Ricerca visite per tipo
+			 						case 4:{ 
+			 									String tipo = LeggiInput.stringa("Inserisci il tipo della visita:");
+			 									
+			 									
+			 								
+			 								
+			 						}; break;
+			 	                       
+			 	                       
+			 						}; break;
+			 					
+			 							
+			 					}
+			 			
+			 			
+			 			
+			 			// cancellazione visita
+			 			case 3:{ 
+			 						int scelta_sottovisita = elenco_sottovisita.stampaSottoMenu();
+			 			
+			 						switch(scelta_sottovisita){
+			 							case 1 :{ 
+			 										String campo = LeggiInput.stringa("Dato medico: ");
+			 										Medico medico = archivio.ricercaMedici(campo);
+			 										int giorno = LeggiInput.intero("Inserire giorno: ");
+			 										int mese = LeggiInput.intero("Inserire mese: ");
+			 										int anno = LeggiInput.intero("Inserire anno: ");
+			 										int ora = LeggiInput.intero("Inserire ora: ");
+			 										int minuti = LeggiInput.intero("Inserire minuti: ");
+			 										LocalDate data = LocalDate.of(anno, mese, giorno);
+			 										LocalTime orario = LocalTime.of(ora, minuti);
+	 				     
+			 										Giorno giorno_visita = agenda.specificaVisita(medico, data, orario); 
+			 										boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
+			 										if (decisione) 
+			 										{ 
+			 											giorno_visita.rimuoviVisita();
+			 											giorno_visita.cambiaStato("prenotabile");
+			 							
+			 										}
 			 				
-			 				
-			 			};
-			 			break;
+			 							};break;
+			 							
+			 							// Ricerca visite per medico
+			 							case 2:{
+			 										String campo = LeggiInput.stringa("Dato medico: ");
+			 										Medico cercato = archivio.ricercaMedici(campo);
+			 										ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
+											
+			 										Giorno giorno_visita = selezionaVisita(giorni_visite);
+			 							
+			 										boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
+													if (decisione)
+													{ 
+														giorno_visita.rimuoviVisita();
+														giorno_visita.cambiaStato("prenotabile");
+													}
+			 							  		
+			 							}; break;
+			 							
+			 							// Ricerca visite per utente
+			 							case 3: {
+			 										String campo = LeggiInput.stringa("Dato utente: ");
+			 										Utente cercato = archivio.ricercaUtenti(campo);
+			 										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
+			 								
+			 										Giorno giorno_visita = selezionaVisita(giorni_visite);
+			 								
+			 										boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
+													if (decisione)
+													{ 
+														giorno_visita.rimuoviVisita();
+														giorno_visita.cambiaStato("prenotabile");
+													}
+			 							}; break;
+			 							
+			 							case 0: {}; break;
+			 							
+			 						};break;
+			 			
+			 			}
+			 			
 			 			
 			 			// Uscita
-			 			case 0:{};
-			 			break;
+			 			case 0:{};break;
 			
 			 		};
-		}
-		break;
+		}; break;
 		
 		// ricerca 
-		case 3:{  int scelta_ricerca;
+		case 3:{ 
+			        int scelta_ricerca;
 					scelta_ricerca = elenco_ricerca.stampaSottoMenu();
 					
 					switch(scelta_ricerca){
@@ -300,119 +459,34 @@ public class MenuMain {
 					};
 					break;
 					
-					// Ricerca visite per medico
-					case 3:{
-								String campo = LeggiInput.stringa("Dato medico: ");
-								Medico cercato = archivio.ricercaMedici(campo);
-								ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
-								
-								Giorno giorno_visita = selezionaVisita(giorni_visite);
-								Visita selezionata = giorno_visita.getVisita();	
-								String scelta_ricercavisite = LeggiInput.riga("Modifica o cancella?");
-								scelta_ricercavisite = scelta_ricercavisite.toLowerCase();
-								switch(scelta_ricercavisite){
-								
-								case "modifica": {
-													
-													String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
-													if(campo_visita.equalsIgnoreCase("stato")) 
-													{
-														String input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
-														giorno_visita.cambiaStato(input);
-													}
-				 					
-													if(campo_visita.equalsIgnoreCase("referto medico"))
-													{
-				 						
-														String input = LeggiInput.riga("Inserire referto: ");
-														selezionata.modificaVisita(campo, input);
-														giorno_visita.cambiaStato("refertata");	
-				 						
-													}
-				 					
-													String input = LeggiInput.riga("Inserire nuovo dato: ");
-													selezionata.modificaVisita(campo_visita, input);
-								}; break;
-								
-								case "cancella": {
-													
-													boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
-													if (decisione)
-													{ 
-														giorno_visita.rimuoviVisita();
-														giorno_visita.cambiaStato("prenotabile");
-													}
-									
-								}; break;
-						
-								
-								}; break;
-						
-					}
-					
-					
-					// Ricerca visite per utente
-					case 4:{
-						
-						String campo = LeggiInput.stringa("Dato utente: ");
-						Utente cercato = archivio.ricercaUtenti(campo);
-						ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
-						
-						Giorno giorno_visita = selezionaVisita(giorni_visite);
-						Visita selezionata = giorno_visita.getVisita();	
-						String scelta_ricercavisite = LeggiInput.riga("Modifica o cancella?");
-						scelta_ricercavisite = scelta_ricercavisite.toLowerCase();
-						switch(scelta_ricercavisite){
-						
-						case "modifica": {
-											
-											String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
-											if(campo_visita.equalsIgnoreCase("stato")) 
-											{
-												String input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
-												giorno_visita.cambiaStato(input);
-											}
-		 					
-											if(campo_visita.equalsIgnoreCase("referto medico"))
-											{
-		 						
-												String input = LeggiInput.riga("Inserire referto: ");
-												selezionata.modificaVisita(campo, input);
-												giorno_visita.cambiaStato("refertata");	
-		 						
-											}
-		 					
-											String input = LeggiInput.riga("Inserire nuovo dato: ");
-											selezionata.modificaVisita(campo_visita, input);
-						}; break;
-						
-						case "cancella": {
-											
-											boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
-											if (decisione)
-											{ 
-												giorno_visita.rimuoviVisita();
-												giorno_visita.cambiaStato("prenotabile");
-											}
-							
-						}; break;
-				
-						
-						}; break;
-						
-					}
-					
-					
 					// Uscita
-					case 0:{};
-					break;
+					case 0:{};break;
 					
-					}
+					}; break;
 			
 			
 			
-		};
-		break;
+		}
+		
+		// Statistiche
+		
+		case 4:{ 
+			     
+					int scelta_statistiche;
+					scelta_statistiche = elenco_statistiche.stampaSottoMenu();
+			
+					switch(scelta_statistiche){
+							// Visite totali		 
+							case 1:{
+									agenda.statisticheVisite();
+							}; break;
+			 
+							//
+							case 2:{
+			 
+							}; break;
+					}; break;	
+		}
 		
 		case 0: { };return;
 				
