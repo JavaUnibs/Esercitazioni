@@ -38,7 +38,7 @@ public class Archivio implements Serializable {
 	       if(temp.size()>1) {
 	    	   System.out.println("*******"+temp.size()+" utenti trovati:*******\n");
 	    	   for(Utente utente: temp){
-	    		   System.out.println(utente.toString());
+	    		   System.out.println(utente.toStringNomeCognome()+utente.toStringCodiceFiscale());
 	    	   }
 	    	int scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
 	    	return temp.get(scelta);
@@ -74,7 +74,7 @@ public class Archivio implements Serializable {
 	       if(temp.size()>1) {
 	    	   System.out.println("*******"+temp.size()+" medici trovati:*******\n");
 	    	   for(Medico medico: temp){
-	    		   System.out.println(medico.toString());
+	    		   System.out.println(medico.toStringNomeCognomeAlbo());
 	    	   }
 	    	int scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
 	    	return temp.get(scelta);

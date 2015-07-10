@@ -131,6 +131,7 @@ public class Agenda implements Serializable{
 		for(Giorno giorno: settimana[k][i].getGiorni()){
 			if(giorno.getData().equals(data)) stringa=stringa.concat(giorno.getMedico().toStringNomeCognomeAlbo());
 		}
+		if (stringa.equals("Medici disponibili: \n")) return stringa+"nessuno";
 		return stringa;
 	}
 	
@@ -206,6 +207,7 @@ public class Agenda implements Serializable{
 	   for(Giorno giorno: settimana[k][i].getGiorni()){
 		   if(giorno.getData().equals(data)&giorno.getVisita()!=null) return giorno;
 	   }
+	   System.out.println("Nessuna visita trovata");
 	   return nullo;
    }
 
