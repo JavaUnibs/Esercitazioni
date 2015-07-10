@@ -18,6 +18,14 @@ public class Visita {
 	public String getAreaComp(){
 		return areaCompetenza;
 	}
+	
+	public String getReferto(){
+		return refertoMedico;
+	}
+	
+	public String getPrescrizione(){
+		return prescrizioneMedica;
+	}
 
 /**
 * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
