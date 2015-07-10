@@ -39,8 +39,6 @@ public class MenuMain {
 	static final String[] MENU_CANCELLADISP = {"Cancella giorni continuati e orari continuati", "Cancella giorni specifici e ore specifiche", "Cancella giorno e orario continuato"};
 	// Sottomenu del sottomenu della seconda e terza scelta
 	static final String[] MENU_SOTTOVISITA = {"Ricerca specifica", "Ricerca visite per medico", "Ricerca visite per utente", "Ricerca visite per tipo"};
-
-	static final String[] ELENCO_AREE = {"Ortopedia", "Chirurgia", "Cardiologia"};
 	
 	public static void main(String[] args) {
 		
@@ -52,8 +50,6 @@ public class MenuMain {
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
 		Menu elenco_statistiche = new Menu(MENU_STATISTICHE);
 		Menu elenco_sottovisita = new Menu(MENU_SOTTOVISITA);
-		
-		ArrayList<String> elenco_Aree = new ArrayList<String>(Arrays.asList(ELENCO_AREE));
 		
 		//Inizio caricamento (il salvataggio è in fondo al main)
 				File fClinica = new File(NOMEFILECLINICA);
@@ -94,8 +90,6 @@ public class MenuMain {
 					archivio = new Archivio();
 					agenda = new Agenda();
 				    }
-				
-				ArrayList<Medico> elenco_Medici = archivio.getElencoMedici();
 		
 		do{scelta = elenco.stampaMenu();
 		
@@ -542,6 +536,8 @@ public class MenuMain {
 		// Statistiche
 		
 		case 4:{ 
+					ArrayList<Medico> elenco_Medici = archivio.getElencoMedici();
+					ArrayList<String> elenco_Aree = new ArrayList<String>(archivio.areeCompetenzaTot());
 			     
 					int scelta_statistiche;
 					scelta_statistiche = elenco_statistiche.stampaSottoMenu();
