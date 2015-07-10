@@ -6,6 +6,8 @@ import java.lang.String;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Classe main che costituisce il menu del programma e che consente l'interazione con l'utente
  * @author Riccardo Grespan
@@ -14,21 +16,19 @@ import java.util.ArrayList;
 
 public class MenuMain {
 
-	
 	static final String NOMEFILECLINICA = "clinicamedica.dat";
 	static final String MSG_SALVA = "Salvataggio dati in corso!";
 	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
 	static final String MSG_OK_FILE = "Benvenuto, il caricamento dal file è avvenuto con successo!";
 	static final String MSG_NO_FILE = "Benvenuto nel programma di gestione di una clinica medica!";
     static final String MSG_SALUTO = "Arrivederci, grazie per aver usato il programma di gestione della clinica!";
-
-
+	
 	// Menu principale
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca", "Statistiche"};
 	// Sottomenu Prima scelta menu principale
-	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "modifica dati medico"};
+	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
 	// Sottomenu Seconda scelta menu principale
-	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita"};	
+	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita", "Visualizzazione elenco visite utente", "Visualizzazione lenco visite medico" };	
 	// Sottomenu Terza scelta menu principale
 	static final String[] MENU_RICERCA = {"Ricerca giorni di lavoro medici", "Ricerca medico disponibile per orario"};
 	// Sottomenu Quarta scelta menu principale
@@ -39,50 +39,10 @@ public class MenuMain {
 	static final String[] MENU_CANCELLADISP = {"Cancella giorni continuati e orari continuati", "Cancella giorni specifici e ore specifiche", "Cancella giorno e orario continuato"};
 	// Sottomenu del sottomenu della seconda e terza scelta
 	static final String[] MENU_SOTTOVISITA = {"Ricerca specifica", "Ricerca visite per medico", "Ricerca visite per utente", "Ricerca visite per tipo"};
-	
 
+	static final String[] ELENCO_AREE = {"Ortopedia", "Chirurgia", "Cardiologia"};
+	
 	public static void main(String[] args) {
-		
-		//Inizio caricamento (il salvataggio è in fondo al main)
-		File fClinica = new File(NOMEFILECLINICA);
-		Archivio archivio = null;
-		
-		Agenda agenda = null;
-		
-		Contenitore c1 = null;
-		
-		boolean caricamentoRiuscito = false;
-		
-		if ( fClinica.exists() )
-		{
-		 try 
-		  {
-			 c1 = (Contenitore)SalvataggioFile.caricaOggetto(fClinica);
-			 archivio = c1.getArchivio();
-			 agenda = c1.getAgenda();
-		   }
-		  catch (ClassCastException e)
-		   {
-			 System.out.println(MSG_NO_CAST);
-			}
-		   finally
-			{
-		      if ( (archivio != null) || (agenda != null) )
-			    {
-				 System.out.println(MSG_OK_FILE);
-				 caricamentoRiuscito = true;
-				 }
-			  }
-			
-		 }//fine caricamento
-			
-		if (!caricamentoRiuscito)//Viene effettutato se il file non esiste(possibilità di mettere la scelta di creare o meno un nuovo file in un menu iniziale)
-		   {
-			System.out.println(MSG_NO_FILE);
-			archivio = new Archivio();
-			agenda = new Agenda();
-		    }
-		
 		
 		int scelta;
 		
@@ -90,13 +50,52 @@ public class MenuMain {
 		Menu elenco_dati = new Menu(MENU_DATI);
 		Menu elenco_visita = new Menu(MENU_VISITA);
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
-
-		
-		
-
 		Menu elenco_statistiche = new Menu(MENU_STATISTICHE);
 		Menu elenco_sottovisita = new Menu(MENU_SOTTOVISITA);
-
+		
+		ArrayList<String> elenco_Aree = new ArrayList<String>(Arrays.asList(ELENCO_AREE));
+		
+		//Inizio caricamento (il salvataggio è in fondo al main)
+				File fClinica = new File(NOMEFILECLINICA);
+				Archivio archivio = null;
+				
+				Agenda agenda = null;
+				
+				Contenitore c1 = null;
+				
+				boolean caricamentoRiuscito = false;
+				
+				if ( fClinica.exists() )
+				{
+				 try 
+				  {
+					 c1 = (Contenitore)SalvataggioFile.caricaOggetto(fClinica);
+					 archivio = c1.getArchivio();
+					 agenda = c1.getAgenda();
+				   }
+				  catch (ClassCastException e)
+				   {
+					 System.out.println(MSG_NO_CAST);
+					}
+				   finally
+					{
+				      if ( (archivio != null) || (agenda != null) )
+					    {
+						 System.out.println(MSG_OK_FILE);
+						 caricamentoRiuscito = true;
+						 }
+					  }
+					
+				 }//fine caricamento
+					
+				if (!caricamentoRiuscito)//Viene effettutato se il file non esiste(possibilità di mettere la scelta di creare o meno un nuovo file in un menu iniziale)
+				   {
+					System.out.println(MSG_NO_FILE);
+					archivio = new Archivio();
+					agenda = new Agenda();
+				    }
+				
+				ArrayList<Medico> elenco_Medici = archivio.getElencoMedici();
 		
 		do{scelta = elenco.stampaMenu();
 		
@@ -188,16 +187,6 @@ public class MenuMain {
 					};
 					break;
 					
-					// Visualizzazione visite utente
-					case 5:{
-						
-						
-					};
-					
-					// Uscita
-					case 0:{};
-					break;
-					
 					}
 		
 		};
@@ -262,7 +251,7 @@ public class MenuMain {
 			 						
 			 									String input = LeggiInput.riga("Inserire referto: ");
 			 									Visita da_modificare = giorno_visita.getVisita();
-			 									da_modificare.modificaVisita(campo, input);
+			 									da_modificare.modificaVisita(campo_visita, input);
 			 									giorno_visita.cambiaStato("refertata");	
 			 						
 			 								}
@@ -293,7 +282,7 @@ public class MenuMain {
 			 									{
 						 						
 			 										String input = LeggiInput.riga("Inserire referto: ");
-			 										selezionata.modificaVisita(campo, input);
+			 										selezionata.modificaVisita(campo_visita, input);
 			 										giorno_visita.cambiaStato("refertata");	
 			 									
 			 									}
@@ -323,7 +312,7 @@ public class MenuMain {
 			 									{
 			 			 						
 			 											input = LeggiInput.riga("Inserire referto: ");
-			 											selezionata.modificaVisita(campo, input);
+			 											selezionata.modificaVisita(campo_visita, input);
 			 											giorno_visita.cambiaStato("refertata");	
 			 			 						
 			 									}
@@ -335,13 +324,34 @@ public class MenuMain {
 			 	                      // Ricerca visite per tipo
 			 						case 4:{ 
 			 									String tipo = LeggiInput.stringa("Inserisci il tipo della visita:");
+			 									ArrayList<Giorno> giorni_visite = agenda.visiteTipo(tipo);
 			 									
+			 									String input;
+			 									Giorno giorno_visita = selezionaVisita(giorni_visite);
+			 									Visita selezionata = giorno_visita.getVisita();	
+			 									String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
+			 									if(campo_visita.equalsIgnoreCase("stato")) 
+			 									{
+			 											input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
+			 											giorno_visita.cambiaStato(input);
+			 									}
+			 			 					
+			 									if(campo_visita.equalsIgnoreCase("referto medico"))
+			 									{
+			 			 						
+			 											input = LeggiInput.riga("Inserire referto: ");
+			 											selezionata.modificaVisita(campo_visita, input);
+			 											giorno_visita.cambiaStato("refertata");	
+			 			 						
+			 									}
+			 			 					
+			 									input = LeggiInput.riga("Inserire nuovo dato: ");
+			 									selezionata.modificaVisita(campo_visita, input);
 			 									
-			 								
-			 								
 			 						}; break;
 			 	                       
-			 	                       
+			 						case 0: {}; break;
+			 						
 			 						}; break;
 			 					
 			 							
@@ -409,7 +419,37 @@ public class MenuMain {
 													}
 			 							}; break;
 			 							
-			 							case 0: {}; break;
+			 							// Ricerca visite per tipo
+			 							case 4:{
+			 										String tipo = LeggiInput.stringa("Inserisci il tipo della visita:");
+			 										ArrayList<Giorno> giorni_visite = agenda.visiteTipo(tipo);
+			 								
+			 										Giorno giorno_visita = selezionaVisita(giorni_visite);
+					 								
+			 										boolean decisione = LeggiInput.doppiaScelta("Cancellare visita?");
+													if (decisione)
+													{ 
+														giorno_visita.rimuoviVisita();
+														giorno_visita.cambiaStato("prenotabile");
+													}
+													
+			 							}; break;
+			 							
+			 							// Visualizzazione visite utente
+			 							case 5:{
+			 								
+			 								
+			 							};
+			 							
+			 							// Visualizzazione visite medico
+			 							case 6:{
+			 								
+			 							
+			 							}; break;
+			 							
+			 							// Uscita
+			 							case 0:{};break;
+			 						
 			 							
 			 						};break;
 			 			
@@ -471,26 +511,45 @@ public class MenuMain {
 					switch(scelta_statistiche){
 							// Visite totali		 
 							case 1:{
-									agenda.statisticheVisite();
+										agenda.statisticheVisite();
 							}; break;
 			 
-							//
+							//Visite totali per tipo
 							case 2:{
-			 
+										agenda.statisticheVisiteTipo();
 							}; break;
+							
+							//Visite prenotate e concluse per competenza
+							case 3:{
+										agenda.statisticheVisiteArea(elenco_Aree);
+							}; break;
+							
+							//Aree con minor e maggior numero di visite
+							case 4:{
+										agenda.statisticheVisiteAreaMinMax(elenco_Aree);
+							}; break;
+							
+							//Visite per medico
+							case 5:{
+										agenda.statisticheVisiteMedici(elenco_Medici);
+							}; break;
+						
 					}; break;	
 		}
 		
-		case 0: { };return;
+		case 0: { };break;
 				
 		}}while(scelta != 0);
 		
 		//Salvataggio dati
-				System.out.println(MSG_SALVA);
-			    c1 = new Contenitore(archivio,agenda);
-				SalvataggioFile.salvaOggetto(fClinica, c1);
-				System.out.println(MSG_SALUTO);	
-				//Fine salvataggio
+       
+		System.out.println(MSG_SALVA);
+		c1 = new Contenitore(archivio,agenda);
+        SalvataggioFile.salvaOggetto(fClinica, c1);
+        System.out.println(MSG_SALUTO);
+        
+        //Fine salvataggio
+        
 	}
 	
 	
@@ -713,7 +772,9 @@ public class MenuMain {
 		if(elencoTemp.size() >1 ){
 			System.out.println("*******"+elencoTemp.size()+" visite trovate:*******\n");
 	   for(Giorno giorno: elencoTemp){
-		   System.out.println(giorno.toString());
+		   System.out.println(giorno.getData().toString());
+		   System.out.println(giorno.getStato().toString());
+		   System.out.println(giorno.getVisita().toString());
 
 	   };
 	   int scelta=LeggiInput.intero("******Scegliere tramite un numero la visita desiderata*******")-1;
