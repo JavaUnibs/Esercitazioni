@@ -1,8 +1,15 @@
 package it.unibs.ing.clinica;
+import java.io.Serializable;
 import java.util.*;
+
 import it.unibs.ing.myutility.*;
 
-public class Archivio {
+public class Archivio implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<Utente> elencoUtenti = new ArrayList<Utente>();
 	private ArrayList<Medico> elencoMedici = new ArrayList<Medico>();

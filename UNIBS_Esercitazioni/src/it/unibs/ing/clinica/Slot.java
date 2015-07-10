@@ -1,8 +1,14 @@
 package it.unibs.ing.clinica;
 import java.util.*;
+import java.io.Serializable;
 import java.time.*;
 
-public class Slot {
+public class Slot implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private LocalTime ora;
 	

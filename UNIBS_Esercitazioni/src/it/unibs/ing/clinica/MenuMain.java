@@ -1,6 +1,7 @@
 package it.unibs.ing.clinica;
 import it.unibs.ing.myutility.*;
 
+import java.io.File;
 import java.lang.String;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,6 +15,12 @@ import java.util.ArrayList;
 
 public class MenuMain {
 	
+	static final String NOMEFILECLINICA = "clinicamedica.dat";
+	static final String MSG_SALVA = "Salvataggio dati in corso!";
+	static final String MSG_NO_CAST = "Attenzione, ci sono problemi con il cast del file!";
+	static final String MSG_OK_FILE = "Benvenuto, il caricamento dal file è avvenuto con successo!";
+	static final String MSG_NO_FILE = "Benvenuto nel programma di gestione di una clinica medica!";
+    static final String MSG_SALUTO = "Arrivederci, grazie per aver usato il programma di gestione della clinica!";
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca"};
 	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
 	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita"};	
@@ -23,6 +30,47 @@ public class MenuMain {
 	
 	public static void main(String[] args) {
 		
+		//Inizio caricamento (il salvataggio è in fondo al main)
+		File fClinica = new File(NOMEFILECLINICA);
+		Archivio archivio = null;
+		
+		Agenda agenda = null;
+		
+		Contenitore c1 = null;
+		
+		boolean caricamentoRiuscito = false;
+		
+		if ( fClinica.exists() )
+		{
+		 try 
+		  {
+			 c1 = (Contenitore)SalvataggioFile.caricaOggetto(fClinica);
+			 archivio = c1.getArchivio();
+			 agenda = c1.getAgenda();
+		   }
+		  catch (ClassCastException e)
+		   {
+			 System.out.println(MSG_NO_CAST);
+			}
+		   finally
+			{
+		      if ( (archivio != null) || (agenda != null) )
+			    {
+				 System.out.println(MSG_OK_FILE);
+				 caricamentoRiuscito = true;
+				 }
+			  }
+			
+		 }//fine caricamento
+			
+		if (!caricamentoRiuscito)//Viene effettutato se il file non esiste(possibilità di mettere la scelta di creare o meno un nuovo file in un menu iniziale)
+		   {
+			System.out.println(MSG_NO_FILE);
+			archivio = new Archivio();
+			agenda = new Agenda();
+		    }
+		
+		
 		int scelta;
 		
 		Menu elenco = new Menu(MENU_PRINCIPALE);
@@ -31,10 +79,6 @@ public class MenuMain {
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
 		
 		
-		
-		Archivio archivio = new Archivio();
-		
-		Agenda agenda = new Agenda();
 		
 		do{scelta = elenco.stampaMenu();
 		
@@ -373,6 +417,13 @@ public class MenuMain {
 		case 0: { };return;
 				
 		}}while(scelta != 0);
+		
+		//Salvataggio dati
+				System.out.println(MSG_SALVA);
+			    c1 = new Contenitore(archivio,agenda);
+				SalvataggioFile.salvaOggetto(fClinica, c1);
+				System.out.println(MSG_SALUTO);	
+				//Fine salvataggio
 	}
 	
 	

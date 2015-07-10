@@ -1,8 +1,15 @@
 package it.unibs.ing.clinica;
+import java.io.Serializable;
+
 import it.unibs.ing.myutility.*;
 
-public class Utente {
+public class Utente implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nome, cognome, dataNascita, luogoNascita, sesso, codiceFiscale, numTelefono, cognomeNome;
 	
 

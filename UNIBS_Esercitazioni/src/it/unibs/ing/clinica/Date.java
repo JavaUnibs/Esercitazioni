@@ -1,7 +1,13 @@
 package it.unibs.ing.clinica;
+import java.io.Serializable;
 import java.time.*;
 
-public class Date {
+public class Date implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private final static int MEZZORA=30;
 	

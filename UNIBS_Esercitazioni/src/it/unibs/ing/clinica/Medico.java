@@ -1,7 +1,14 @@
 package it.unibs.ing.clinica;
 
+import java.io.Serializable;
 
-public class Medico extends Utente{
+
+public class Medico extends Utente implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String tipo, areaCompetenza="", codiceAlbo;
 	

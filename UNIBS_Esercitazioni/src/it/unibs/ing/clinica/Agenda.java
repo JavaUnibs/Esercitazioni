@@ -4,7 +4,9 @@ import it.unibs.ing.myutility.LeggiInput;
 import java.time.*;
 import java.util.*;
 
-public class Agenda {
+public class Agenda  {
+	
+	
 	Slot[][] settimana = new Slot[20][6];
 	
 	

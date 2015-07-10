@@ -1,11 +1,17 @@
 package it.unibs.ing.clinica;
+import java.io.Serializable;
 import java.time.*;
 
 enum StatoVisita {
 	Prenotata, Prenotabile, Conclusa, Refertata, Non_prenotabile
 }
 
-public class Giorno {
+public class Giorno implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Medico medico;
 	private Visita visita;
 	private LocalDate data;
