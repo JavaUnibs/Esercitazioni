@@ -1,10 +1,17 @@
 package it.unibs.ing.clinica;
 import it.unibs.ing.myutility.LeggiInput;
 
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Agenda  {
+public class Agenda implements Serializable{
+	 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	
 	Slot[][] settimana = new Slot[20][6];
