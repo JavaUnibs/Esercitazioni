@@ -437,13 +437,51 @@ public class MenuMain {
 			 							
 			 							// Visualizzazione visite utente
 			 							case 5:{
-			 								
+			 										String campo = LeggiInput.stringa("Dato utente: ");
+			 										Utente cercato = archivio.ricercaUtenti(campo);
+			 										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
+	 										
+			 										for(Giorno giorno: giorni_visite){
+	 											
+			 											if(giorno.getStato() == StatoVisita.Prenotata)
+			 											{
+			 												System.out.println(giorno.getStato().toString());
+			 												System.out.println(giorno.getData().toString());
+			 											};
+			 											if(giorno.getStato() == StatoVisita.Conclusa)
+			 											{
+			 												System.out.println(giorno.getStato().toString());
+			 												System.out.println(giorno.getData().toString());
+			 												System.out.println("Referto: " + giorno.getVisita().getReferto().toString());
+			 												System.out.println("Prescrizione: " + giorno.getVisita().getRefertoPrescrizione().toString());
+			 											};
+			 											if(giorno.getStato() == StatoVisita.Refertata)
+			 											{
+			 												System.out.println(giorno.getStato().toString());
+			 												System.out.println(giorno.getData().toString());
+			 												System.out.println("Referto: " + giorno.getVisita().getReferto().toString());
+			 												System.out.println("Prescrizione: " + giorno.getVisita().getRefertoPrescrizione().toString());
+			 											}
+			 										};	
 			 								
 			 							};
 			 							
 			 							// Visualizzazione visite medico
 			 							case 6:{
+			 										String campo = LeggiInput.stringa("Dato medico: ");
+			 										Medico cercato = archivio.ricercaMedici(campo);
+			 										ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
 			 								
+			 										for(Giorno giorno: giorni_visite){
+			 											
+			 											if(giorno.getStato() == StatoVisita.Prenotata)
+			 											{
+			 												System.out.println(giorno.getStato().toString());
+			 												System.out.println(giorno.getData().toString());
+			 												System.out.println("Motivo: "+giorno.getVisita().getMotivo().toString());
+			 											};
+			 											
+			 										};
 			 							
 			 							}; break;
 			 							
