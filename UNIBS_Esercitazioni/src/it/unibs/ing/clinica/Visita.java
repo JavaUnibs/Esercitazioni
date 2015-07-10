@@ -2,7 +2,7 @@ package it.unibs.ing.clinica;
 
 public class Visita {
 	 
-	private String motivoVisita, refertoMedico, prescrizioneMedica, tipoVisita, areaCompetenza="";
+	private String motivoVisita, refertoMedico="", prescrizioneMedica="", tipoVisita, areaCompetenza="";
 	
 	Visita(String _motivoVisita, String _tipoVisita, String _areaCompetenza){
 		motivoVisita=_motivoVisita;
