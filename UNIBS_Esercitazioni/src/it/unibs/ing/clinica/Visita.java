@@ -1,19 +1,10 @@
 package it.unibs.ing.clinica;
 
-import java.io.Serializable;
 
-public class Visita implements Serializable{
-	 
-<<<<<<< HEAD
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private String motivoVisita, refertoMedico, prescrizioneMedica, tipoVisita, areaCompetenza="";
-=======
-	private String motivoVisita, refertoMedico="", prescrizioneMedica="", tipoVisita, areaCompetenza="";
->>>>>>> branch 'master' of https://github.com/JavaUnibs/Esercitazioni
+public class Visita {
+
+private String motivoVisita, refertoMedico="", prescrizioneMedica="", tipoVisita, areaCompetenza="";
+
 	
 	Visita(String _motivoVisita, String _tipoVisita, String _areaCompetenza){
 		motivoVisita=_motivoVisita;

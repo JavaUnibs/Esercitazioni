@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 
 public class MenuMain {
-<<<<<<< HEAD
+
 	
 	static final String NOMEFILECLINICA = "clinicamedica.dat";
 	static final String MSG_SALVA = "Salvataggio dati in corso!";
@@ -21,16 +21,13 @@ public class MenuMain {
 	static final String MSG_OK_FILE = "Benvenuto, il caricamento dal file è avvenuto con successo!";
 	static final String MSG_NO_FILE = "Benvenuto nel programma di gestione di una clinica medica!";
     static final String MSG_SALUTO = "Arrivederci, grazie per aver usato il programma di gestione della clinica!";
-	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca"};
-	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
-=======
+
 
 	// Menu principale
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca", "Statistiche"};
 	// Sottomenu Prima scelta menu principale
 	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "modifica dati medico"};
 	// Sottomenu Seconda scelta menu principale
->>>>>>> branch 'master' of https://github.com/JavaUnibs/Esercitazioni
 	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita"};	
 	// Sottomenu Terza scelta menu principale
 	static final String[] MENU_RICERCA = {"Ricerca giorni di lavoro medici", "Ricerca medico disponibile per orario"};
@@ -93,17 +90,13 @@ public class MenuMain {
 		Menu elenco_dati = new Menu(MENU_DATI);
 		Menu elenco_visita = new Menu(MENU_VISITA);
 		Menu elenco_ricerca = new Menu(MENU_RICERCA);
-<<<<<<< HEAD
+
 		
 		
-=======
+
 		Menu elenco_statistiche = new Menu(MENU_STATISTICHE);
 		Menu elenco_sottovisita = new Menu(MENU_SOTTOVISITA);
-		
-		Archivio archivio = new Archivio();
-		
-		Agenda agenda = new Agenda();
->>>>>>> branch 'master' of https://github.com/JavaUnibs/Esercitazioni
+
 		
 		do{scelta = elenco.stampaMenu();
 		
