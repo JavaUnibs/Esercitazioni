@@ -107,13 +107,20 @@ public class Utente implements Serializable {
 				generico.equals(cognomeNome)) return true;
 		return false;
 	}
-
+/**
+ * Versione ridotta di toString
+ *@author Riccardo Grespan
+ */
 	public String toStringNomeCognome(){
 		String descrizione="-----------\n"
     			+ "Nome: "+nome+"\n"
     			+ "Cognome: "+cognome+"\n";
 		return descrizione;
 	}
+/**
+* Versione ridotta di toString
+*@author Riccardo Grespan
+*/	
 	
 	public String toStringCodiceFiscale(){
 		return "Codice fiscale: "+codiceFiscale+"\n";

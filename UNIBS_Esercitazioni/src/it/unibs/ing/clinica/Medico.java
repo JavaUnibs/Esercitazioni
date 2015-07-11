@@ -77,7 +77,10 @@ public class Medico extends Utente implements Serializable{
     	if (super.datoUguale(generico)||generico.equals(codiceAlbo)||generico.equals(tipo)||generico.equals(areaCompetenza)) return true;
     	return false;
     }
-    
+ /**
+  * Versione ridotta di toString 
+  * @author Riccardo Grespan
+  */
     public String toStringNomeCognomeAlbo()
     {
     	String descrizione=super.toStringNomeCognome() + "Codice albo: " + codiceAlbo + "\n";
