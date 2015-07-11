@@ -30,7 +30,7 @@ public class UtenteTest {
 	@Test
 	public void verificaCodice()
 	{
-		assertEquals(utente.verificaCodice(codice_fiscale_errato), false);
+		assertEquals(utente.verificaCodice(codice_fiscale_errato), false); //dovrebbe essere permesso
 		assertEquals(utente.verificaCodice("MRCVRD85H01B157G"), true);
 	}
 	
