@@ -74,7 +74,8 @@ public class Medico extends Utente implements Serializable{
 */
     public boolean datoUguale(String generico)
     {
-    	if (super.datoUguale(generico)||generico.equals(codiceAlbo)||generico.equals(tipo)||generico.equals(areaCompetenza)) return true;
+    	generico=generico.toLowerCase();
+    	if (super.datoUguale(generico)||generico.equals(codiceAlbo.toLowerCase())||generico.equals(tipo.toLowerCase())||generico.equals(areaCompetenza.toLowerCase())) return true;
     	return false;
     }
  /**

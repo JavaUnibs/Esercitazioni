@@ -45,7 +45,7 @@ public class Visita implements Serializable{
 * @author Andrea Ferrari
 */
 	public void modificaVisita(String campo, String input){
-		campo.toLowerCase();
+		campo=campo.toLowerCase();
 		switch (campo){
 		case "motivo": motivoVisita=input;
 		break;

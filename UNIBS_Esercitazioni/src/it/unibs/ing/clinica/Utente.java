@@ -37,7 +37,7 @@ public class Utente implements Serializable {
  */
 	public void modificaUtente(String campo, String input)
 	{
-		campo.toLowerCase();
+		campo=campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;
 		break;
@@ -102,9 +102,10 @@ public class Utente implements Serializable {
  * @author Riccardo Grespan
  */
 	public boolean datoUguale(String generico){
-		if (generico.equals(codiceFiscale)||generico.equals(cognome)||generico.equals(dataNascita)||
-				generico.equals(luogoNascita)||generico.equals(nome)||generico.equals(numTelefono)||
-				generico.equals(cognomeNome)) return true;
+		generico=generico.toLowerCase();
+		if (generico.equals(codiceFiscale.toLowerCase())||generico.equals(cognome.toLowerCase())||generico.equals(dataNascita.toLowerCase())||
+				generico.equals(luogoNascita.toLowerCase())||generico.equals(nome.toLowerCase())||generico.equals(numTelefono.toLowerCase())||
+				generico.equals(cognomeNome.toLowerCase())) return true;
 		return false;
 	}
 /**
