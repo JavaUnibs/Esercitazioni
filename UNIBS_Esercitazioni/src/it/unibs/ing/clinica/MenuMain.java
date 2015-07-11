@@ -210,9 +210,17 @@ public class MenuMain {
 			 						
 			 					
 			 						String tipoVisita = LeggiInput.riga("Inserire il tipo della visita: ");
+			 						String areaCompetenza="";
+			 				   	    if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
 			 						String motivoVisita = LeggiInput.riga("Inserire motivo della visita: ");
 			 					
-			 						agenda.inserimentoVisita(selezionato, motivoVisita, data, orario, tipoVisita);
+			 						if(!agenda.inserimentoVisita(selezionato, motivoVisita, data, orario, tipoVisita, areaCompetenza)){
+			 							if(!agenda.trovaDispGiorno(selezionato, data, orario, tipoVisita, areaCompetenza)){
+			 								if(!agenda.trovaDispSett(selezionato, data, tipoVisita, areaCompetenza)){
+			 									agenda.trovaDispOvunque(selezionato, data, tipoVisita, areaCompetenza);
+			 								}
+			 							}
+			 						}
 			 					}
 			 			}
 			 			break;

@@ -203,5 +203,26 @@ public class AgendaTest {
 		assertEquals(test, agenda.statisticheVisiteMedici(temp));
 		
 	}
+	
+	@Test
+	public void testTrovaDispGiorno() {
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		assertTrue(agenda.trovaDispGiorno(utente, LocalDate.of(2015, 7, 8), LocalTime.of(13, 0), "generica", ""));
+	}
+
+	@Test
+	public void testTrovaDispSett() {
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 8), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		assertTrue(agenda.trovaDispSett(utente, LocalDate.of(2015, 7, 6), "generica", ""));
+	}
+
+	@Test
+	public void testTrovaDispOvunque() {
+		Agenda agenda=new Agenda();
+		agenda.inserimentoDisp(medico, LocalDate.of(2015, 7, 16), LocalTime.of(14, 0), LocalTime.of(14, 30));
+		assertTrue(agenda.trovaDispOvunque(utente, LocalDate.of(2015, 7, 8), "generica", ""));
+	}
 
 }

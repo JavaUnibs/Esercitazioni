@@ -114,7 +114,8 @@ public class Agenda implements Serializable{
 		}
 		Iterator<LocalDateTime> iterator=orari.iterator();
 		String stringa="Orari disponibili: \n";
-	    while(iterator.hasNext()) stringa=stringa.concat(iterator.next().toString()+"\n");
+	    while(iterator.hasNext()) stringa=stringa.concat(iterator.next().toLocalDate().toString()+
+	    		" alle "+iterator.next().toLocalTime().toString()+"\n");
 	    return stringa;
 	    
 	}
@@ -228,74 +229,117 @@ public class Agenda implements Serializable{
    
    
 /**
- * Verifica se nella data e ora inseriti ci sono uno o più medici adatti alle caratteristiche della visita. Se non ci sono, stampa 
- * la prossima data e ora in cui ve n'è uno adatto.
- * @param utente         l'utente che vuole fissare la visita
- * @param motivoVisita   il motivo per la prenotazione della visita
- * @param data           la data specificata
- * @param ora            l'ora specificata
- * @param tipoVisita     la tipologia della visita
- * @author Andrea Ferrari
+* Verifica se nella data e ora inseriti ci sono uno o più medici adatti alle caratteristiche della visita e se ci sono li inserisce.
+* @param utente         l'utente che vuole fissare la visita
+* @param motivoVisita   il motivo per la prenotazione della visita
+* @param data           la data specificata
+* @param ora            l'ora specificata
+* @param tipoVisita     la tipologia della visita
+* @return boolean
+* @author Andrea Ferrari
+*/
+   public boolean inserimentoVisita(Utente utente, String motivoVisita, LocalDate data, LocalTime ora, String tipoVisita, String areaCompetenza){
+   	   int scelta, ora1=Date.indiceOra(ora), data1=Date.indiceGiorno(data);
+   	   
+   	   ArrayList<Giorno> elencoTemp= settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);
+   	   System.out.println("Medici disponibili il "+data.toString()+" alle "+settimana[ora1][data1].getOra().toString()+" :");
+   	   if(elencoTemp.size()==0) {
+   		   System.out.println("Nessun medico disponibile in questa data."); 
+   		   return false;
+   	   }
+   	   else {
+   		   for(Giorno giorno: elencoTemp){
+   			   System.out.println(giorno.getMedico().toStringNomeCognomeAlbo());
+   	   }
+   	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
+   	   elencoTemp.get(scelta).setUtente(utente);
+   	   elencoTemp.get(scelta).setStato(StatoVisita.Prenotata);
+   	   elencoTemp.get(scelta).setVisita(new Visita(motivoVisita, tipoVisita, areaCompetenza));
+   	   return true;
+   	   }
+      }
+  
+/**
+ * Verifica se nella data specificata e a partire dall'ora specificata vi sono medici disponibili per la visita.
+* @param utente         l'utente che vuole fissare la visita
+* @param motivoVisita   il motivo per la prenotazione della visita
+* @param data           la data specificata
+* @param ora            l'ora specificata
+* @param tipoVisita     la tipologia della visita
+* @param areaCompetenza l'area di competenza necessaria
+* @return boolean
+* @author Andrea Ferrari
  */
-   public void inserimentoVisita(Utente utente, String motivoVisita, LocalDate data, LocalTime ora, String tipoVisita){
-	   int scelta, ora1=Date.indiceOra(ora), data1=Date.indiceGiorno(data), i, j;
-	   String areaCompetenza="";
-	   if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
-	   
-	   ArrayList<Giorno> elencoTemp= settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);
-	   System.out.println("Medici disponibili il "+data.toString()+" alle "+settimana[ora1][data1].getOra().toString()+" :");
-	   if(elencoTemp.size()==0) System.out.println("Nessun medico disponibile in questa data.");
-	   else {
-		   for(Giorno giorno: elencoTemp){
-			   System.out.println(giorno.getMedico().toStringNomeCognomeAlbo());
-	   }
-	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
-	   elencoTemp.get(scelta).setUtente(utente);
-	   elencoTemp.get(scelta).setStato(StatoVisita.Prenotata);
-	   elencoTemp.get(scelta).setVisita(new Visita(motivoVisita, tipoVisita, areaCompetenza));
-	   return;
-	   }
-	   
-	   //Questo ciclo finisce i restanti orari del giorno in cerca del prossimo giorno adatto alla visita
-	   for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
-		   elencoTemp=settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);   
-	       if (elencoTemp.size()>0){
-	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
-	    	return;  
-	       }
-	   }
-	   
-	   //Questo ciclo finisce i restanti giorni della settimana in cerca del prossimo giorno adatto alla visita
-	   int cont=1;
-	   for(data1=Date.indiceGiorno(data)+1;data1<6;data1++){
-	       for(ora1=0;ora1<20;ora1++){
-	    	   	elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
-	       		if (elencoTemp.size()>0){
-	       			System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
-	       			return;  
-	       		}
-	       }
-	       cont++;
-	   }
-	   
-	   LocalDate maxData=massimaData();
-	   //Questo ciclo cerca un nuovo giorno disponibile fino alla massima data di disponibilità in tutto il calendario.
-	   while(data.isBefore(maxData)||data.isEqual(maxData)){
-	       if(data.getDayOfWeek().getValue()==7) cont++;
-		   for(i=0;i<6;i++){
-			   for(j=0;j<20;j++){
-			   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
-		       		if (elencoTemp.size()>0){
-		       		System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
-		       		return; 
-		       		}
-			   }
-		   cont++;
-		   }   
-	   }
-	   System.out.println("Nessun medico disponibile in tutta le date");
-	   return;
-   }
+   public boolean trovaDispGiorno(Utente utente, LocalDate data, LocalTime ora, String tipoVisita, String areaCompetenza){	   
+   	   //Questo ciclo finisce i restanti orari del giorno in cerca del prossimo giorno adatto alla visita
+   	   ArrayList<Giorno> elencoTemp;
+   	   int ora1=Date.indiceOra(ora), data1=Date.indiceGiorno(data);
+   	   for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
+   		   elencoTemp=settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);   
+   	       if (elencoTemp.size()>0){
+   	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
+   	    	return true; 
+   	       }
+   	   }
+   	   return false;
+      }   
+/**
+ * Verifica se, a partire dal giorno successivo da quello specificato fino alla fine di questa settimana, vi sono medici disponibili per la visita.
+* @param utente         l'utente che vuole fissare la visita
+* @param motivoVisita   il motivo per la prenotazione della visita
+* @param data           la data specificata
+* @param tipoVisita     la tipologia della visita
+* @param areaCompetenza l'area di competenza necessaria
+* @return boolean
+* @author Andrea Ferrari
+ */
+   public boolean trovaDispSett(Utente utente, LocalDate data, String tipoVisita, String areaCompetenza){
+       //Questo ciclo finisce i restanti giorni della settimana in cerca del prossimo giorno adatto alla visita
+     	   ArrayList<Giorno> elencoTemp;
+   	   int cont=1;
+   	   
+   	   for(int data1=Date.indiceGiorno(data)+1;data1<6;data1++){
+   	       for(int ora1=0;ora1<20;ora1++){
+   	    	   	elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
+   	       		if (elencoTemp.size()>0){
+   	       			System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
+   	       			return true;  
+   	       		}
+   	       }
+   	       cont++;
+   	   }
+   	   return false;
+     }   
+/**Verifica se, a partire dalla settimana successiva al giorno specificato fino alla massima data segnata nell'agenda, vi sono medici disponibili per la visita.
+* @param utente         l'utente che vuole fissare la visita
+* @param motivoVisita   il motivo per la prenotazione della visita
+* @param data           la data specificata
+* @param tipoVisita     la tipologia della visita
+* @param areaCompetenza l'area di competenza necessaria
+* @return boolean
+* @author Andrea Ferrari
+ */
+   public boolean trovaDispOvunque(Utente utente, LocalDate data, String tipoVisita, String areaCompetenza){
+   	   LocalDate maxData=massimaData();
+   	   ArrayList<Giorno> elencoTemp;
+   	   int cont=7-Date.indiceGiorno(data), i, j;
+   	   //Questo ciclo cerca un nuovo giorno disponibile fino alla massima data di disponibilità in tutto il calendario.
+   	   while(Date.incrementoGiorno(data, cont).isBefore(maxData)||Date.incrementoGiorno(data, cont).isEqual(maxData)){
+   	       if(Date.incrementoGiorno(data, cont).getDayOfWeek().getValue()==7) cont++;
+   		   for(i=0;i<6;i++){
+   			   for(j=0;j<20;j++){
+   				   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
+   		       		if (elencoTemp.size()>0){
+   		       			System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
+   		       			return true;
+   		       		}
+   			   }
+   		   cont++;
+   		   }   
+   	   }
+   	   System.out.println("Nessun medico disponibile in tutta le date");
+   	   return false;
+      }
      
    
    
