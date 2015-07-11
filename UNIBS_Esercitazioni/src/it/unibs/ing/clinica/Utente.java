@@ -13,7 +13,8 @@ public class Utente implements Serializable {
 	private String nome, cognome, dataNascita, luogoNascita, sesso, codiceFiscale, numTelefono, cognomeNome;
 	
 
-	Utente(String _nome, String _cognome, String _dataNascita, String _luogoNascita, String _sesso, String _numTelefono, String _codiceFiscale) {
+	Utente(String _nome, String _cognome, String _dataNascita, String _luogoNascita, String _sesso, String _numTelefono, String _codiceFiscale) 
+	{
 		nome=_nome;
 		cognome=_cognome;
 		dataNascita=_dataNascita;
@@ -29,11 +30,13 @@ public class Utente implements Serializable {
 	
 /**
  * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
+ * 
  * @param campo La variabile che si vuole modificare
  * @param input Il nuovo valore da assegnare
- * @author Andrea Ferrari
+ * @author Riccardo Grespan
  */
-	public void modificaUtente(String campo, String input){
+	public void modificaUtente(String campo, String input)
+	{
 		campo.toLowerCase();
 		switch (campo){
 		case "nome": nome=input;
@@ -57,9 +60,10 @@ public class Utente implements Serializable {
  * Verifica che la stringa in ingresso abbia un ordine di numeri e caratteri uguale ai codici fiscali. 	
  * @param codiceFiscale la stringa da verificare
  * @return vero o falso
- * @author Andrea Ferrari
+ * @author Riccardo Grespan
  */
-	public static boolean verificaCodice(String codiceFiscale){
+	public static boolean verificaCodice(String codiceFiscale)
+	{
 		if(codiceFiscale.length()==16){
 			int i;
 			String lettere=codiceFiscale.substring(0, 6)+codiceFiscale.substring(8, 9)+
@@ -76,17 +80,18 @@ public class Utente implements Serializable {
 
 /**
  * Sovrascrive il metodo toString.
- * @author Andrea Ferrari
+ * @author Riccardo Grespan
  */
 	public String toString(){
     	String descrizione="-----------\n"
-    			+ "Nome: "+nome+"\n"
-    			+ "Cognome: "+cognome+"\n"
-    			+ "Data di nascita: "+dataNascita+"\n"
-    			+ "Luogo di nascita: "+luogoNascita+"\n"
-    			+ "Sesso: "+sesso+"\n"
-    			+ "Telefono: "+numTelefono+"\n"
-    			+ "Codice fiscale "+codiceFiscale+"\n";
+    						+ "Nome: "+nome+"\n"
+    						+ "Cognome: "+cognome+"\n"
+    						+ "Data di nascita: "+dataNascita+"\n" 
+    						+ "Luogo di nascita: "+luogoNascita+"\n"
+    						+ "Sesso: "+sesso+"\n"
+    						+ "Telefono: "+numTelefono+"\n"
+    						+ "Codice fiscale: "+codiceFiscale
+    						+"\n";
     	return descrizione;
     	
     }
@@ -94,7 +99,7 @@ public class Utente implements Serializable {
  * Verifica se la stringa in ingresso ha nome uguale a una variabile anagrafica.	
  * @param generico una stringa generica
  * @return vero o falso
- * @author Andrea Ferrari
+ * @author Riccardo Grespan
  */
 	public boolean datoUguale(String generico){
 		if (generico.equals(codiceFiscale)||generico.equals(cognome)||generico.equals(dataNascita)||
@@ -111,7 +116,7 @@ public class Utente implements Serializable {
 	}
 	
 	public String toStringCodiceFiscale(){
-		return "Codice fiscale "+codiceFiscale+"\n";
+		return "Codice fiscale: "+codiceFiscale+"\n";
 	}
 
 }
