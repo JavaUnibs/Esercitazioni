@@ -114,8 +114,7 @@ public class Agenda implements Serializable{
 		}
 		Iterator<LocalDateTime> iterator=orari.iterator();
 		String stringa="Orari disponibili: \n";
-	    while(iterator.hasNext()) stringa=stringa.concat(iterator.next().toLocalDate().toString()+
-	    		" alle "+iterator.next().toLocalTime().toString()+"\n");
+		while(iterator.hasNext()) stringa=stringa.concat(iterator.next().toString()+"\n");
 	    return stringa;
 	    
 	}
