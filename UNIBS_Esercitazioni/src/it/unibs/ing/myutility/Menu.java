@@ -5,7 +5,7 @@ public class Menu {
 	private static final String USCITA = "0) Esci";
 	private static final String RITORNO ="0) Ritorna al precedente menu";
 	private static final String SCELTA = "Inserisci la tua scelta";
-	private static String[] elenco;
+	private  String[] elenco;
 
 	public Menu(String[] _elenco) {
 
