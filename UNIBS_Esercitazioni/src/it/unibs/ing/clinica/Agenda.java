@@ -293,6 +293,8 @@ public class Agenda implements Serializable{
 		   cont++;
 		   }   
 	   }
+	   System.out.println("Nessun medico disponibile in tutta le date");
+	   return;
    }
      
    

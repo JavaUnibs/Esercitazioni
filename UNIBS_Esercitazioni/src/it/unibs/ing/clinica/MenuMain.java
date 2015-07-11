@@ -141,11 +141,11 @@ public class MenuMain {
 							 {
 								 areaCompetenza = LeggiInput.stringa("Area di competenza: ");
 								 archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo, areaCompetenza );
-								 Medico selezionato = new Medico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo, areaCompetenza );
+								 Medico selezionato = archivio.ricercaMedici(codiceAlbo);
 								 menuInserimentoDisp(selezionato, agenda);
 							 }
 							 archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
-						     Medico selezionato = new Medico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
+						     Medico selezionato = archivio.ricercaMedici(codiceAlbo);
 						     menuInserimentoDisp(selezionato, agenda);
 					}
 					break;
@@ -196,7 +196,7 @@ public class MenuMain {
 				
 			 			// Prenotare visita
 			 			case 1:{
-			 					String dato = LeggiInput.stringa("Inserire dato ricerca utente: ((nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice Fiscale)");
+			 					String dato = LeggiInput.stringa("Inserire dato ricerca utente: ((nome, cognome, data di nascita, luogo di nascita, telefono, codice Fiscale)");
 			 					Utente selezionato = archivio.ricercaUtenti(dato);
 			 					if(selezionato!=null){
 			 						int giorno = LeggiInput.intero("Inserire giorno: ");
@@ -204,8 +204,10 @@ public class MenuMain {
 			 						int anno = LeggiInput.intero("Inserire anno: ");
 			 						int ora = LeggiInput.intero("Inserire ora: ");
 			 						int minuti = LeggiInput.intero("Inserire minuti: ");
+			 						LeggiInput.terminaRiga();
 			 						LocalDate data = LocalDate.of(anno, mese, giorno);
 			 						LocalTime orario = LocalTime.of(ora, minuti);
+			 						
 			 					
 			 						String tipoVisita = LeggiInput.riga("Inserire il tipo della visita: ");
 			 						String motivoVisita = LeggiInput.riga("Inserire motivo della visita: ");
