@@ -88,7 +88,7 @@ public class Slot implements Serializable {
  */
    public ArrayList<Giorno> verificaDisp(LocalDate data, String tipoVisita, String areaCompetenza){
 	   ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
-	   if(tipoVisita.toLowerCase().equals("generica")) tipoVisita="Generico"; else tipoVisita="Specialista";
+	   if(tipoVisita.equalsIgnoreCase("generica")) tipoVisita="Generico"; else tipoVisita="Specialista";
 	   
 	   for(Giorno giorno: giorni){
 		   if(giorno.getData().equals(data)&giorno.getVisita()==null&giorno.getMedico().datoUguale(tipoVisita)&giorno.getMedico().datoUguale(areaCompetenza))
@@ -147,7 +147,7 @@ public class Slot implements Serializable {
 	   ArrayList<Giorno> temp= new ArrayList<Giorno>();
 	   for(Giorno giorno: giorni){
 		   if(giorno.getVisita()!=null){
-			   if(giorno.getVisita().getTipo().equals(tipoVisita)&giorno.getVisita().getAreaComp().equals(areaCompetenza)) temp.add(giorno);
+			   if(giorno.getVisita().getTipo().equalsIgnoreCase(tipoVisita)&giorno.getVisita().getAreaComp().equalsIgnoreCase(areaCompetenza)) temp.add(giorno);
 		   }
    	   }
 	   return temp;
@@ -175,11 +175,11 @@ public class Slot implements Serializable {
 	  for(Giorno giorno: giorni){
 		  if(giorno.getVisita()!=null){
 			  if(giorno.getStato().equals(StatoVisita.Prenotata)){
-				  if(giorno.getVisita().getTipo().toLowerCase().equals("generica")) prenotateGeneriche++; else prenotateSpecialistiche++;
+				  if(giorno.getVisita().getTipo().equalsIgnoreCase("generica")) prenotateGeneriche++; else prenotateSpecialistiche++;
 			  }
 		  
 			  if(giorno.getStato().equals(StatoVisita.Conclusa)){
-				  if(giorno.getVisita().getTipo().toLowerCase().equals("generica")) concluseGeneriche++; else concluseSpecialistiche++;
+				  if(giorno.getVisita().getTipo().equalsIgnoreCase("generica")) concluseGeneriche++; else concluseSpecialistiche++;
 			  }
 		  }
 	  }

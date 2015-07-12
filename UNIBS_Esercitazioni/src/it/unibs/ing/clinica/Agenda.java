@@ -382,7 +382,7 @@ public class Agenda implements Serializable{
   public ArrayList<Giorno> visiteTipo(String tipoVisita){
 	  ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
 	  String areaCompetenza="";
-	  if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
+	  if(tipoVisita.equalsIgnoreCase("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
 	  for(int i=0;i<6;i++){
   		   for(int j=0;j<20;j++){
   			   elencoTemp.addAll(settimana[j][i].visiteTipoSlot(tipoVisita, areaCompetenza));

@@ -1,6 +1,7 @@
 package it.unibs.ing.clinica;
 import java.io.Serializable;
 import java.util.*;
+import java.util.Arrays;
 
 import it.unibs.ing.myutility.*;
 
@@ -145,13 +146,17 @@ public class Archivio implements Serializable {
 	public ArrayList<String> areeCompetenzaTot(){
 		boolean valore;
 		ArrayList<String> temp= new ArrayList<String>();
+		String[] genericaArea={""};
+		
 		for(Medico medico: elencoMedici){
-			valore=true;
-			if (medico.getArea().equals("")) valore=false;
-			else for(String stringa: temp){
-					if(medico.getArea().equals(stringa)) valore=false; break;
+			if (Arrays.equals(medico.getArea(), genericaArea)) continue;
+			else for(int i=0;i<medico.getArea().length;i++){
+				valore=true;
+				for(String stringa:temp){
+					if(stringa.equals(medico.getArea()[i])) valore=false; break;
 				}
-			if(valore) temp.add(medico.getArea());
+				if(valore) temp.add(medico.getArea()[i]);
+			}
 		}
 		return temp;
 	}

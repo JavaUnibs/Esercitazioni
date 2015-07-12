@@ -1,6 +1,7 @@
 package it.unibs.ing.clinica;
 
 import java.io.Serializable;
+import java.util.*;
 
 public class Visita implements Serializable{
 	 
@@ -13,14 +14,24 @@ public class Visita implements Serializable{
 
 
 	private String motivoVisita, refertoMedico="", prescrizioneMedica="", tipoVisita, areaCompetenza="";
-
+    private ArrayList<Consulto> elencoConsulti=new ArrayList<Consulto>();
 	
 	Visita(String _motivoVisita, String _tipoVisita, String _areaCompetenza){
 		motivoVisita=_motivoVisita;
 		tipoVisita=_tipoVisita;
 		areaCompetenza=_areaCompetenza;
 	}
-	
+/**
+ * Crea ed inserisce un consulto specialistico nell'elenco dei consulti di questa visita.	
+ * @param _medico         il medico che ha effettuato il consulto
+ * @param _approvazione   valore boolean
+ * @param _referto        il nuovo referto
+ * @param _prescrizione   la nuova prescrizione
+ * @author Sartori Fabio
+ */
+	public void inserisciConsulto(Medico _medico, boolean _approvazione, String _referto, String _prescrizione){
+		elencoConsulti.add(new Consulto(_medico, _approvazione, _referto, _prescrizione));
+	}
 	
 	public String getTipo(){
 		return tipoVisita;

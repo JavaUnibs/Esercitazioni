@@ -1,6 +1,7 @@
 package it.unibs.ing.clinica;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 
 public class Medico extends Utente implements Serializable{
@@ -10,7 +11,9 @@ public class Medico extends Utente implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String tipo, areaCompetenza="", codiceAlbo;
+	private String tipo, codiceAlbo;
+	String[] areaCompetenza={""};
+	String delimita = "[-]+";
 	
 	Medico(String _nome, String _cognome, String _dataNascita, String _luogoNascita, String _sesso, String _numTelefono, String _codiceFiscale, String _codiceAlbo, String _tipo)
 	{
@@ -26,12 +29,20 @@ public class Medico extends Utente implements Serializable{
 		
 		tipo=_tipo;
 		codiceAlbo=_codiceAlbo;
-		areaCompetenza=_areaCompetenza;
+		areaCompetenza=_areaCompetenza.split(delimita);
 	}
 	
-	public String getArea()
+	public String[] getArea()
 	{
 		return areaCompetenza;
+	}
+	
+	public boolean datoUgualeArea(String generico){
+		for(int i=0;i<areaCompetenza.length;i++){
+			if(areaCompetenza[i].equalsIgnoreCase(generico)) return true;
+		}
+		return false;
+			
 	}
 	
 /**
@@ -42,14 +53,14 @@ public class Medico extends Utente implements Serializable{
 */
 	public void modificaMedico(String campo, String input)
 	{
-		campo.toLowerCase();
+		campo=campo.toLowerCase();
 		super.modificaUtente(campo, input);
 		switch (campo){
 		case "codice albo": codiceAlbo=input;
 		break;
 		case "tipo": tipo=input;
 		break;
-		case "area di competenza": areaCompetenza=input;
+		case "area di competenza": areaCompetenza=input.split(delimita);
 		break;
 		}
 		}
@@ -61,7 +72,7 @@ public class Medico extends Utente implements Serializable{
     public String toString()
     {
     	
-    	String descrizione=super.toString() + "\n" + "Codice albo: " + codiceAlbo+ "\n" + "Tipo: "+tipo+"\n" + "Area di competenza: " + areaCompetenza+"\n";
+    	String descrizione=super.toString() + "\n" + "Codice albo: " + codiceAlbo+ "\n" + "Tipo: "+tipo+"\n" + "Area di competenza: " + Arrays.toString(areaCompetenza)+"\n";
     	return descrizione;
     	
     }
@@ -74,8 +85,8 @@ public class Medico extends Utente implements Serializable{
 */
     public boolean datoUguale(String generico)
     {
-    	generico=generico.toLowerCase();
-    	if (super.datoUguale(generico)||generico.equals(codiceAlbo.toLowerCase())||generico.equals(tipo.toLowerCase())||generico.equals(areaCompetenza.toLowerCase())) return true;
+    	
+    	if (super.datoUguale(generico)||generico.equalsIgnoreCase(codiceAlbo)||generico.equalsIgnoreCase(tipo.toLowerCase())||datoUgualeArea(generico)) return true;
     	return false;
     }
  /**

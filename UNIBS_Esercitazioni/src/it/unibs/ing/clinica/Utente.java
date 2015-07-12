@@ -70,7 +70,6 @@ public class Utente implements Serializable {
 			String lettere=codiceFiscale.substring(0, 6)+codiceFiscale.substring(8, 9)+
 			codiceFiscale.substring(8, 9)+codiceFiscale.substring(11, 12)+codiceFiscale.substring(15, 16);
 			String cifre=codiceFiscale.substring(6, 8)+codiceFiscale.substring(9, 11)+codiceFiscale.substring(12, 15);
-			lettere.toUpperCase();
 			for(i=0;i<cifre.length();i++) {if(cifre.charAt(i)<48||cifre.charAt(i)>57) return false;}
 			for(i=0;i<lettere.length();i++) {if(lettere.charAt(i)<65||lettere.charAt(i)>90) return false;}
 			return true;
@@ -103,10 +102,9 @@ public class Utente implements Serializable {
  * @author Riccardo Grespan
  */
 	public boolean datoUguale(String generico){
-		generico=generico.toLowerCase();
-		if (generico.equals(codiceFiscale.toLowerCase())||generico.equals(cognome.toLowerCase())||generico.equals(dataNascita.toLowerCase())||
-				generico.equals(luogoNascita.toLowerCase())||generico.equals(nome.toLowerCase())||generico.equals(sesso.toLowerCase())||generico.equals(numTelefono.toLowerCase())||
-				generico.equals(cognomeNome.toLowerCase())) return true;
+		if (generico.equalsIgnoreCase(codiceFiscale)||generico.equalsIgnoreCase(cognome)||generico.equalsIgnoreCase(dataNascita)||
+				generico.equalsIgnoreCase(luogoNascita)||generico.equalsIgnoreCase(nome)||generico.equalsIgnoreCase(sesso)||generico.equalsIgnoreCase(numTelefono)||
+				generico.equalsIgnoreCase(cognomeNome)) return true;
 		return false;
 	}
 /**
