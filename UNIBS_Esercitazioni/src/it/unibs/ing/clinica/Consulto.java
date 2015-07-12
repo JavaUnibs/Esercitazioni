@@ -1,7 +1,9 @@
 package it.unibs.ing.clinica;
 
 public class Consulto {
-	
+	/**
+	 * @author Andrea Ferrari
+	 */
 	private Medico medico;
 	private boolean approvazione;
 	private String referto;
