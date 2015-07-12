@@ -494,6 +494,7 @@ public class MenuMain {
 									Medico cercato = archivio.ricercaMedici("specialista");
 									if(cercato!=null){
 									boolean approvazione=LeggiInput.doppiaScelta("Lo specialista ha approvato il referto del medico di base?");
+									LeggiInput.terminaRiga();
 									String referto=LeggiInput.riga("Inserire il referto dello specialista:");
 									String prescrizione=LeggiInput.riga("Inserire la prescrizione dello specialista:");
 									giorno_visita.getVisita().inserisciConsulto(cercato, approvazione, referto, prescrizione);
