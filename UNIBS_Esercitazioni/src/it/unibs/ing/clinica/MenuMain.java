@@ -208,7 +208,7 @@ public class MenuMain {
 							System.out.println(cercato.toStringNomeCognomeAlbo());
 						}
 					}
-					
+					break;
 					case 6:{
 						String dato = LeggiInput.stringa("Inserire dato ricerca: ");
 					    Utente cercato = archivio.ricercaUtenti(dato);
@@ -216,6 +216,7 @@ public class MenuMain {
 					    	System.out.println(cercato.toStringNomeCognome()+cercato.toStringCodiceFiscale());
 					    }
 					}
+					break;
 					
 					}
 		
