@@ -113,7 +113,8 @@ public class MenuMain {
 							 nome = LeggiInput.stringa("Nome: ");
 							 cognome = LeggiInput.stringa("Cognome: ");
 							 dataNascita = LeggiInput.stringa("Data di nascita: ");
-							 luogoNascita = LeggiInput.stringa("Luogo di Nascita: ");
+							 LeggiInput.terminaRiga();
+							 luogoNascita = LeggiInput.riga("Luogo di Nascita: ");
 							 sesso = LeggiInput.stringa("Sesso: ");
 							 numTelefono = LeggiInput.stringa("Numero di telefono: ");
 							 codiceFiscale = LeggiInput.stringa("CF: ");
@@ -129,7 +130,8 @@ public class MenuMain {
 							 nome = LeggiInput.stringa("Nome: ");
 							 cognome = LeggiInput.stringa("Cognome: ");
 							 dataNascita = LeggiInput.stringa("Data di nascita: ");
-							 luogoNascita = LeggiInput.stringa("Luogo di Nascita: ");
+							 LeggiInput.terminaRiga();
+							 luogoNascita = LeggiInput.riga("Luogo di Nascita: ");
 							 sesso = LeggiInput.stringa("Sesso: ");
 							 numTelefono = LeggiInput.stringa("Numero di telefono: ");
 							 codiceFiscale = LeggiInput.stringa("CF: ");
