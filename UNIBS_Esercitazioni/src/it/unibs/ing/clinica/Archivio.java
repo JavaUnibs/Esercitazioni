@@ -156,7 +156,9 @@ public class Archivio implements Serializable {
 		return elencoMedici;
 	}
 
-
+    public ArrayList<Utente> getElencoUtenti(){
+    	return elencoUtenti;
+    }
 
 }
 
