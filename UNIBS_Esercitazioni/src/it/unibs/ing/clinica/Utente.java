@@ -105,7 +105,7 @@ public class Utente implements Serializable {
 	public boolean datoUguale(String generico){
 		generico=generico.toLowerCase();
 		if (generico.equals(codiceFiscale.toLowerCase())||generico.equals(cognome.toLowerCase())||generico.equals(dataNascita.toLowerCase())||
-				generico.equals(luogoNascita.toLowerCase())||generico.equals(nome.toLowerCase())||generico.equals(numTelefono.toLowerCase())||
+				generico.equals(luogoNascita.toLowerCase())||generico.equals(nome.toLowerCase())||generico.equals(sesso.toLowerCase())||generico.equals(numTelefono.toLowerCase())||
 				generico.equals(cognomeNome.toLowerCase())) return true;
 		return false;
 	}
