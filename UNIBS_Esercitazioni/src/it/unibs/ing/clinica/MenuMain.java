@@ -607,8 +607,10 @@ public class MenuMain {
 	    	 		int ora_F = LeggiInput.intero("Inserire ora finale: ");
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
+	    	 		if(!agenda.controlloIntervallo(data_I, data_F)) System.out.println("Inserire un intervallo di giorni corretto");       
+	    	 		else agenda.cancellaDisp(da_modificare, data_I, data_F, orario_I, orario_F);
+	    	 		System.out.println("Disponibilità cancellate");
 	    	 		
-	    	 		agenda.cancellaDisp(da_modificare, data_I, data_F, orario_I, orario_F);
 	     }
 	     break;
 	    
@@ -640,8 +642,9 @@ public class MenuMain {
 				
 					LocalDate []array = new LocalDate[giorniVari.size()];
 					giorniVari.toArray(array);
-					
-					agenda.cancellaDisp(da_modificare, orario_I, orario_F, array);
+					if(!agenda.controlloElencoGiorni(array)) System.out.println("La domenica non si lavora");
+					else agenda.cancellaDisp(da_modificare, orario_I, orario_F, array);
+					System.out.println("Disponibilità cancellate");
 	     
 	     }
 	     break;
@@ -661,9 +664,9 @@ public class MenuMain {
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
  
-	    	 		
-	    	 		agenda.cancellaDisp(da_modificare, data, orario_I, orario_F);
-	    	 		
+	    	 		if(data.getDayOfWeek().getValue()==7) System.out.println("La domenica non si lavora");
+   	 		        else agenda.cancellaDisp(da_modificare, data, orario_I, orario_F);
+	    	 		System.out.println("Disponibilità cancellate");
 	    	 
 	     }
 	     break;
@@ -813,6 +816,7 @@ public class MenuMain {
 	 * Sottomenu per modificare i vari campi di una visita
 	 * @param giorno_visita l'oggetto Giorno che contiene la visita selezionata
 	 * @param selezionata la visita che si vuole modificare
+	 * @author Riccardo Grespan
 	 */
 	public static void modificaVisitaMain(Giorno giorno_visita, Visita selezionata){
 		String campo_visita = LeggiInput.riga("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
