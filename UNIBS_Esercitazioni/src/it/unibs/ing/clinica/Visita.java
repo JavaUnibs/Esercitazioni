@@ -42,7 +42,7 @@ public class Visita implements Serializable{
 * Permette di assegnare un nuovo valore ad una variabile con nome uguale alla stringa in ingresso.
 * @param campo La variabile che si vuole modificare
 * @param input Il nuovo valore da assegnare
-* @author Andrea Ferrari
+* @author Sartori Fabio
 */
 	public void modificaVisita(String campo, String input){
 		campo=campo.toLowerCase();
@@ -63,7 +63,7 @@ public class Visita implements Serializable{
 
 /**
 * Sovrascrive il metodo toString.
-* @author Andrea Ferrari
+* @author Sartori Fabio
 */
 	public String toString(){
     	String descrizione="-----------\n"

@@ -440,6 +440,12 @@ public class Agenda implements Serializable{
  * @param elencoAree un arraylist di stringhe contenente tutte le aree di competenza dei medici della clinica.
  */
   public String statisticheVisiteArea(ArrayList<String> elencoAree){
+	  
+	  if(elencoAree.isEmpty()){
+		  String stringa="Nessuna area di competenza\n";
+				  return stringa;
+	  } 
+	  
 	  int[][] contatore=new int[2][elencoAree.size()];
 	  int[][] contatoreSlot;
 	  for(int i=0;i<6;i++){
@@ -468,6 +474,13 @@ public class Agenda implements Serializable{
  * @param elencoAree un arraylist di stringhe contenente tutte le aree di competenza dei medici della clinica.
  */
   public String statisticheVisiteAreaMinMax(ArrayList<String> elencoAree){
+	  
+	  if(elencoAree.isEmpty()){
+		  String stringa="Area di competenza con più visite: nessuna\n"
+				  +"Area di competenza con meno visite: nessuna\n";
+				  return stringa;
+	  }
+	  
 	  int[] contatore=new int[elencoAree.size()];
 	  int[][] contatoreSlot;
 	  for(int i=0;i<6;i++){
@@ -480,11 +493,7 @@ public class Agenda implements Serializable{
 			}
 		  }
 	  }
-	  if(elencoAree.isEmpty()){
-		  String stringa="Area di competenza con più visite: nessuna\n"
-				  +"Area di competenza con meno visite: nessuna\n";
-				  return stringa;
-	  }
+	  
 	  
       int posizioneMax=0, posizioneMin=0, max=contatore[0], min=contatore[0];
 	  for(int x=0;x<elencoAree.size();x++){

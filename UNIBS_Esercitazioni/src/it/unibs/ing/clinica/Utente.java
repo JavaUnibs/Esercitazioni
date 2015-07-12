@@ -63,7 +63,8 @@ public class Utente implements Serializable {
  * @author Riccardo Grespan
  */
 	public static boolean verificaCodice(String codiceFiscale)
-	{
+	{   
+		codiceFiscale=codiceFiscale.toUpperCase();
 		if(codiceFiscale.length()==16){
 			int i;
 			String lettere=codiceFiscale.substring(0, 6)+codiceFiscale.substring(8, 9)+

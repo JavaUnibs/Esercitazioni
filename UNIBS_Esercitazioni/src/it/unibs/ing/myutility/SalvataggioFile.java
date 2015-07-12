@@ -1,6 +1,7 @@
 package it.unibs.ing.myutility;
 
 import java.io.BufferedInputStream;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +11,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * 
+ * @author Sartori Fabio
+ *
+ */
 public class SalvataggioFile {
 	private final static String FILE_NON_SCRITTO = "Il processo di scrittura del file non è riuscito.";
 	private final static String FILE_NON_LETTO = "Il processo di lettura del file non è riuscito.";

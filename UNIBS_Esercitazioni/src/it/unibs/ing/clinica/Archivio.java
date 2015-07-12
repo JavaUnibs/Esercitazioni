@@ -20,7 +20,7 @@ public class Archivio implements Serializable {
 	 * la possibilità di sceglierne uno stampando i dati degli utenti e richiedendo un numero intero in ingresso. 
 	 * @param generico una stringa generica 
 	 * @return         l'utente corrispondente
-	 * @author Andrea Ferrari
+	 * @author Sartori Fabio
 	 */
 	public Utente ricercaUtenti(String generico){
 	Utente nullo=null;
@@ -56,7 +56,7 @@ public class Archivio implements Serializable {
 	 * la possibilità di sceglierne uno stampando i dati dei medici e richiedendo un numero intero in ingresso. 
 	 * @param generico una stringa generica 
 	 * @return         il medico corrispondente
-	 * @author Andrea Ferrari
+	 * @author Sartori Fabio
 	 */
 	public Medico ricercaMedici(String generico){
 	Medico nullo=null;
@@ -94,7 +94,7 @@ public class Archivio implements Serializable {
 	 * @param sesso
 	 * @param numTelefono
 	 * @param codiceFiscale
-	 * @author Andrea Ferrari
+	 * @author Sartori Fabio
 	 */
 	public void inserimentoUtente(String nome, String cognome, String dataNascita, String luogoNascita, String sesso, String numTelefono, String codiceFiscale){
 		elencoUtenti.add(new Utente(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale ));
@@ -111,6 +111,7 @@ public class Archivio implements Serializable {
 	 * @param codiceFiscale
 	 * @param codiceAlbo
 	 * @param tipo
+	 * @author Sartori Fabio
 	 */
 	public void inserimentoMedico(String nome, String cognome, String dataNascita, String luogoNascita, String sesso, String numTelefono, String codiceFiscale, String codiceAlbo, String tipo){
 		elencoMedici.add(new Medico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo));
@@ -129,6 +130,7 @@ public class Archivio implements Serializable {
 	 * @param codiceAlbo
 	 * @param tipo
 	 * @param areaCompetenza
+	 * @author Sartori Fabio
 	 */
 	public void inserimentoMedico(String nome, String cognome, String dataNascita, String luogoNascita, String sesso, String numTelefono, String codiceFiscale, String codiceAlbo, String tipo, String areaCompetenza){
 		elencoMedici.add(new Medico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo, areaCompetenza));
@@ -137,16 +139,18 @@ public class Archivio implements Serializable {
 	
 	/**
 	 * Restituisce un ArrayList contenente tutte le aree di competenza riscontrate nei medici dell'archivio, non contando i doppioni.
-	 * @return
+	 * 
+	 * @author Sartori Fabio
 	 */
 	public ArrayList<String> areeCompetenzaTot(){
 		boolean valore;
 		ArrayList<String> temp= new ArrayList<String>();
 		for(Medico medico: elencoMedici){
 			valore=true;
-			for(String stringa: temp){
-				if(medico.getArea().equals(stringa)||medico.getArea().equals("")) valore=false; break;
-			}
+			if (medico.getArea().equals("")) valore=false;
+			else for(String stringa: temp){
+					if(medico.getArea().equals(stringa)) valore=false; break;
+				}
 			if(valore) temp.add(medico.getArea());
 		}
 		return temp;

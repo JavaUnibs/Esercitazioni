@@ -17,7 +17,9 @@ public class VisitaTest {
 	@Test
 	public void toStringTest() 
 	{
-		assertEquals("-----------\nMotivo: Dolori al petto\nTipo: Specialista\nArea di competenza: Cardiologo\nReferto Medico: \nPrescrizione medica: \n", visita.toString());
+		visita.modificaVisita("referto medico", "Angina Pectoris");
+		visita.modificaVisita("prescrizione", "Assunzione betabloccanti");
+		assertEquals("-----------\nMotivo: Dolori al petto\nTipo: Specialista\nArea di competenza: Cardiologo\nReferto Medico: Angina Pectoris\nPrescrizione medica: Assunzione betabloccanti\n", visita.toString());
 	}
 	
 }

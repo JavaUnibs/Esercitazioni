@@ -1,6 +1,11 @@
 package it.unibs.ing.clinica;
 
 import java.io.Serializable;
+/**
+ * 
+ * @author Sartori Fabio
+ *
+ */
 
 public class Contenitore implements Serializable{
 	

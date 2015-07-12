@@ -30,7 +30,7 @@ public class MenuMain {
 	// Menu principale
 	static final String[] MENU_PRINCIPALE = {"Azioni dati", "Azioni visita", "Ricerca", "Statistiche"};
 	// Sottomenu Prima scelta menu principale
-	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
+	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico", "Visualizza dati medico", "Visualizza dati utente"};
 	// Sottomenu Seconda scelta menu principale
 	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita", "Visualizzazione elenco visite utente", "Visualizzazione elenco visite medico" };	
 	// Sottomenu Terza scelta menu principale
@@ -115,8 +115,8 @@ public class MenuMain {
 							 dataNascita = LeggiInput.stringa("Data di nascita: ");
 							 luogoNascita = LeggiInput.stringa("Luogo di Nascita: ");
 							 sesso = LeggiInput.stringa("Sesso: ");
-							 codiceFiscale = LeggiInput.stringa("CF: ");
 							 numTelefono = LeggiInput.stringa("Numero di telefono: ");
+							 codiceFiscale = LeggiInput.stringa("CF: ");
 							 
 							 archivio.inserimentoUtente(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale);
 							
@@ -131,8 +131,8 @@ public class MenuMain {
 							 dataNascita = LeggiInput.stringa("Data di nascita: ");
 							 luogoNascita = LeggiInput.stringa("Luogo di Nascita: ");
 							 sesso = LeggiInput.stringa("Sesso: ");
-							 codiceFiscale = LeggiInput.stringa("CF: ");
 							 numTelefono = LeggiInput.stringa("Numero di telefono: ");
+							 codiceFiscale = LeggiInput.stringa("CF: ");
 							 tipo = LeggiInput.stringa("Tipo: ");
 							 codiceAlbo = LeggiInput.stringa("Codice albo: ");
 						     
@@ -144,9 +144,11 @@ public class MenuMain {
 								 Medico selezionato = archivio.ricercaMedici(codiceAlbo);
 								 menuInserimentoDisp(selezionato, agenda);
 							 }
-							 archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
-						     Medico selezionato = archivio.ricercaMedici(codiceAlbo);
-						     menuInserimentoDisp(selezionato, agenda);
+							 else{
+								 archivio.inserimentoMedico(nome, cognome, dataNascita, luogoNascita, sesso, numTelefono, codiceFiscale, codiceAlbo, tipo );
+								 Medico selezionato = archivio.ricercaMedici(codiceAlbo);
+								 menuInserimentoDisp(selezionato, agenda);
+							 }
 					}
 					break;
 					
@@ -183,6 +185,22 @@ public class MenuMain {
 				            }
 					}
 					break;
+					
+					case 5:{
+						String dato = LeggiInput.stringa("Inserire dato ricerca: ");
+						Medico cercato = archivio.ricercaMedici(dato);
+						if(cercato!=null){
+							System.out.println(cercato.toStringNomeCognomeAlbo());
+						}
+					}
+					
+					case 6:{
+						String dato = LeggiInput.stringa("Inserire dato ricerca: ");
+					    Utente cercato = archivio.ricercaUtenti(dato);
+					    if(cercato!=null){
+					    	System.out.println(cercato.toStringNomeCognome()+cercato.toStringCodiceFiscale());
+					    }
+					}
 					
 					}
 		
