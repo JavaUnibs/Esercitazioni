@@ -32,7 +32,7 @@ public class MenuMain {
 	// Sottomenu Prima scelta menu principale
 	static final String[] MENU_DATI = {"Inserisci dati utente", "Inserisci dati medico", "Modifica dati utente", "Modifica dati medico"};
 	// Sottomenu Seconda scelta menu principale
-	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita", "Visualizzazione elenco visite utente", "Visualizzazione lenco visite medico" };	
+	static final String[] MENU_VISITA = {"Prenota visita", "Modifica prenotazione","Cancellazione visita", "Visualizzazione elenco visite utente", "Visualizzazione elenco visite medico" };	
 	// Sottomenu Terza scelta menu principale
 	static final String[] MENU_RICERCA = {"Ricerca giorni di lavoro medici", "Ricerca medico disponibile per orario"};
 	// Sottomenu Quarta scelta menu principale
@@ -174,10 +174,12 @@ public class MenuMain {
 								if(campo.equals("disponibilità")){
 									String dec_disp = LeggiInput.stringa("Aggiungere o cancellare?");	
 									if (dec_disp.equalsIgnoreCase("cancellare")) menuCancDisp(da_modificare, agenda);
-										menuInserimentoDisp(da_modificare, agenda);
+									else menuInserimentoDisp(da_modificare, agenda);
 								}
+								else{
 								String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
 								da_modificare.modificaMedico(campo, dato_modifica);
+								}
 				            }
 					}
 					break;
@@ -401,59 +403,7 @@ public class MenuMain {
 													
 			 							}
 			 							break;
-			 							
-			 							// Visualizzazione visite utente
-			 							case 5:{
-			 									String campo = LeggiInput.stringa("Dato utente: ");
-			 									Utente cercato = archivio.ricercaUtenti(campo);
-			 									if(cercato!=null){
-			 										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
-	 										
-			 										for(Giorno giorno: giorni_visite){
-	 											
-			 											if(giorno.getStato() == StatoVisita.Prenotata)
-			 											{
-			 												System.out.println(giorno.getStato().toString());
-			 												System.out.println(giorno.getData().toString());
-			 											}
-			 											
-			 											if(giorno.getStato() == StatoVisita.Conclusa)
-			 											{
-			 												System.out.println(giorno.getStato().toString());
-			 												System.out.println(giorno.getData().toString());
-			 												System.out.println("Referto: " + giorno.getVisita().getReferto().toString());
-			 												System.out.println("Prescrizione: " + giorno.getVisita().getPrescrizione().toString());
-			 											}
-			 											
-			 										}	
-			 									}
-			 								
-			 							}
-			 							break;
-			 							
-			 							// Visualizzazione visite medico
-			 							case 6:{
-			 										String campo = LeggiInput.stringa("Dato medico: ");
-			 										Medico cercato = archivio.ricercaMedici(campo);
-			 										if(cercato!=null){
-			 											ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
-			 								
-			 											for(Giorno giorno: giorni_visite){
-			 											
-			 												if(giorno.getStato() == StatoVisita.Prenotata)
-			 												{
-			 													System.out.println(giorno.getStato().toString());
-			 													System.out.println(giorno.getData().toString());
-			 													System.out.println("Motivo: "+giorno.getVisita().getMotivo().toString());
-			 												}
-			 											
-			 											}
-			 										}
-			 										
-			 							
-			 							} 
-			 							break;
-			 							
+			 						
 			 							// Uscita
 			 							case 0:{}
 			 							break;
@@ -464,6 +414,59 @@ public class MenuMain {
 			 			
 			 			}
 			 			break;
+			 			
+						// Visualizzazione visite utente
+						case 4:{
+									String campo = LeggiInput.stringa("Dato utente: ");
+									Utente cercato = archivio.ricercaUtenti(campo);
+									if(cercato!=null){
+										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
+								
+										for(Giorno giorno: giorni_visite){
+									
+											if(giorno.getStato() == StatoVisita.Prenotata)
+											{
+												System.out.println(giorno.getStato().toString());
+												System.out.println(giorno.getData().toString());
+											}
+											
+											if(giorno.getStato() == StatoVisita.Conclusa)
+											{
+												System.out.println(giorno.getStato().toString());
+												System.out.println(giorno.getData().toString());
+												System.out.println("Referto: " + giorno.getVisita().getReferto());
+												System.out.println("Prescrizione: " + giorno.getVisita().getPrescrizione());
+											}
+											
+										}	
+									}
+								
+						}
+						break;
+							
+						// Visualizzazione visite medico
+						case 5:{
+										String campo = LeggiInput.stringa("Dato medico: ");
+										Medico cercato = archivio.ricercaMedici(campo);
+										if(cercato!=null){
+											ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
+								
+											for(Giorno giorno: giorni_visite){
+											
+												if(giorno.getStato() == StatoVisita.Prenotata)
+												{
+													System.out.println(giorno.getStato().toString());
+													System.out.println(giorno.getData().toString());
+													System.out.println("Motivo: "+giorno.getVisita().getMotivo());
+												}
+											
+											}
+										}
+										
+							
+						} 
+						break;
+			 			
 			 			
 			 			// Uscita
 			 			case 0:{}
@@ -515,8 +518,8 @@ public class MenuMain {
 		// Statistiche
 		
 		case 4:{ 
-					ArrayList<Medico> elenco_Medici = archivio.getElencoMedici();
-					ArrayList<String> elenco_Aree = archivio.areeCompetenzaTot();
+					
+					archivio.areeCompetenzaTot();
 			     
 					int scelta_statistiche;
 					scelta_statistiche = elenco_statistiche.stampaSottoMenu();
@@ -524,27 +527,27 @@ public class MenuMain {
 					switch(scelta_statistiche){
 							// Visite totali		 
 							case 1:{
-										agenda.statisticheVisite();
+									System.out.println(agenda.statisticheVisite());
 							} break;
 			 
 							//Visite totali per tipo
 							case 2:{
-										agenda.statisticheVisiteTipo();
+									System.out.println(agenda.statisticheVisiteTipo());
 							} break;
 							
 							//Visite prenotate e concluse per competenza
 							case 3:{
-										agenda.statisticheVisiteArea(elenco_Aree);
+									System.out.println(agenda.statisticheVisiteArea(archivio.areeCompetenzaTot()));
 							} break;
 							
 							//Aree con minor e maggior numero di visite
 							case 4:{
-										agenda.statisticheVisiteAreaMinMax(elenco_Aree);
+									System.out.println(agenda.statisticheVisiteAreaMinMax(archivio.areeCompetenzaTot()));
 							} break;
 							
 							//Visite per medico
 							case 5:{
-										agenda.statisticheVisiteMedici(elenco_Medici);
+									System.out.println(agenda.statisticheVisiteMedici(archivio.getElencoMedici()));
 							} break;
 						
 					}; break;	
@@ -707,8 +710,9 @@ public class MenuMain {
 	    	 		int ora_F = LeggiInput.intero("Inserire ora finale: ");
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
-	    	 		
-	    	 		agenda.inserimentoDisp(selezionato, data_I, data_F, orario_I, orario_F);
+	    	 		if(!agenda.controlloIntervallo(data_I, data_F)) System.out.println("Inserire un intervallo di giorni corretto");       
+	    	 		else agenda.inserimentoDisp(selezionato, data_I, data_F, orario_I, orario_F);
+	    	 		System.out.println("Disponibilità inserite");
 	     }
 	     break;
 	    
@@ -739,9 +743,10 @@ public class MenuMain {
 					
 					LocalDate []array = new LocalDate[giorniVari.size()];
 					giorniVari.toArray(array);
+					if(!agenda.controlloElencoGiorni(array)) System.out.println("La domenica non si lavora");
+					else agenda.inserimentoDisp(selezionato, orario_I, orario_F, array);
 					
-					agenda.inserimentoDisp(selezionato, orario_I, orario_F, array);
-	     
+					System.out.println("Disponibilità inserite");
 	     }
 	     break;
 	     
@@ -759,10 +764,10 @@ public class MenuMain {
 	    	 		int ora_F = LeggiInput.intero("Inserire ora finale: ");
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
-   	 		
-	    	 		agenda.inserimentoDisp(selezionato, data, orario_I, orario_F);
+   	 		        if(data.getDayOfWeek().getValue()==7) System.out.println("La domenica non si lavora");
+   	 		        else agenda.inserimentoDisp(selezionato, data, orario_I, orario_F);
 	    	 		
-	    	 
+	    	 		System.out.println("Disponibilità inserite");	 
 	     }
 	     break;
 	     

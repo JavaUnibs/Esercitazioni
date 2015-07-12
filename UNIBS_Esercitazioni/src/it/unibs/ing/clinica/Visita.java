@@ -77,11 +77,6 @@ public class Visita implements Serializable{
     }
 	
 	public String getMotivo(){
-		return "Motivo: "+motivoVisita+"\n";
-	}
-	
-	public String getRefertoPrescrizione(){
-		return "Referto Medico: "+refertoMedico+"\n"
-    			+ "Prescrizione medica: "+prescrizioneMedica+"\n";	
+		return motivoVisita;
 	}
 }
