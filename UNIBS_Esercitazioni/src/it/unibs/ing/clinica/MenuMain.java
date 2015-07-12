@@ -625,7 +625,9 @@ public class MenuMain {
 	     switch(scelta_cancelladisp){
 	     
 	     // Cancella intervallo di giorni e ore
-	     case 1:{
+	     case 1:{ 
+	    	    boolean valore=true;
+	    	    do{
 	    	 		int giorno_I = LeggiInput.intero("Inserire giorno iniziale: ");
 	    	 		int mese_I = LeggiInput.intero("Inserire mese iniziale: ");
 	    	 		int anno_I = LeggiInput.intero("Inserire anno iniziale: ");
@@ -648,7 +650,10 @@ public class MenuMain {
 	    	 		else {
 	    	 			agenda.cancellaDisp(da_modificare, data_I, data_F, orario_I, orario_F);
 	    	 			System.out.println("Disponibilità cancellate");
+	    	 			valore=false;
 	    	 		}
+	    	 		
+	    	    }while(valore);
 	    	 		
 	    	 		
 	     }
@@ -656,6 +661,8 @@ public class MenuMain {
 	    
 	     // Cancella giorni specifici ore continuate
 	     case 2:{
+	    	 	boolean valore=true;
+	    	 	do{
 	    	 		int ora_I = LeggiInput.intero("Inserire ora iniziale: ");
 	    	 		int minuti_I = LeggiInput.intero("Inserire minuti inziali: ");
 	    	 		LocalTime orario_I = LocalTime.of(ora_I, minuti_I);
@@ -687,14 +694,17 @@ public class MenuMain {
 					else {
 						agenda.cancellaDisp(da_modificare, orario_I, orario_F, array);
 						System.out.println("Disponibilità cancellate");
+						valore=false;
 					}
-					
+	    	 	}while(valore);
 	     
 	     }
 	     break;
 	     
 	     // Cancella un giorno e orario specifico 
 	     case 3: {
+	    	 	boolean valore=true;
+	    	 	do{
 	    	 		int giorno = LeggiInput.intero("Inserire giorno: ");
 	    	 		int mese = LeggiInput.intero("Inserire mese: ");
 	    	 		int anno = LeggiInput.intero("Inserire anno: ");
@@ -713,7 +723,9 @@ public class MenuMain {
    	 		        else {
    	 		        	agenda.cancellaDisp(da_modificare, data, orario_I, orario_F);
    	 		            System.out.println("Disponibilità cancellate");
+   	 		            valore=false;
    	 		        }
+	    	 	}while(valore);
 	    	 		
 	    	 
 	     }
@@ -744,6 +756,8 @@ public class MenuMain {
 	     
 	     // Intervallo di giorni e ore
 	     case 1:{
+	    	 	boolean valore=true;
+	    	 	do{
 	    	 		int giorno_I = LeggiInput.intero("Inserire giorno iniziale: ");
 	    	 		int mese_I = LeggiInput.intero("Inserire mese iniziale: ");
 	    	 		int anno_I = LeggiInput.intero("Inserire anno iniziale: ");
@@ -766,13 +780,17 @@ public class MenuMain {
 	    	 		else {
 	    	 			agenda.inserimentoDisp(selezionato, data_I, data_F, orario_I, orario_F);
 	    	 			System.out.println("Disponibilità inserite");
+	    	 			valore=false;
 	    	 		}
+	    	 	}while(valore);
 	    	 		
 	     }
 	     break;
 	    
 	     // Giorni specifici ore continuate
 	     case 2:{
+	    	 	boolean valore=true;
+	    	 	do{
 	    	 		int ora_I = LeggiInput.intero("Inserire ora iniziale: ");
 	    	 		int minuti_I = LeggiInput.intero("Inserire minuti iniziali: ");
 	    	 		LocalTime orario_I = LocalTime.of(ora_I, minuti_I);
@@ -803,7 +821,9 @@ public class MenuMain {
 	    	 			else {
 	    	 				agenda.inserimentoDisp(selezionato, orario_I, orario_F, array);
 	    	 				System.out.println("Disponibilità inserite");
+	    	 				valore=false;
 	    	 			}
+	    	 	}while(valore);
 					
 					
 	     }
@@ -811,6 +831,8 @@ public class MenuMain {
 	     
 	     //un giorno e orario specifico 
 	     case 3: {
+	    	 	boolean valore=true;
+	    	 	do{
 	    	 		int giorno = LeggiInput.intero("Inserire giorno: ");
 	    	 		int mese = LeggiInput.intero("Inserire mese: ");
 	    	 		int anno = LeggiInput.intero("Inserire anno: ");
@@ -828,7 +850,9 @@ public class MenuMain {
 	    	 			else {
 	    	 				agenda.inserimentoDisp(selezionato, data, orario_I, orario_F);
 	    	 				System.out.println("Disponibilità inserite");
+	    	 				valore=false;
 	    	 			}
+	    	 	}while(valore);
 	    	 		
 	    	 			 
 	     }
