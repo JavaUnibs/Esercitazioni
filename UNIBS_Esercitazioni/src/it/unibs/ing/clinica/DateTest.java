@@ -33,5 +33,21 @@ public class DateTest {
 		LocalTime ora=LocalTime.of(17, 30);
 		assertEquals(LocalTime.of(19, 0), Date.incrementoOra(ora, 3));
 	}
+	
+	@Test
+	public void testControlloIntervallo(){
+		assertFalse(Date.controlloIntervallo(LocalDate.of(2015, 7, 12), LocalDate.of(2015, 7, 25)));
+	}
+	
+	@Test
+	public void testControlloElencoGiorni(){
+		LocalDate[] array={LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 12)};
+		assertFalse(Date.controlloElencoGiorni(array));
+	}
+	
+	@Test
+	public void testControlloOrari(){
+		assertFalse(Date.controlloOrari(LocalTime.of(23, 0), LocalTime.of(22, 0)));
+	}
 
 }

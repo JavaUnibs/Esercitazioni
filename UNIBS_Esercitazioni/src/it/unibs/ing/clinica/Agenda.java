@@ -531,33 +531,7 @@ public class Agenda implements Serializable{
 	   }
 	   return stringa;
    }
-/**
- * Controlla che tra i due giorni inseriti vi sia un intervallo di massimo 6 giorni lavorativi. 
- * @param giornoInizio il giorno iniziale
- * @param giornoFine   il giorno finale
- * @return boolean
- * @author Ferro
- */
-   public boolean controlloIntervallo(LocalDate giornoInizio, LocalDate giornoFine){
-	   int cont=0;
-	   while(Date.incrementoGiorno(giornoInizio, cont).isBefore(giornoFine)||Date.incrementoGiorno(giornoInizio, cont).isEqual(giornoFine)){
-		    if(giornoInizio.getDayOfWeek().getValue()==7) return false;
-		    cont++;
-	   }
-	   return true;
-   }
- /**
-  * Controlla che in un array di giorni non vi sia domenica  
-  * @param array l'array contenente i giorni
-  * @return boolean
-  * @author Ferro
-  */
-   public boolean controlloElencoGiorni(LocalDate []array){
-	   for(int i=0;i<array.length;i++){
-		   if(array[i].getDayOfWeek().getValue()==7) return false;
-	   }
-	   return true;
-   }
+
 }	
 
 

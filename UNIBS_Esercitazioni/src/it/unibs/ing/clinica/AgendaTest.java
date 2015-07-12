@@ -225,17 +225,6 @@ public class AgendaTest {
 		assertTrue(agenda.trovaDispOvunque(utente, LocalDate.of(2015, 7, 8), "generica", ""));
 	}
 	
-	@Test
-	public void testControlloIntervallo(){
-		Agenda agenda=new Agenda();
-		assertFalse(agenda.controlloIntervallo(LocalDate.of(2015, 7, 12), LocalDate.of(2015, 7, 25)));
-	}
-	
-	@Test
-	public void testControlloElencoGiorni(){
-		Agenda agenda=new Agenda();
-		LocalDate[] array={LocalDate.of(2015, 7, 8), LocalDate.of(2015, 7, 12)};
-		assertFalse(agenda.controlloElencoGiorni(array));
-	}
+
 
 }

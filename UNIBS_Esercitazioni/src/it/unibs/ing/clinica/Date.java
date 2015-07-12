@@ -54,4 +54,46 @@ public class Date implements Serializable {
 	public static LocalTime incrementoOra(LocalTime ora, int incr){
 		return ora.plusMinutes(incr*MEZZORA);
 	}
+	
+/**
+ * Controlla che tra i due giorni inseriti vi sia un intervallo di massimo 6 giorni lavorativi. 
+ * @param giornoInizio il giorno iniziale
+ * @param giornoFine   il giorno finale
+ * @return boolean
+ * @author Ferro
+ */
+	public static boolean controlloIntervallo(LocalDate giornoInizio, LocalDate giornoFine){
+	   int cont=0;
+	   while(Date.incrementoGiorno(giornoInizio, cont).isBefore(giornoFine)||Date.incrementoGiorno(giornoInizio, cont).isEqual(giornoFine)){
+		    if(giornoInizio.getDayOfWeek().getValue()==7) return false;
+		    cont++;
+	   }
+	   return true;
+   }
+ /**
+  * Controlla che in un array di giorni non vi sia domenica  
+  * @param array l'array contenente i giorni
+  * @return boolean
+  * @author Ferro
+  */
+	public static boolean controlloElencoGiorni(LocalDate []array){
+	   for(int i=0;i<array.length;i++){
+		   if(array[i].getDayOfWeek().getValue()==7) return false;
+	   }
+	   return true;
+   }
+/**
+ * Controlla che gli orari iniziale e finale siano corretti(min. 8:00 max. 17:30)   
+ * @param ora1 l'orario iniziale
+ * @param ora2 l'orario finale
+ * @return boolean
+ * @author Andrea Ferrari
+ */
+	public static boolean controlloOrari(LocalTime ora1, LocalTime ora2){
+	   if(ora1.getMinute()!=0&ora1.getMinute()!=30) return false;
+	   if(ora2.getMinute()!=0&ora2.getMinute()!=30) return false;
+	   if(ora1.isBefore(LocalTime.of(8, 0))||ora2.isAfter(LocalTime.of(17, 30))) return false;
+	   if(ora1.isAfter(ora2)||ora2.isBefore(ora1)) return false;
+	   return true;
+   }
 }

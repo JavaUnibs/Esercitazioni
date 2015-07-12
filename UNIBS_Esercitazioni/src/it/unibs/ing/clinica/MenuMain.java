@@ -625,7 +625,7 @@ public class MenuMain {
 	    	 		int ora_F = LeggiInput.intero("Inserire ora finale: ");
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
-	    	 		if(!agenda.controlloIntervallo(data_I, data_F)) System.out.println("Inserire un intervallo di giorni corretto");       
+	    	 		if(!Date.controlloIntervallo(data_I, data_F)) System.out.println("Inserire un intervallo di giorni corretto");       
 	    	 		else agenda.cancellaDisp(da_modificare, data_I, data_F, orario_I, orario_F);
 	    	 		System.out.println("Disponibilità cancellate");
 	    	 		
@@ -660,7 +660,7 @@ public class MenuMain {
 				
 					LocalDate []array = new LocalDate[giorniVari.size()];
 					giorniVari.toArray(array);
-					if(!agenda.controlloElencoGiorni(array)) System.out.println("La domenica non si lavora");
+					if(!Date.controlloElencoGiorni(array)) System.out.println("La domenica non si lavora");
 					else agenda.cancellaDisp(da_modificare, orario_I, orario_F, array);
 					System.out.println("Disponibilità cancellate");
 	     
@@ -731,7 +731,7 @@ public class MenuMain {
 	    	 		int ora_F = LeggiInput.intero("Inserire ora finale: ");
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
-	    	 		if(!agenda.controlloIntervallo(data_I, data_F)) System.out.println("Inserire un intervallo di giorni corretto");       
+	    	 		if(!Date.controlloIntervallo(data_I, data_F)) System.out.println("Inserire un intervallo di giorni corretto");       
 	    	 		else agenda.inserimentoDisp(selezionato, data_I, data_F, orario_I, orario_F);
 	    	 		System.out.println("Disponibilità inserite");
 	     }
@@ -764,8 +764,9 @@ public class MenuMain {
 					
 					LocalDate []array = new LocalDate[giorniVari.size()];
 					giorniVari.toArray(array);
-					if(!agenda.controlloElencoGiorni(array)) System.out.println("La domenica non si lavora");
-					else agenda.inserimentoDisp(selezionato, orario_I, orario_F, array);
+					if(!Date.controlloOrari(orario_I, orario_F)) System.out.println("Inserire orari corretti");
+	    	 		else if(!Date.controlloElencoGiorni(array)) System.out.println("La domenica non si lavora");
+	    	 			else agenda.inserimentoDisp(selezionato, orario_I, orario_F, array);
 					
 					System.out.println("Disponibilità inserite");
 	     }
@@ -785,8 +786,9 @@ public class MenuMain {
 	    	 		int ora_F = LeggiInput.intero("Inserire ora finale: ");
 	    	 		int minuti_F = LeggiInput.intero("Inserire minuti finali: ");
 	    	 		LocalTime orario_F = LocalTime.of(ora_F, minuti_F);
-   	 		        if(data.getDayOfWeek().getValue()==7) System.out.println("La domenica non si lavora");
-   	 		        else agenda.inserimentoDisp(selezionato, data, orario_I, orario_F);
+	    	 		if(!Date.controlloOrari(orario_I, orario_F)) System.out.println("Inserire orari corretti");
+	    	 		else if(data.getDayOfWeek().getValue()==7) System.out.println("La domenica non si lavora");
+	    	 			else agenda.inserimentoDisp(selezionato, data, orario_I, orario_F);
 	    	 		
 	    	 		System.out.println("Disponibilità inserite");	 
 	     }
