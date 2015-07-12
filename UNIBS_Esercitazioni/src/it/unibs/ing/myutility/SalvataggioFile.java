@@ -21,7 +21,12 @@ public class SalvataggioFile {
 	private final static String FILE_NON_LETTO = "Il processo di lettura del file non è riuscito.";
 	private final static String FILE_NON_TROVATO = "Il file non è stato trovato.";
 	private final static String FILE_NON_CHIUSO = "Il processo di chiusura del file non è riuscito.";
-
+	
+/**
+ * Salva l'oggetto selezionato e quelli ad esso correlato in uno specifico file.
+ * @param file
+ * @param oggettoDaSalvare
+ */
 	public static void salvaOggetto(File file, Object oggettoDaSalvare) {
 		ObjectOutputStream output = null;
 
@@ -46,7 +51,12 @@ public class SalvataggioFile {
 		}
 
 	}
-
+	
+/**
+ * Carica l'oggetto(precedentemente salvato) e quelli ad esso correlato dal file specifico
+ * @param file
+ * @return
+ */
 	public static Object caricaOggetto(File file) {
 		Object nomeFile = null;
 		ObjectInputStream input = null;
