@@ -63,6 +63,7 @@ public class Date implements Serializable {
  * @author Ferro
  */
 	public static boolean controlloIntervallo(LocalDate giornoInizio, LocalDate giornoFine){
+       if(giornoInizio.isAfter(giornoFine)) return false;
 	   int cont=0;
 	   while(Date.incrementoGiorno(giornoInizio, cont).isBefore(giornoFine)||Date.incrementoGiorno(giornoInizio, cont).isEqual(giornoFine)){
 		    if(incrementoGiorno(giornoInizio, cont).getDayOfWeek().getValue()==7) return false;
