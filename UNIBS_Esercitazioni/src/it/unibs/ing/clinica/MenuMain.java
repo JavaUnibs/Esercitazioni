@@ -162,8 +162,12 @@ public class MenuMain {
 						    Utente da_modificare = archivio.ricercaUtenti(dato);
 						    if(da_modificare!=null){
 						        String campo = LeggiInput.stringa("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale)");
-						        String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
-						        da_modificare.modificaUtente(campo, dato_modifica);
+						        if(!campo.equalsIgnoreCase("nome")&!campo.equalsIgnoreCase("cognome")&!campo.equalsIgnoreCase("data di nascita")&!campo.equalsIgnoreCase("luogo di nascita")
+						        &!campo.equalsIgnoreCase("sesso")&!campo.equalsIgnoreCase("telefono")&!campo.equalsIgnoreCase("codice fiscale")) System.out.println("Campo non esistente");
+				            	else{
+				            		String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
+				            		da_modificare.modificaUtente(campo, dato_modifica);
+				            	}
 						    }
 						  	
 					}
@@ -174,14 +178,17 @@ public class MenuMain {
 							String dato = LeggiInput.stringa("Inserire dato ricerca: ");
 							Medico da_modificare = archivio.ricercaMedici(dato);
 				            if(da_modificare!=null){   
-					            String campo = LeggiInput.stringa("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale, \ntipo, area di Competenza, codice albo, disponibilità)");
+					            String campo = LeggiInput.stringa("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale, \ntipo, area di competenza, codice albo, disponibilità)");
 								campo = campo.toLowerCase();
 								if(campo.equals("disponibilità")){
 									String dec_disp = LeggiInput.stringa("Aggiungere o cancellare?");	
 									if (dec_disp.equalsIgnoreCase("cancellare")) menuCancDisp(da_modificare, agenda);
 									else menuInserimentoDisp(da_modificare, agenda);
 								}
-								else{
+								else if(!campo.equalsIgnoreCase("nome")&!campo.equalsIgnoreCase("cognome")&!campo.equalsIgnoreCase("data di nascita")&!campo.equalsIgnoreCase("luogo di nascita")
+								&!campo.equalsIgnoreCase("sesso")&!campo.equalsIgnoreCase("telefono")&!campo.equalsIgnoreCase("codice fiscale")&!campo.equalsIgnoreCase("area di competenza")
+								&!campo.equalsIgnoreCase("tipo")&!campo.equalsIgnoreCase("codice albo")) System.out.println("Campo non esistente");
+								else {
 								String dato_modifica = LeggiInput.stringa("Nuovo dato: ");
 								da_modificare.modificaMedico(campo, dato_modifica);
 								}
@@ -905,7 +912,7 @@ public class MenuMain {
 	public static void modificaVisitaMain(Giorno giorno_visita, Visita selezionata){
 		boolean valore=true;
 		do{
-			String campo_visita = LeggiInput.stringa("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza): ");
+			String campo_visita = LeggiInput.stringa("Inserire campo da modificare(motivo, referto, prescrizione, tipo, competenza, stato): ");
 		    campo_visita=campo_visita.toLowerCase();
 		    switch(campo_visita){
 		    case ("stato"):
@@ -933,7 +940,8 @@ public class MenuMain {
 		    break;
             default:{
             	String input = LeggiInput.stringa("Inserire nuovo dato: ");
-            	selezionata.modificaVisita(campo_visita, input);
+            	if(!input.equals("motivo")&!input.equals("tipo")&!input.equals("competenza")) System.out.println("Campo non esistente");
+            	else selezionata.modificaVisita(campo_visita, input);
             }
 		   }
 			valore=LeggiInput.doppiaScelta("Modificare altri dati?");
