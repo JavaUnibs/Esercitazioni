@@ -1,10 +1,13 @@
 package it.unibs.ing.myutility;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LeggiInput {
 
 	private static Scanner in = new Scanner(System.in);
+	
+	private final static String ERRORE_FORMATO = "Attenzione: il dato inserito non è nel formato corretto.";
 
 	/**
 	 * Questo metodo permette di leggere una stringa senza spazi
@@ -60,11 +63,25 @@ public class LeggiInput {
 
 	public static int intero(String domanda) {
 		
-		System.out.println(domanda);
-		int input = in.nextInt();
-		return input;
+		boolean opEseguita = false;
+		   int input = 0;
+		   do
+		    {
+		     System.out.println(domanda);
+		     try
+		      {
+		       input = in.nextInt();
+		       opEseguita = true;
+		      }
+		     catch (InputMismatchException e)
+		      {
+		       System.out.println(ERRORE_FORMATO);
+		      }
+		    } while (!opEseguita);
+		   return input;
+		  }
 
-	}
+	
 
 	/**
 	 * Questo metodo permette di leggere un numero intero con limiti di min e
@@ -95,11 +112,23 @@ public class LeggiInput {
 
 	public static double doppio(String domanda) {
 
-		System.out.println(domanda);
-		double input = in.nextDouble();
-		return input;
-
-	}
+		boolean opEseguita = false;
+		   double input = 0;
+		   do
+		    {
+		     System.out.println(domanda);
+		     try
+		      {
+		       input = in.nextDouble();
+		       opEseguita = true;
+		      }
+		     catch (InputMismatchException e)
+		      {
+		       System.out.println(ERRORE_FORMATO);
+		      }
+		    } while (!opEseguita);
+		   return input;
+		  }
 	
 	/**
 	 * Metodo per la scelta 
