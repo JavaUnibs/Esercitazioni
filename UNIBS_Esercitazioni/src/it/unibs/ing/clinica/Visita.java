@@ -60,7 +60,7 @@ public class Visita implements Serializable{
 		switch (campo){
 		case "motivo": motivoVisita=input;
 		break;
-        case "referto medico": refertoMedico=input;
+        case "referto": refertoMedico=input;
 		break;
 		case "prescrizione": prescrizioneMedica=input;
 		break;
