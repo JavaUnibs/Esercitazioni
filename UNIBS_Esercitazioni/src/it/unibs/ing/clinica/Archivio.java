@@ -84,7 +84,7 @@ public class Archivio implements Serializable {
 	    		   System.out.println(medico.toStringNomeCognomeAlbo());
 	    	   }
 	    	   do{
-	   	    	scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	   	    	scelta=LeggiInput.intero("******Scegliere tramite un numero il medico desiderato*******")-1;
 	   	    	LeggiInput.terminaRiga();
 	   	    	}while(scelta<0||scelta>temp.size()-1);
 	   	    	
