@@ -157,12 +157,13 @@ public class MenuMain {
 					
 					// Modifica dati utente
 					case 3:{
-						
-							String dato = LeggiInput.stringa("Inserire dato ricerca: ");
+							LeggiInput.terminaRiga();
+							String dato = LeggiInput.riga("Inserire dato ricerca: ");
 						    Utente da_modificare = archivio.ricercaUtenti(dato);
 						    if(da_modificare!=null){
 						    	System.out.println("Dati correnti:\n"+da_modificare.toString());
-						        String campo = LeggiInput.stringa("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale)");
+						    	
+						        String campo = LeggiInput.riga("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale)");
 						        if(!campo.equalsIgnoreCase("nome")&!campo.equalsIgnoreCase("cognome")&!campo.equalsIgnoreCase("data di nascita")&!campo.equalsIgnoreCase("luogo di nascita")
 						        &!campo.equalsIgnoreCase("sesso")&!campo.equalsIgnoreCase("telefono")&!campo.equalsIgnoreCase("codice fiscale")) System.out.println("Campo non esistente");
 				            	else{
@@ -177,12 +178,13 @@ public class MenuMain {
 					
 					// Modifica dati medico
 					case 4:{
-							String dato = LeggiInput.stringa("Inserire dato ricerca: ");
+							LeggiInput.terminaRiga();
+							String dato = LeggiInput.riga("Inserire dato ricerca: ");
 							Medico da_modificare = archivio.ricercaMedici(dato);
 							
 				            if(da_modificare!=null){   
 				            	System.out.println("Dati correnti:\n"+da_modificare.toString());
-					            String campo = LeggiInput.stringa("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale, \ntipo, area di competenza, codice albo, disponibilità)");
+					            String campo = LeggiInput.riga("Campo da modificare: \n(nome, cognome, data di nascita, luogo di nascita, sesso, telefono, codice fiscale, \ntipo, area di competenza, codice albo, disponibilità)");
 								campo = campo.toLowerCase();
 								if(campo.equals("disponibilità")){
 									String dec_disp = LeggiInput.stringa("Aggiungere o cancellare?");	
@@ -232,7 +234,8 @@ public class MenuMain {
 				
 			 			// Prenotare visita
 			 			case 1:{
-			 					String dato = LeggiInput.stringa("Inserire dato ricerca utente: ((nome, cognome, data di nascita, sesso, luogo di nascita, telefono, codice Fiscale)");
+			 					LeggiInput.terminaRiga();
+			 					String dato = LeggiInput.riga("Inserire dato ricerca utente: ((nome, cognome, data di nascita, sesso, luogo di nascita, telefono, codice Fiscale)");
 			 					Utente selezionato = archivio.ricercaUtenti(dato);
 			 					if(selezionato!=null){
 			 						int giorno = LeggiInput.intero("Inserire giorno: ");
@@ -269,8 +272,8 @@ public class MenuMain {
 			 				
 			 						// Ricerca Visita precisa
 			 						case 1: {
-			 							    
-			 								String campo = LeggiInput.stringa("Dato medico: ");
+			 							    LeggiInput.terminaRiga();
+			 								String campo = LeggiInput.riga("Dato medico: ");
 			 								Medico medico = archivio.ricercaMedici(campo);
 			 								if(medico!=null){
 			 									int giorno = LeggiInput.intero("Inserire giorno: ");
@@ -292,7 +295,8 @@ public class MenuMain {
 			 					
 			 						// Ricerca visita per medico
 			 						case 2:{
-			 								String campo = LeggiInput.stringa("Dato medico: ");
+			 								LeggiInput.terminaRiga();
+			 								String campo = LeggiInput.riga("Dato medico: ");
 			 								Medico cercato = archivio.ricercaMedici(campo);
 			 									if(cercato!=null){
 			 										ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
@@ -309,7 +313,8 @@ public class MenuMain {
 			 							
 			 						// Ricerca visite per utente
 			 						case 3: {
-			 									String campo = LeggiInput.stringa("Dato utente: ");
+			 									LeggiInput.terminaRiga();
+			 									String campo = LeggiInput.riga("Dato utente: ");
 			 									Utente cercato = archivio.ricercaUtenti(campo);
 			 									if(cercato!=null){
 			 										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
@@ -352,7 +357,8 @@ public class MenuMain {
 			 			
 			 						switch(scelta_sottovisita){
 			 							case 1 :{ 
-			 									String campo = LeggiInput.stringa("Dato medico: ");
+			 									LeggiInput.terminaRiga();
+			 									String campo = LeggiInput.riga("Dato medico: ");
 			 									Medico medico = archivio.ricercaMedici(campo);
 			 									if(medico!=null){
 			 									    int giorno = LeggiInput.intero("Inserire giorno: ");
@@ -379,7 +385,8 @@ public class MenuMain {
 			 							
 			 							// Ricerca visite per medico
 			 							case 2:{
-			 									String campo = LeggiInput.stringa("Dato medico: ");
+			 									LeggiInput.terminaRiga();
+			 									String campo = LeggiInput.riga("Dato medico: ");
 			 									Medico cercato = archivio.ricercaMedici(campo);
 			 									if(cercato!=null){	
 			 										ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
@@ -401,7 +408,8 @@ public class MenuMain {
 			 							
 			 							// Ricerca visite per utente
 			 							case 3: {
-			 									String campo = LeggiInput.stringa("Dato utente: ");
+			 									LeggiInput.terminaRiga();
+			 									String campo = LeggiInput.riga("Dato utente: ");
 			 									Utente cercato = archivio.ricercaUtenti(campo);
 			 									if(cercato!=null){
 			 										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
@@ -451,7 +459,8 @@ public class MenuMain {
 			 			
 						// Visualizzazione visite utente
 						case 4:{
-									String campo = LeggiInput.stringa("Dato utente: ");
+									LeggiInput.terminaRiga();
+									String campo = LeggiInput.riga("Dato utente: ");
 									Utente cercato = archivio.ricercaUtenti(campo);
 									if(cercato!=null){
 										ArrayList<Giorno> giorni_visite = agenda.visiteUtente(cercato);
@@ -480,7 +489,8 @@ public class MenuMain {
 							
 						// Visualizzazione visite medico
 						case 5:{
-										String campo = LeggiInput.stringa("Dato medico: ");
+										LeggiInput.terminaRiga();
+										String campo = LeggiInput.riga("Dato medico: ");
 										Medico cercato = archivio.ricercaMedici(campo);
 										if(cercato!=null){
 											ArrayList<Giorno> giorni_visite = agenda.visiteMedico(cercato);
@@ -534,7 +544,8 @@ public class MenuMain {
 					
 					// Ricerca giorni di lavoro medici
 					case 1:{
-								String campo = LeggiInput.stringa("Dato medico: ");
+								LeggiInput.terminaRiga();
+								String campo = LeggiInput.riga("Dato medico: ");
 								Medico cercato = archivio.ricercaMedici(campo);
 								if(cercato!=null){
 									System.out.println(agenda.orariVisita(cercato));
@@ -886,6 +897,7 @@ public class MenuMain {
 	public static Giorno selezionaVisita(ArrayList<Giorno> elencoTemp)
 	{
 		Giorno nullo = null;
+		int scelta;
 		
 		if(elencoTemp.isEmpty()){
 			System.out.println("Nessuna visita trovata");
@@ -899,7 +911,12 @@ public class MenuMain {
 		   System.out.println(giorno.getVisita().toString());
 
 	   }
-	   int scelta=LeggiInput.intero("******Scegliere tramite un numero la visita desiderata*******")-1;
+	   do{
+	    	scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	    	LeggiInput.terminaRiga();
+	    	}while(scelta<0||scelta>elencoTemp.size()-1);
+	    	
+	    	
 	   Giorno giorno_visita = elencoTemp.get(scelta);
 	   return giorno_visita;
 	

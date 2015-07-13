@@ -1,7 +1,6 @@
 package it.unibs.ing.clinica;
 import java.io.Serializable;
 import java.util.*;
-import java.util.Arrays;
 
 import it.unibs.ing.myutility.*;
 
@@ -25,6 +24,7 @@ public class Archivio implements Serializable {
 	 */
 	public Utente ricercaUtenti(String generico){
 	Utente nullo=null;
+	int scelta;
 	ArrayList<Utente> temp = new ArrayList<Utente>();
 		for (Utente utente: elencoUtenti){
 			if (utente.datoUguale(generico)) {
@@ -41,8 +41,13 @@ public class Archivio implements Serializable {
 	    	   for(Utente utente: temp){
 	    		   System.out.println(utente.toStringNomeCognome()+utente.toStringCodiceFiscale());
 	    	   }
-	    	int scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	    	do{
+	    	scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	    	LeggiInput.terminaRiga();
+	    	}while(scelta<0||scelta>temp.size()-1);
+	    	
 	    	return temp.get(scelta);
+	    	
 	    	
 	       }
 	       
@@ -61,6 +66,7 @@ public class Archivio implements Serializable {
 	 */
 	public Medico ricercaMedici(String generico){
 	Medico nullo=null;
+	int scelta;
 	ArrayList<Medico> temp = new ArrayList<Medico>();
 		for (Medico medico: elencoMedici){
 			if (medico.datoUguale(generico)) {
@@ -77,8 +83,12 @@ public class Archivio implements Serializable {
 	    	   for(Medico medico: temp){
 	    		   System.out.println(medico.toStringNomeCognomeAlbo());
 	    	   }
-	    	int scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
-	    	return temp.get(scelta);
+	    	   do{
+	   	    	scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	   	    	LeggiInput.terminaRiga();
+	   	    	}while(scelta<0||scelta>temp.size()-1);
+	   	    	
+	   	    	return temp.get(scelta);
 	    	
 	       }
 	       
