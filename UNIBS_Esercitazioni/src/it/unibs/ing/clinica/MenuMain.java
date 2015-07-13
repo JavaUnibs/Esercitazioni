@@ -195,9 +195,8 @@ public class MenuMain {
 										&!campo.equalsIgnoreCase("sesso")&!campo.equalsIgnoreCase("telefono")&!campo.equalsIgnoreCase("codice fiscale")&!campo.equalsIgnoreCase("area di competenza")
 										&!campo.equalsIgnoreCase("tipo")&!campo.equalsIgnoreCase("codice albo")) System.out.println("Campo non esistente");
 								else {
-								    LeggiInput.terminaRiga();
-									String dato_modifica = LeggiInput.riga("Nuovo dato: ");
-									da_modificare.modificaMedico(campo, dato_modifica);
+										String dato_modifica = LeggiInput.riga("Nuovo dato: ");
+										da_modificare.modificaMedico(campo, dato_modifica);
 								}
 				            }
 					}
@@ -243,11 +242,10 @@ public class MenuMain {
 			 						int anno = LeggiInput.intero("Inserire anno: ");
 			 						int ora = LeggiInput.intero("Inserire ora: ");
 			 						int minuti = LeggiInput.intero("Inserire minuti: ");
-			 						LeggiInput.terminaRiga();
 			 						LocalDate data = LocalDate.of(anno, mese, giorno);
 			 						LocalTime orario = LocalTime.of(ora, minuti);
 			 						
-			 					
+			 						LeggiInput.terminaRiga();
 			 						String tipoVisita = LeggiInput.riga("Inserire il tipo della visita: ");
 			 						String areaCompetenza="";
 			 				   	    if(tipoVisita.toLowerCase().equals("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
