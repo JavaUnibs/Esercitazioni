@@ -201,20 +201,21 @@ public class MenuMain {
 				            }
 					}
 					break;
-					
+					//visualizzazione dati medico
 					case 5:{
 						String dato = LeggiInput.stringa("Inserire dato ricerca: ");
 						Medico cercato = archivio.ricercaMedici(dato);
 						if(cercato!=null){
-							System.out.println(cercato.toStringNomeCognomeAlbo());
+							System.out.println(cercato.toString());
 						}
 					}
 					break;
+					//visualizzazione dati utente
 					case 6:{
 						String dato = LeggiInput.stringa("Inserire dato ricerca: ");
 					    Utente cercato = archivio.ricercaUtenti(dato);
 					    if(cercato!=null){
-					    	System.out.println(cercato.toStringNomeCognome()+cercato.toStringCodiceFiscale());
+					    	System.out.println(cercato.toString());
 					    }
 					}
 					break;
