@@ -910,7 +910,7 @@ public class MenuMain {
 
 	   }
 	   do{
-	    	scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	    	scelta=LeggiInput.intero("******Scegliere tramite un numero la visita desiderata*******")-1;
 	    	LeggiInput.terminaRiga();
 	    	}while(scelta<0||scelta>elencoTemp.size()-1);
 	    	
