@@ -10,6 +10,11 @@ public class Archivio implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String NO_UTENTI="Nessun utente trovato";
+	private static final String NO_MEDICI="Nessun medico trovato";
+	private static final String SCELTA_UTENTE="******Scegliere tramite un numero l'utente desiderato*******";
+	private static final String SCELTA_MEDICO="******Scegliere tramite un numero il medico desiderato*******";
+	private static final int CORREZIONE_INDICE=1;
 	
 	private ArrayList<Utente> elencoUtenti = new ArrayList<Utente>();
 	private ArrayList<Medico> elencoMedici = new ArrayList<Medico>();
@@ -32,7 +37,7 @@ public class Archivio implements Serializable {
 			};
 		}
 	       if(temp.isEmpty()) { 
-	    	   System.out.println("Nessun utente trovato");
+	    	   System.out.println(NO_UTENTI);
 	    	   return nullo;
 	       }
 	       
@@ -42,9 +47,9 @@ public class Archivio implements Serializable {
 	    		   System.out.println(utente.toStringNomeCognome()+utente.toStringCodiceFiscale());
 	    	   }
 	    	do{
-	    	scelta=LeggiInput.intero("******Scegliere tramite un numero l'utente desiderato*******")-1;
+	    	scelta=LeggiInput.intero(SCELTA_UTENTE)-CORREZIONE_INDICE;
 	    	LeggiInput.terminaRiga();
-	    	}while(scelta<0||scelta>temp.size()-1);
+	    	}while(scelta<0||scelta>temp.size()-CORREZIONE_INDICE);
 	    	
 	    	return temp.get(scelta);
 	    	
@@ -74,7 +79,7 @@ public class Archivio implements Serializable {
 			};
 		}
 	       if(temp.isEmpty()) { 
-	    	   System.out.println("Nessun medico trovato");
+	    	   System.out.println(NO_MEDICI);
 	    	   return nullo;
 	       }
 	       
@@ -84,9 +89,9 @@ public class Archivio implements Serializable {
 	    		   System.out.println(medico.toStringNomeCognomeAlbo());
 	    	   }
 	    	   do{
-	   	    	scelta=LeggiInput.intero("******Scegliere tramite un numero il medico desiderato*******")-1;
+	   	    	scelta=LeggiInput.intero(SCELTA_MEDICO)-CORREZIONE_INDICE;
 	   	    	LeggiInput.terminaRiga();
-	   	    	}while(scelta<0||scelta>temp.size()-1);
+	   	    	}while(scelta<0||scelta>temp.size()-CORREZIONE_INDICE);
 	   	    	
 	   	    	return temp.get(scelta);
 	    	

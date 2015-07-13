@@ -9,7 +9,11 @@ public class Date implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private final static int MEZZORA=30;
+	private static final int MINUTI_IN_MEZZORA=30;
+	private static final int ORE_TO_MEZZORE=2;
+	private static final int NUM_ORE_DA_OTTO=8;
+	private static final int UNA_MEZZORA=1;
+	
 	
 /**
  * Restituisce in base al giorno della settimana della data scelta un indice numerico, da lunedì(0) a venerdì(5).
@@ -28,10 +32,10 @@ public class Date implements Serializable {
  */
 	
 	public static int indiceOra (LocalTime ora){
-		int ore=ora.getHour()-8;
+		int ore=ora.getHour()-NUM_ORE_DA_OTTO;
 		int minuti= ora.getMinute();
-		if (minuti==0) return ore*2;
-		else return ore*2 + 1;	
+		if (minuti==0) return ore*ORE_TO_MEZZORE;
+		else return ore*ORE_TO_MEZZORE + UNA_MEZZORA;	
 	}
 /**
  * Incrementa una data scelta di un tot di giorni.
@@ -52,7 +56,7 @@ public class Date implements Serializable {
  * @author Andrea Ferrari
  */	
 	public static LocalTime incrementoOra(LocalTime ora, int incr){
-		return ora.plusMinutes(incr*MEZZORA);
+		return ora.plusMinutes(incr*MINUTI_IN_MEZZORA);
 	}
 	
 /**

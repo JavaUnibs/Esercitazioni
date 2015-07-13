@@ -12,6 +12,30 @@ public class Agenda implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String NO_DISP1="Questo medico non è disponibile in nessuna data.";
+	private static final String NO_VISITE="Nessuna visita trovata";
+	private static final String NO_DISP2="Nessun medico disponibile in questa data.";
+	private static final String VIS_INS="Visita inserita";
+	private static final String SCELTA_MED="Scegliere un medico tramite un numero";
+	private static final String PROSS_DATA="Prossima data disponibile: ";
+	private static final String AREA_COMP="Inserire l'area di competenza richiesta";
+	private static final String VIS_TOT="Visite totali: ";
+	private static final String VIS_CONC="Visite concluse: ";
+	private static final String VIS_PREN="Visite prenotate: ";
+	private static final String VIS_TOT_GEN="Visite totali generiche: ";
+	private static final String VIS_TOT_SPEC="Visite totali specialistiche: ";
+	private static final String VIS_GEN_CONC="Visite generiche concluse: ";
+	private static final String VIS_GEN_PREN="Visite generiche prenotate: ";
+	private static final String VIS_SPEC_CONC="Visite specialistiche concluse: ";
+	private static final String VIS_SPEC_PREN="Visite specialistiche prenotate: ";
+	private static final String NO_AREA="Nessuna area di competenza presente\n";
+	private static final String NO_DISP3="Nessun medico disponibile in tutte le date";
+	private static final String VIS_AREA_PREN="Visite prenotate di ";
+	private static final String VIS_AREA_CONC="Visite concluse di ";
+	private static final String VIS_AREA_MAX="Area di competenza con più visite: ";
+	private static final String VIS_AREA_MIN="Area di competenza con meno visite: ";
+	private static final String VIS_MED="Visite assegnate: ";
+	private static final int CORREZIONE_INDICE=1;
 	
 	
 	Slot[][] settimana = new Slot[20][6];
@@ -109,7 +133,7 @@ public class Agenda implements Serializable{
 		}
 		
 		if(orari.isEmpty()) {
-			return "Questo medico non è disponibile in nessuna data."; 
+			return NO_DISP1; 
 			
 		}
 		Iterator<LocalDateTime> iterator=orari.iterator();
@@ -207,7 +231,7 @@ public class Agenda implements Serializable{
 	   for(Giorno giorno: settimana[k][i].getGiorni()){
 		   if(giorno.getData().equals(data)&giorno.getVisita()!=null) return giorno;
 	   }
-	   System.out.println("Nessuna visita trovata");
+	   System.out.println(NO_VISITE);
 	   return nullo;
    }
 
@@ -243,18 +267,18 @@ public class Agenda implements Serializable{
    	   ArrayList<Giorno> elencoTemp= settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);
    	   System.out.println("Medici disponibili il "+data.toString()+" alle "+settimana[ora1][data1].getOra().toString()+" :");
    	   if(elencoTemp.size()==0) {
-   		   System.out.println("Nessun medico disponibile in questa data."); 
+   		   System.out.println(NO_DISP2); 
    		   return false;
    	   }
    	   else {
    		   for(Giorno giorno: elencoTemp){
    			   System.out.println(giorno.getMedico().toStringNomeCognomeAlbo());
    	   }
-   	   scelta=LeggiInput.intero("Scegliere un medico tramite un numero")-1;
+   	   scelta=LeggiInput.intero(SCELTA_MED)-CORREZIONE_INDICE;
    	   elencoTemp.get(scelta).setUtente(utente);
    	   elencoTemp.get(scelta).setStato(StatoVisita.Prenotata);
    	   elencoTemp.get(scelta).setVisita(new Visita(motivoVisita, tipoVisita, areaCompetenza));
-   	   System.out.println("Visita inserita");
+   	   System.out.println(VIS_INS);
    	   return true;
    	   }
       }
@@ -277,7 +301,7 @@ public class Agenda implements Serializable{
    	   for(ora1=Date.indiceOra(ora);ora1<20;ora1++){
    		   elencoTemp=settimana[ora1][data1].verificaDisp(data, tipoVisita, areaCompetenza);   
    	       if (elencoTemp.size()>0){
-   	       System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
+   	       System.out.println(PROSS_DATA+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
    	    	return true; 
    	       }
    	   }
@@ -298,11 +322,11 @@ public class Agenda implements Serializable{
      	   ArrayList<Giorno> elencoTemp;
    	   int cont=1;
    	   
-   	   for(int data1=Date.indiceGiorno(data)+1;data1<6;data1++){
+   	   for(int data1=Date.indiceGiorno(data)+CORREZIONE_INDICE;data1<6;data1++){
    	       for(int ora1=0;ora1<20;ora1++){
    	    	   	elencoTemp=settimana[ora1][data1].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);   
    	       		if (elencoTemp.size()>0){
-   	       			System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
+   	       			System.out.println(PROSS_DATA+elencoTemp.get(0).getData().toString()+" alle "+settimana[ora1][data1].getOra().toString());  
    	       			return true;  
    	       		}
    	       }
@@ -330,14 +354,14 @@ public class Agenda implements Serializable{
    			   for(j=0;j<20;j++){
    				   elencoTemp=settimana[j][i].verificaDisp(Date.incrementoGiorno(data, cont), tipoVisita, areaCompetenza);
    		       		if (elencoTemp.size()>0){
-   		       			System.out.println("Prossima data disponibile: "+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
+   		       			System.out.println(PROSS_DATA+elencoTemp.get(0).getData().toString()+" alle "+settimana[j][i].getOra().toString());  
    		       			return true;
    		       		}
    			   }
    		   cont++;
    		   }   
    	   }
-   	   System.out.println("Nessun medico disponibile in tutta le date");
+   	   System.out.println(NO_DISP3);
    	   return false;
       }
      
@@ -382,7 +406,7 @@ public class Agenda implements Serializable{
   public ArrayList<Giorno> visiteTipo(String tipoVisita){
 	  ArrayList<Giorno> elencoTemp = new ArrayList<Giorno>();
 	  String areaCompetenza="";
-	  if(tipoVisita.equalsIgnoreCase("specialistica")) areaCompetenza=LeggiInput.riga("Inserire l'area di competenza richiesta");
+	  if(tipoVisita.equalsIgnoreCase("specialistica")) areaCompetenza=LeggiInput.riga(AREA_COMP);
 	  for(int i=0;i<6;i++){
   		   for(int j=0;j<20;j++){
   			   elencoTemp.addAll(settimana[j][i].visiteTipoSlot(tipoVisita, areaCompetenza));
@@ -404,9 +428,9 @@ public class Agenda implements Serializable{
 		 }
 	 }
 	 String stringa=
-	 "Visite totali: "+(prenotate+concluse)+"\n"
-	 +"Visite prenotate: "+prenotate+"\n"
-	 +"Visite concluse: "+concluse+"\n";
+	 VIS_TOT+(prenotate+concluse)+"\n"
+	 +VIS_PREN+prenotate+"\n"
+	 +VIS_CONC+concluse+"\n";
 	 return stringa;
 	 
   }
@@ -426,12 +450,12 @@ public class Agenda implements Serializable{
 			 }	 
 		 }
 	  String stringa=
-	  "Visite totali generiche: "+(prenotateGeneriche+concluseGeneriche)+"\n"
-	  +"Visite totali specialistiche: "+(prenotateSpecialistiche+concluseSpecialistiche)+"\n"
-	  +"Visite prenotate generiche: "+prenotateGeneriche+"\n"
-	  +"Visite prenotate specialistiche: "+prenotateSpecialistiche+"\n"
-	  +"Visite concluse generiche: "+concluseGeneriche+"\n"
-	  +"Visite concluse specialistiche: "+concluseSpecialistiche+"\n";
+	  VIS_TOT_GEN+(prenotateGeneriche+concluseGeneriche)+"\n"
+	  +VIS_TOT_SPEC+(prenotateSpecialistiche+concluseSpecialistiche)+"\n"
+	  +VIS_GEN_PREN+prenotateGeneriche+"\n"
+	  +VIS_SPEC_PREN+prenotateSpecialistiche+"\n"
+	  +VIS_GEN_CONC+concluseGeneriche+"\n"
+	  +VIS_SPEC_CONC+concluseSpecialistiche+"\n";
 	  return stringa;
   }
 
@@ -442,7 +466,7 @@ public class Agenda implements Serializable{
   public String statisticheVisiteArea(ArrayList<String> elencoAree){
 	  
 	  if(elencoAree.isEmpty()){
-		  String stringa="Nessuna area di competenza\n";
+		  String stringa=NO_AREA;
 				  return stringa;
 	  } 
 	  
@@ -461,8 +485,8 @@ public class Agenda implements Serializable{
 	  String stringa="";
 	  for(int x=0;x<elencoAree.size();x++){
 		  for(int y=0;y<2;y++){
-			  if(y==0) stringa=stringa.concat("Visite prenotate di "+elencoAree.get(x)+": "+contatore[y][x]+"\n");
-			  else stringa=stringa.concat("Visite concluse di "+elencoAree.get(x)+": "+contatore[y][x])+"\n";
+			  if(y==0) stringa=stringa.concat(VIS_AREA_PREN+elencoAree.get(x)+": "+contatore[y][x]+"\n");
+			  else stringa=stringa.concat(VIS_AREA_CONC+elencoAree.get(x)+": "+contatore[y][x])+"\n";
 		  }
 	  }
 	  
@@ -476,8 +500,7 @@ public class Agenda implements Serializable{
   public String statisticheVisiteAreaMinMax(ArrayList<String> elencoAree){
 	  
 	  if(elencoAree.isEmpty()){
-		  String stringa="Area di competenza con più visite: nessuna\n"
-				  +"Area di competenza con meno visite: nessuna\n";
+		  String stringa=NO_AREA;
 				  return stringa;
 	  }
 	  
@@ -509,8 +532,8 @@ public class Agenda implements Serializable{
 		 
 	  }
 	  
-	  String stringa="Area di competenza con più visite: "+elencoAree.get(posizioneMax)+"\n"
-				 +"Area di competenza con meno visite: "+elencoAree.get(posizioneMin)+"\n";
+	  String stringa=VIS_AREA_MAX+elencoAree.get(posizioneMax)+"\n"
+				 +VIS_AREA_MIN+elencoAree.get(posizioneMin)+"\n";
 	  return stringa;
 	  
   }
@@ -525,7 +548,7 @@ public class Agenda implements Serializable{
 	   for(Medico medico: elencoMedici){
 		   x=visiteMedico(medico).size();
 		   stringa=stringa.concat(medico.toStringNomeCognomeAlbo());
-		   stringa=stringa.concat("Visite assegnate: "+x+"\n");
+		   stringa=stringa.concat(VIS_MED+x+"\n");
 		   x++;
 		   
 	   }
