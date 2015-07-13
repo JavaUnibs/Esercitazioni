@@ -167,7 +167,7 @@ public class MenuMain {
 						        if(!campo.equalsIgnoreCase("nome")&!campo.equalsIgnoreCase("cognome")&!campo.equalsIgnoreCase("data di nascita")&!campo.equalsIgnoreCase("luogo di nascita")
 						        &!campo.equalsIgnoreCase("sesso")&!campo.equalsIgnoreCase("telefono")&!campo.equalsIgnoreCase("codice fiscale")) System.out.println("Campo non esistente");
 				            	else{
-				            		LeggiInput.terminaRiga();
+				            		
 				            		String dato_modifica = LeggiInput.riga("Nuovo dato: ");
 				            		da_modificare.modificaUtente(campo, dato_modifica);
 				            	}
