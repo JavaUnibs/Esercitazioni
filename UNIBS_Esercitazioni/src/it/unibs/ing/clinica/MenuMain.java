@@ -924,11 +924,14 @@ public class MenuMain {
 		    switch(campo_visita){
 		    case ("stato"):
 			{
-				String input = LeggiInput.stringa("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
-				giorno_visita.cambiaStato(input);
+		    	LeggiInput.terminaRiga();
+				String input = LeggiInput.riga("Inserire nuovo stato(prenotata, conclusa, non prenotabile, refertata: ");
+				if(!input.equalsIgnoreCase("prenotata")&!input.equalsIgnoreCase("conclusa")&!input.equalsIgnoreCase("non prenotabile")&!input.equalsIgnoreCase("refertata")) System.out.println("Stato non esistente");
+				else giorno_visita.cambiaStato(input);
+				
 			}
             break;
-		    case ("referto medico"):
+		    case ("referto"):
 			{
                 LeggiInput.terminaRiga();
 				String input = LeggiInput.riga("Inserire referto: ");
@@ -946,9 +949,13 @@ public class MenuMain {
 			}
 		    break;
             default:{
-            	String input = LeggiInput.stringa("Inserire nuovo dato: ");
-            	if(!input.equals("motivo")&!input.equals("tipo")&!input.equals("competenza")) System.out.println("Campo non esistente");
-            	else selezionata.modificaVisita(campo_visita, input);
+            	if(!campo_visita.equals("motivo")&!campo_visita.equals("tipo")&!campo_visita.equals("competenza")) System.out.println("Campo non esistente");
+            	else{
+            		LeggiInput.terminaRiga();
+            		String input = LeggiInput.riga("Inserire nuovo dato: ");
+            		selezionata.modificaVisita(campo_visita, input);
+            	}
+            	 	
             }
 		   }
 			valore=LeggiInput.doppiaScelta("Modificare altri dati?");
