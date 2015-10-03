@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
-import it.unibs.ing.Swing.SwingUtility;
+import it.unibs.ing.Swing.SwingUtilities;
 
 public class OperatorModel {
 	
@@ -20,7 +20,7 @@ public class OperatorModel {
 			fieldB.commitEdit();
 			list.add(fieldB.getText());
 			list.add(symbol);
-			SwingUtility.updateTextField(fieldA, fieldB.getText().concat(symbol));	
+			SwingUtilities.updateTextField(fieldA, fieldB.getText().concat(symbol));	
 			}
 		catch (ParseException exc){}
 		
