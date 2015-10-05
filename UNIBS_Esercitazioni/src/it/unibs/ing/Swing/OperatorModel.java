@@ -9,27 +9,48 @@ import it.unibs.ing.Swing.SwingUtilities;
 
 public class OperatorModel {
 	
-	private JTextField fieldA;
+	private JTextField fieldA, fieldC;
 	private JFormattedTextField fieldB;
 	private String symbol;
 	private ArrayList<String> list;
 	
+	private boolean isOperator(){
+		try{
+			switch(list.get(list.size()-1)){
+				case("+"): return true;
+				case("-"): return true;
+				case("*"): return true;
+				case("/"): return true;
+			}
+		}catch(NullPointerException e){}
+		return false;
+	}
+	
 	private void computeOperator(){
-		
+		if(isOperator()) {
+			list.remove(list.size()-1);
+			list.add(symbol);
+			fieldA.setText(SwingUtilities.arraylistToString(list));
+		}
+		else
 		try{
 			fieldB.commitEdit();
 			list.add(fieldB.getText());
 			list.add(symbol);
-			SwingUtilities.updateTextField(fieldA, fieldB.getText().concat(symbol));	
+			fieldA.setText(SwingUtilities.arraylistToString(list));	
 			}
-		catch (ParseException exc){}
+		catch (ParseException exc){
+			fieldC.setText("Input invalido");
+			fieldC.requestFocusInWindow();
+		}
 		
 		}
 
 	
-	public OperatorModel(JTextField _fieldA, JFormattedTextField _fieldB, String _symbol, ArrayList<String> _list){
+	public OperatorModel(JTextField _fieldA, JTextField _fieldC, JFormattedTextField _fieldB, String _symbol, ArrayList<String> _list){
 		fieldA=_fieldA;
 		fieldB=_fieldB;
+		fieldC=_fieldC;
 		symbol=_symbol;
 		list=_list;
 		computeOperator();

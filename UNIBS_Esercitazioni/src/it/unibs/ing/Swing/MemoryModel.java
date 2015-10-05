@@ -3,9 +3,11 @@ package it.unibs.ing.Swing;
 import java.text.ParseException;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 
 public class MemoryModel {
 	private JFormattedTextField field;
+	private JTextField fieldB;
 	private String symbol;
 	private Double memory;
 	
@@ -22,13 +24,20 @@ public class MemoryModel {
 			case("M+"): field.setValue(new Double(value+memory.doubleValue())); break;
 			case("M-"): field.setValue(new Double(value-memory.doubleValue())); break;
 			}
-		}catch(ParseException exc){}
-		catch(NullPointerException exc){}
+		}catch(ParseException exc){
+			fieldB.setText("Input invalido");
+			fieldB.requestFocusInWindow();
+		}
+		catch(NullPointerException exc){
+			fieldB.setText("Memoria vuota");
+			fieldB.requestFocusInWindow();
+		}
 	}
 	
 	
-	public MemoryModel(JFormattedTextField _field, String _symbol, Double _memory){
+	public MemoryModel(JFormattedTextField _field, JTextField _fieldB, String _symbol, Double _memory){
 		field=_field;
+		fieldB=_fieldB;
 		symbol=_symbol;
 		memory=_memory;
 		computeMemory();

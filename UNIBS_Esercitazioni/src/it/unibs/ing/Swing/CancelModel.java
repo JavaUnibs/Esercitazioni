@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 public class CancelModel {
 	
-	private JTextField fieldA;
+	private JTextField fieldA, fieldC;
 	private JFormattedTextField fieldB;
 	private String symbol;
 	private ArrayList<String> list;
@@ -16,7 +16,7 @@ public class CancelModel {
 	private void computeCancel(){
 		switch(symbol){
 		case("C"): {
-			fieldA.setText("");
+			fieldA.setText(null);
 			fieldB.setValue(new Double(0));
 			list.clear();
 		}
@@ -29,14 +29,18 @@ public class CancelModel {
 				String text=fieldB.getText().substring(0, fieldB.getText().length()-1);
 				fieldB.setText(text);
 				
-			}catch(ParseException exc){}
+			}catch(ParseException exc){
+				fieldC.setText("Input invalido");
+				fieldC.requestFocusInWindow();
+			}
 		}
 		break;
 		}
 	}
-	public CancelModel(JTextField _fieldA, JFormattedTextField _fieldB, String _symbol, ArrayList<String> _list){
+	public CancelModel(JTextField _fieldA, JFormattedTextField _fieldB, JTextField _fieldC, String _symbol, ArrayList<String> _list){
 		fieldA=_fieldA;
 		fieldB=_fieldB;
+		fieldC=_fieldC;
 		symbol=_symbol;
 		list=_list;
 		computeCancel();

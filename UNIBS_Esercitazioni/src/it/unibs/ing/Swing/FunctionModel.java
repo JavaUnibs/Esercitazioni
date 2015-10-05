@@ -4,10 +4,12 @@ import java.text.ParseException;
 import java.lang.Math;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 
 public class FunctionModel {
 
 	private JFormattedTextField field;
+	private JTextField fieldB;
 	private String symbol;
 	
 	private double selectFunction(double value){
@@ -17,7 +19,10 @@ public class FunctionModel {
 		case("reciprocate"): return 1/value;
 		case("negate"): return value*(-1);
 		}
-		} catch (ArithmeticException exc){}
+		} catch (ArithmeticException exc){
+			fieldB.setText("Operazione impossibile");
+			fieldB.requestFocusInWindow();
+		}
 		return 0;
 	}
 	
@@ -30,15 +35,19 @@ public class FunctionModel {
 			value=selectFunction(value);
 			field.setValue(new Double(value));
 			}
-		catch (ParseException exc){}
+		catch (ParseException exc){
+			fieldB.setText("Input invalido");
+			fieldB.requestFocusInWindow();
+		}
 		
 		}
 	
 	
 	
 	
-	public FunctionModel( JFormattedTextField _field, String _symbol){
+	public FunctionModel( JFormattedTextField _field, JTextField _fieldB,  String _symbol){
 		field=_field;
+		fieldB=_fieldB;
 		symbol=_symbol;
 		computeFunction();
 	}

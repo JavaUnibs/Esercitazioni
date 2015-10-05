@@ -16,6 +16,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import it.unibs.ing.Swing.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class CalcolatriceGUI {
 	private double number=0;
@@ -25,6 +27,7 @@ public class CalcolatriceGUI {
 	private NumberFormat textBFormat;
 	private ArrayList<String> sequence= new ArrayList<String>();
 	private Double memory=null;
+	private JTextField textC;
 	/**
 	 * Launch the application.
 	 */
@@ -81,7 +84,7 @@ public class CalcolatriceGUI {
 		JButton btnMC = new JButton("MC");
 		btnMC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MemoryModel temp= new MemoryModel(textB, "MC", memory);
+				MemoryModel temp= new MemoryModel(textB, textC, "MC", memory);
 			}
 		});
 		btnMC.setPreferredSize(new Dimension(52, 38));
@@ -92,7 +95,7 @@ public class CalcolatriceGUI {
 		JButton btnMS = new JButton("MS");
 		btnMS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MemoryModel temp= new MemoryModel(textB, "MS", memory);
+				MemoryModel temp= new MemoryModel(textB, textC, "MS", memory);
 			}
 		});
 		btnMS.setPreferredSize(new Dimension(52, 38));
@@ -103,7 +106,7 @@ public class CalcolatriceGUI {
 		JButton btnMR = new JButton("MR");
 		btnMR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MemoryModel temp= new MemoryModel(textB, "MR", memory);
+				MemoryModel temp= new MemoryModel(textB, textC, "MR", memory);
 			}
 		});
 		btnMR.setPreferredSize(new Dimension(52, 38));
@@ -114,7 +117,7 @@ public class CalcolatriceGUI {
 		JButton btnMPlus = new JButton("M+");
 		btnMPlus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MemoryModel temp= new MemoryModel(textB, "M+", memory);
+				MemoryModel temp= new MemoryModel(textB, textC, "M+", memory);
 			}
 		});
 		btnMPlus.setPreferredSize(new Dimension(52, 38));
@@ -125,7 +128,7 @@ public class CalcolatriceGUI {
 		JButton btnMMinus = new JButton("M-");
 		btnMMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MemoryModel temp= new MemoryModel(textB, "M-", memory);
+				MemoryModel temp= new MemoryModel(textB, textC, "M-", memory);
 			}
 		});
 		btnMMinus.setPreferredSize(new Dimension(52, 38));
@@ -136,7 +139,7 @@ public class CalcolatriceGUI {
 		JButton btnBackspace = new JButton("\u2190");
 		btnBackspace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CancelModel temp= new CancelModel(textA, textB, "backspace", sequence);
+				CancelModel temp= new CancelModel(textA, textB, textC, "backspace", sequence);
 			}
 		});
 		btnBackspace.setPreferredSize(new Dimension(52, 38));
@@ -147,7 +150,7 @@ public class CalcolatriceGUI {
 		JButton btnCE = new JButton("CE");
 		btnCE.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CancelModel temp= new CancelModel(textA, textB, "CE", sequence);
+				CancelModel temp= new CancelModel(textA, textB, textC, "CE", sequence);
 			}
 		});
 		btnCE.setPreferredSize(new Dimension(52, 38));
@@ -158,7 +161,7 @@ public class CalcolatriceGUI {
 		JButton btnC = new JButton("C");
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CancelModel temp= new CancelModel(textA, textB, "C", sequence);
+				CancelModel temp= new CancelModel(textA, textB, textC, "C", sequence);
 			}
 		});
 		btnC.setPreferredSize(new Dimension(52, 38));
@@ -169,7 +172,7 @@ public class CalcolatriceGUI {
 		JButton btnNegate = new JButton("\u00B1");
 		btnNegate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionModel temp= new FunctionModel(textB, "negate");
+				FunctionModel temp= new FunctionModel(textB, textC,  "negate");
 			}
 		});
 		btnNegate.setPreferredSize(new Dimension(52, 38));
@@ -180,7 +183,7 @@ public class CalcolatriceGUI {
 		JButton btnRoot = new JButton("\u221A");
 		btnRoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionModel temp= new FunctionModel(textB, "root");
+				FunctionModel temp= new FunctionModel(textB, textC, "root");
 			}
 		});
 		btnRoot.setPreferredSize(new Dimension(52, 38));
@@ -191,7 +194,7 @@ public class CalcolatriceGUI {
 		JButton btnFor = new JButton("*");
 		btnFor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			OperatorModel temp= new OperatorModel(textA, textB, "*", sequence);
+			OperatorModel temp= new OperatorModel(textA, textC, textB, "*", sequence);
 			}
 		});
 		btnFor.setPreferredSize(new Dimension(52, 38));
@@ -202,7 +205,7 @@ public class CalcolatriceGUI {
 		JButton btnPlus = new JButton("+");
 		btnPlus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			OperatorModel temp= new OperatorModel(textA, textB, "+", sequence);
+			OperatorModel temp= new OperatorModel(textA, textC, textB, "+", sequence);
 			}
 		});
 		btnPlus.setPreferredSize(new Dimension(52, 38));
@@ -213,7 +216,7 @@ public class CalcolatriceGUI {
 		JButton btnDivide = new JButton("/");
 		btnDivide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			OperatorModel temp= new OperatorModel(textA, textB, "/", sequence);
+			OperatorModel temp= new OperatorModel(textA, textC, textB, "/", sequence);
 			}
 		});
 		btnDivide.setPreferredSize(new Dimension(52, 38));
@@ -224,7 +227,7 @@ public class CalcolatriceGUI {
 		JButton btnMinus = new JButton("-");
 		btnMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			OperatorModel temp= new OperatorModel(textA, textB, "-", sequence);
+			OperatorModel temp= new OperatorModel(textA, textC, textB, "-", sequence);
 			}
 		});
 		btnMinus.setPreferredSize(new Dimension(52, 38));
@@ -235,7 +238,7 @@ public class CalcolatriceGUI {
 		JButton btnReciprocate = new JButton("1/x");
 		btnReciprocate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FunctionModel temp= new FunctionModel(textB, "reciprocate");
+				FunctionModel temp= new FunctionModel(textB, textC, "reciprocate");
 			}
 		});
 		btnReciprocate.setPreferredSize(new Dimension(52, 38));
@@ -365,9 +368,27 @@ public class CalcolatriceGUI {
 		panel.add(btnDot);
 		
 		JButton btnEqual = new JButton("=");
+		btnEqual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SequenceCalculator temp=new SequenceCalculator(sequence, textB, textA, textC);
+			}
+		});
 		btnEqual.setPreferredSize(new Dimension(108, 38));
 		btnEqual.setMinimumSize(new Dimension(52, 38));
 		btnEqual.setMaximumSize(new Dimension(52, 38));
 		panel.add(btnEqual);
+		
+		textC = new JTextField();
+		textC.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				textC.setText(null);
+			}
+		});
+		textC.setBackground(Color.WHITE);
+		textC.setEditable(false);
+		textC.setBounds(10, 52, 131, 20);
+		frame.getContentPane().add(textC);
+		textC.setColumns(10);
 	}
 }
