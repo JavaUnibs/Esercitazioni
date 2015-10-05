@@ -8,8 +8,7 @@ public class SwingUtilities {
 
 	public static void updateTextField(JTextField field, String string){
 		String text= field.getText();
-		text.concat(string);
-		field.setText(text);
+		field.setText(text+string);
 	}
 	
 	public static String arraylistToString(ArrayList<String> list){

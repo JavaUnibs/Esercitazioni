@@ -48,8 +48,9 @@ public class CalcolatriceGUI {
 	 * Create the application.
 	 */
 	public CalcolatriceGUI() {
-		initialize();
 		textBFormat=NumberFormat.getNumberInstance();
+		initialize();
+		
 	}
 
 	/**
