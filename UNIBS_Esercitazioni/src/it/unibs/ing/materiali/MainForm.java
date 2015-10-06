@@ -23,14 +23,13 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
-
 
 /***
  * L'esempio mostra l'utilizzo base di alcuni componenti della GUI Java
@@ -54,6 +53,8 @@ public class MainForm {
 	private JLabel lblTitle;
 	private JSlider slider;
 	private JComboBox comboBox;
+	private MyModel myModel;
+	private JButton btnRed;
 
 	/**
 	 * Launch the application.
@@ -76,6 +77,19 @@ public class MainForm {
 	 */
 	public MainForm() {
 		initialize();
+		
+		myModel = new MyModel();
+		myModel.addColor("Rosso", Color.red);
+		
+		myModel.addCurrentColorChangeListener(new CurrentColorChangeListener(){
+			public void currentColorChanged(Color newColor){
+				txtLog.setForeground(newColor);
+				comboBox.setSelectedItem(newColor);
+				updateLog("Model -> CurrentColorChanged");
+			}
+		});
+
+		comboBox.setModel(new DefaultComboBoxModel<>(myModel.getColors().toArray()));
 		
 		
 	}
@@ -100,14 +114,15 @@ public class MainForm {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.SOUTH);
 		
+		btnRed = new JButton("RED");
+		btnRed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myModel.setCurrentColor("Rosso");
+			}
+		});
+		panel_1.add(btnRed);
+		
 		comboBox = new JComboBox();
-		
-		NewModel myModel = new NewModel(
-				new ColorName[] { new ColorName("Nero", Color.black), new ColorName("Blue", Color.blue), 
-						new ColorName("Rosso",  Color.red), new ColorName("Verde",  Color.green), new ColorName("Rosa", Color.pink)});
-		
-		comboBox.setModel(myModel);
-		
 		
 		panel_1.add(comboBox);
 		
@@ -165,14 +180,15 @@ public class MainForm {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateLog(String.format("Colore selezionato: %s", 
-						myModel.getSelectedItem().toString()));
+						comboBox.getSelectedItem()));
 				
 				//Color[] colors = {Color.black, Color.blue, 
 				//		Color.green, Color.red };
 				
 				//txtLog.setForeground(colors[comboBox.getSelectedIndex()]);
 				
-				txtLog.setForeground(myModel.getSelectedItem().getColor());
+				//txtLog.setForeground((Color)comboBox.getSelectedItem());
+				myModel.setCurrentColor((Color)comboBox.getSelectedItem());
 				
 				//myModel.setCurrentColor((Color)comboBox.getSelectedItem());
 			}

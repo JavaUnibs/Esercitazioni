@@ -22,6 +22,10 @@ public class SequenceCalculator {
 	private void computeSequence(){
 
 		try{
+			
+			fieldB.commitEdit();
+			sequence.add(fieldB.getText());
+			fieldA.setText(SwingUtilities.arraylistToString(sequence));
 			for(int i=0;i<sequence.size();i++){
 				if(sequence.get(i).equals("*")) {
 					double number1=Double.parseDouble(sequence.get(i-1));
@@ -30,7 +34,7 @@ public class SequenceCalculator {
 					sequence.remove(i);
 					sequence.add(i, temp);
 					sequence.remove(i-1);
-					sequence.remove(i+1);
+					sequence.remove(i);
 				}
 				else if(sequence.get(i).equals("/")){
 					double number1=Double.parseDouble(sequence.get(i-1));
@@ -39,7 +43,7 @@ public class SequenceCalculator {
 					sequence.remove(i);
 					sequence.add(i, temp);
 					sequence.remove(i-1);
-					sequence.remove(i+1);
+					sequence.remove(i);
 				}
 				
 			}
@@ -52,7 +56,7 @@ public class SequenceCalculator {
 					sequence.remove(i);
 					sequence.add(i, temp);
 					sequence.remove(i-1);
-					sequence.remove(i+1);
+					sequence.remove(i);
 				}
 				
 				else if(sequence.get(i).equals("-")) {
@@ -62,7 +66,7 @@ public class SequenceCalculator {
 					sequence.remove(i);
 					sequence.add(i, temp);
 					sequence.remove(i-1);
-					sequence.remove(i+1);
+					sequence.remove(i);
 				}
 			
 			}
@@ -71,7 +75,7 @@ public class SequenceCalculator {
 			sequence.clear();
 			fieldA.setText(null);
 			
-		} catch(NumberFormatException e){
+		/*} catch(NumberFormatException e){
 			fieldC.setText("Sintassi non corretta");
 			fieldC.requestFocusInWindow();
 		}
@@ -88,6 +92,12 @@ public class SequenceCalculator {
 			fieldC.setText("Sintassi non corretta");
 			fieldC.requestFocusInWindow();
 		}
+		catch(ParseException e){
+			fieldC.setText("Sintassi non corretta");
+			fieldC.requestFocusInWindow();
+		}
+		*/
+		}catch(ParseException e){};
 		
 	}
 

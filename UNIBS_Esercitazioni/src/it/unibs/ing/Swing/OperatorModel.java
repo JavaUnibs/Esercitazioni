@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import it.unibs.ing.Swing.SwingUtilities;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 public class OperatorModel {
 	
@@ -22,13 +23,19 @@ public class OperatorModel {
 				case("*"): return true;
 				case("/"): return true;
 			}
-		}catch(NullPointerException e){}
+		}catch(NullPointerException e){
+			return false;
+		}
+		
+		catch(ArrayIndexOutOfBoundsException e){
+			return false;	
+		}
 		return false;
 	}
 	
 	private void computeOperator(){
 		if(isOperator()) {
-			list.remove(list.size()-1);
+			list.remove(list.size()- 1);
 			list.add(symbol);
 			fieldA.setText(SwingUtilities.arraylistToString(list));
 		}
@@ -38,6 +45,7 @@ public class OperatorModel {
 			list.add(fieldB.getText());
 			list.add(symbol);
 			fieldA.setText(SwingUtilities.arraylistToString(list));	
+			fieldB.setValue(new Double(0));
 			}
 		catch (ParseException exc){
 			fieldC.setText("Input invalido");
