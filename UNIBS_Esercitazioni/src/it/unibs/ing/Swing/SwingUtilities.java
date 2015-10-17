@@ -11,14 +11,5 @@ public class SwingUtilities {
 		field.setText(text+string);
 	}
 	
-	public static String arraylistToString(ArrayList<String> list){
-		String stringList="";
-		for (String s : list)
-		{
-		    stringList += s + " ";
-		}
-		
-		return stringList;
-		
-	}
+
 }

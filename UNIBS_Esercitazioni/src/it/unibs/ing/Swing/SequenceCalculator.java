@@ -8,24 +8,19 @@ import javax.swing.JTextField;
 
 public class SequenceCalculator {
 	private ArrayList<String> sequence;
-	private JFormattedTextField fieldB;
-	private JTextField fieldA, fieldC;
 	
-	public SequenceCalculator(ArrayList<String> _sequence, JFormattedTextField _fieldB, JTextField _fieldA, JTextField _fieldC){
+	public SequenceCalculator(ArrayList<String> _sequence){
 		sequence=_sequence;
-		fieldB=_fieldB;
-		fieldC=_fieldC;
-		fieldA=_fieldA;
-		computeSequence();
 	}
 	
-	private void computeSequence(){
 
-		try{
-			
-			fieldB.commitEdit();
-			sequence.add(fieldB.getText());
-			fieldA.setText(SwingUtilities.arraylistToString(sequence));
+	public void setSequence(ArrayList<String> _sequence){
+		sequence=_sequence;
+	}
+	
+	public  double computeSequence() throws ArithmeticException, IndexOutOfBoundsException, ParseException {
+
+		
 			for(int i=0;i<sequence.size();i++){
 				if(sequence.get(i).equals("*")) {
 					double number1=Double.parseDouble(sequence.get(i-1));
@@ -71,33 +66,8 @@ public class SequenceCalculator {
 			
 			}
 			
-			fieldB.setValue(Double.parseDouble(sequence.get(0)));
-			sequence.clear();
-			fieldA.setText(null);
+			return Double.parseDouble(sequence.get(0));
 			
-		/*} catch(NumberFormatException e){
-			fieldC.setText("Sintassi non corretta");
-			fieldC.requestFocusInWindow();
-		}
-		
-		catch(ArithmeticException e){
-			fieldC.setText("Operazione impossibile");
-			fieldC.requestFocusInWindow();
-		}
-		catch(ArrayIndexOutOfBoundsException e){
-			fieldC.setText("Sintassi non corretta");
-			fieldC.requestFocusInWindow();	
-		}
-		catch(IndexOutOfBoundsException e){
-			fieldC.setText("Sintassi non corretta");
-			fieldC.requestFocusInWindow();
-		}
-		catch(ParseException e){
-			fieldC.setText("Sintassi non corretta");
-			fieldC.requestFocusInWindow();
-		}
-		*/
-		}catch(ParseException e){};
 		
 	}
 
