@@ -10,6 +10,8 @@ public class SpaceObject {
 	public Area shape;
 	float[] position ={0, 0, 0}; //x, y, r
 	float[] speed ={0, 0, 0}; //x, y, r
+	
+
 	float[] maxSpeed ={10, 10, 1}; //x, y, r
 	
 	public float getX(){ return position[0];}
@@ -36,7 +38,7 @@ public class SpaceObject {
 	
 	public void accelerate(float linearAcc){
 		speed[0] = (float)(speed[0]+ linearAcc * Math.cos(position[2]));
-		speed[1] = (float)(speed[0]+ linearAcc * Math.sin(position[2]));
+		speed[1] = (float)(speed[1]+ linearAcc * Math.sin(position[2]));
 	}
 	
 	public void move(){
@@ -54,7 +56,22 @@ public class SpaceObject {
 		return String.format("Pos: %f, %f -Speed: %f, %f - Dir: %f", getX(), getY(), getSpeedX(), getSpeedY(), getR());
 	}
 	
+	public Shape getShape(){
+		AffineTransform t =new AffineTransform();
+		t.translate(position[0], position[1]);
+		t.rotate(position[2]);
+		return t.createTransformedShape(shape);
+		
+	}
 	
+	public void stepNext(){
+		move();
+		
+	}
+	
+	public void setSpeed(float[] speed) {
+		this.speed = speed;
+	}
 	
 }
 

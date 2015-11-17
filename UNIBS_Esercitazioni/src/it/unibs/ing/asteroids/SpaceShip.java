@@ -9,10 +9,11 @@ public class SpaceShip extends SpaceObject{
 	public SpaceShip(){
 		super();
 		this.shape= new Area(new Polygon(
-				new int[] {-30, 30, -30},
-				new int[] {15, 0, -15},
+			new int[] {-30, 30, -30},
+			new int[] {15, 0, -15},
+
 				3));
-		this.setR((float) Math.PI/2);
+	    this.setR((float) Math.PI/2);
 		this.color=Color.WHITE;
 	}
 	
