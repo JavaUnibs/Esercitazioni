@@ -35,7 +35,8 @@ public class SpaceObject {
 	
 	
 	public void accelerate(float linearAcc){
-		
+		speed[0] = (float)(speed[0]+ linearAcc * Math.cos(position[2]));
+		speed[1] = (float)(speed[0]+ linearAcc * Math.sin(position[2]));
 	}
 	
 	public void move(){
@@ -44,6 +45,15 @@ public class SpaceObject {
 		}
 		
 	}
+	
+	public void turn(float d){
+		position[2]+=d;
+	}
+	
+	public String toString(){
+		return String.format("Pos: %f, %f -Speed: %f, %f - Dir: %f", getX(), getY(), getSpeedX(), getSpeedY(), getR());
+	}
+	
 	
 	
 }

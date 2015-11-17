@@ -16,6 +16,8 @@ import javax.swing.JComponent;
 import javax.swing.Timer;
 
 public class SpaceView extends JComponent {
+	
+
 	public SpaceView() {
 		new Timer(30, new ActionListener() {
 			
@@ -31,6 +33,9 @@ public class SpaceView extends JComponent {
 	}
 
 	float r=0;
+
+
+
 
 
 	
@@ -49,20 +54,28 @@ public class SpaceView extends JComponent {
 		g2.fillRect(-500, -500, 1000, 1000);
 		
 		g2.setColor(Color.WHITE);
-		g2.drawLine(-500, 0, 500, 0);
-		g2.drawLine(0, 500, 0, -500);
-		
-		g2.setColor(Color.RED);
-		Rectangle rect= new Rectangle(-50, -50, 100, 100);
-		//g2.draw(rect);
-
-		af.rotate(r);
-		g2.setColor(Color.GREEN);
-		g2.draw(af.createTransformedShape(rect));
+//		g2.drawLine(-500, 0, 500, 0);
+//		g2.drawLine(0, 500, 0, -500);
+//		
+//		g2.setColor(Color.RED);
+//		Rectangle rect= new Rectangle(-50, -50, 100, 100);
+//		//g2.draw(rect);
+//
+//		af.rotate(r);
+//		g2.setColor(Color.GREEN);
+//		g2.draw(af.createTransformedShape(rect));
+		drawSpace(g2);
 		
 		
 	
 		
+	}
+	
+	SpaceShip ship = new SpaceShip();
+	private void drawSpace(Graphics2D g2){
+		if(ship!=null){
+			g2.draw(ship.shape);
+		}
 	}
 	 
 		
