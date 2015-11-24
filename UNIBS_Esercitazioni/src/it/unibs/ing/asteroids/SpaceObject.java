@@ -13,6 +13,7 @@ public class SpaceObject {
 	
 
 	float[] maxSpeed ={10, 10, 1}; //x, y, r
+	boolean isShip;
 	
 	public float getX(){ return position[0];}
 	public float getY(){ return position[1];}
@@ -21,6 +22,12 @@ public class SpaceObject {
 	public void setX(float x){ position[0]=x;}
 	public void setY(float y){ position[1]=y;}
 	public void setR(float r){ position[2]=r;}
+	
+	public void setSpeed(float sx, float sy, float sr){
+		speed[0]=Math.max(Math.min(sx, maxSpeed[0]), -maxSpeed[0]);
+		speed[1]=Math.max(Math.min(sy, maxSpeed[1]), -maxSpeed[1]);
+		speed[2]=Math.max(Math.min(sr, maxSpeed[2]), -maxSpeed[2]);
+	}
 	
 	
 	public void setPosition(float x, float y, float r){
@@ -37,8 +44,9 @@ public class SpaceObject {
 	
 	
 	public void accelerate(float linearAcc){
-		speed[0] = (float)(speed[0]+ linearAcc * Math.cos(position[2]));
-		speed[1] = (float)(speed[1]+ linearAcc * Math.sin(position[2]));
+		setSpeed(speed[0] = (float)(speed[0]+ linearAcc * Math.cos(position[2])),
+		speed[1] = (float)(speed[1]+ linearAcc * Math.sin(position[2])),
+		speed[2]);
 	}
 	
 	public void move(){
@@ -73,6 +81,24 @@ public class SpaceObject {
 		this.speed = speed;
 	}
 	
+	public boolean checkCollision(SpaceObject o){
+		Area a= new Area(this.getShape());
+		a.intersect(new Area(o.getShape()));
+		return !a.isEmpty();
+	}
+	 
+	boolean isAlive= true;
+	public void collision(){
+		isAlive=false;
+	}
+	
+	public boolean isAlive(){
+		return isAlive;
+	}
+	
+	public boolean isShip(){
+		return isShip;
+	}
 }
 
 

@@ -15,7 +15,10 @@ public class SpaceShip extends SpaceObject{
 				3));
 	    this.setR((float) Math.PI/2);
 		this.color=Color.WHITE;
+		this.isShip=true;
 	}
+	
+	
 	
 	
 	
