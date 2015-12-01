@@ -21,6 +21,7 @@ public class SpaceShip extends SpaceObject{
 	public void fire(){
 		Bullet b = new Bullet(this, 5 , 100);
 		space.add(b);
+		SpaceSound.FIRE.play();
 	}
 	
 	

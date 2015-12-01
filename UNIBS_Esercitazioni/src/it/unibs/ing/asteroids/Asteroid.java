@@ -58,5 +58,10 @@ public class Asteroid extends SpaceObject {
 		return s;
 		
 	}
+	
+	
+//	public boolean checkCollision(SpaceObject o){
+//		return (o instanceof Asteroid)? false: super.checkCollision(o);
+//	}
 
 }

@@ -65,7 +65,6 @@ public class BattleField implements Space {
 			    else {
 			objs[i].collision();
 			objs[j].collision();
-			
 			    }
 			
 			}
@@ -89,7 +88,7 @@ public class BattleField implements Space {
 
 	@Override
 	public void add(SpaceObject o) {
-		objects.add(o);
+		objects.add(o); 
 		
 	}
 	

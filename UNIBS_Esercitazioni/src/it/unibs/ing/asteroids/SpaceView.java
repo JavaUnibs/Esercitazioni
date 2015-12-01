@@ -98,6 +98,7 @@ public class SpaceView extends JComponent{
 //		g2.draw(af.createTransformedShape(rect));
 		drawSpace(g2);
 		g2.setTransform(old);
+		g2.setColor(Color.WHITE);
 		if(space!=null){
 			g2.drawString(space.toString(), 0, 10);
 		}
@@ -110,8 +111,10 @@ public class SpaceView extends JComponent{
 	BattleField space= new BattleField();
 	private void drawSpace(Graphics2D g2){
 		if(space!=null){
-			for(SpaceObject o: space.objects)
-			g2.draw(o.getShape());
+			for(SpaceObject o: space.objects){
+				g2.setColor(o.color);
+				g2.draw(o.getShape());
+			}
 
 		}
 	}
