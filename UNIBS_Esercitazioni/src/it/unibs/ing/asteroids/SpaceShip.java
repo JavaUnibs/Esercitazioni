@@ -6,8 +6,8 @@ import java.awt.geom.Area;
 
 public class SpaceShip extends SpaceObject{
 	
-	public SpaceShip(){
-		super();
+	public SpaceShip(Space space){
+		super(space);
 		this.shape= new Area(new Polygon(
 			new int[] {-30, 30, -30},
 			new int[] {15, 0, -15},
@@ -18,9 +18,15 @@ public class SpaceShip extends SpaceObject{
 		this.isShip=true;
 	}
 	
+	public void fire(){
+		Bullet b = new Bullet(this, 5 , 100);
+		space.add(b);
+	}
 	
 	
-	
+	public boolean checkCollision(SpaceObject o){
+		return (o instanceof Bullet&& this.equals(((Bullet)o).ship))? false: super.checkCollision(o);
+	}
 	
 
 }

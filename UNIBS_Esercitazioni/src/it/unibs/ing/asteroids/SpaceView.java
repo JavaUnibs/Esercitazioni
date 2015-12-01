@@ -39,11 +39,8 @@ public class SpaceView extends JComponent{
 				case KeyEvent.VK_LEFT: if(ship!=null) ship.turn(0.1f); break;
 				case KeyEvent.VK_RIGHT: if(ship!=null) ship.turn(-0.1f); break;
 				case KeyEvent.VK_UP: if(ship!=null) ship.accelerate(1f); break;
-				case KeyEvent.VK_N: if(ship!=null) {
-					ship.setPosition(0, 0, 0);
-					ship.setR((float)(Math.PI/2));
-					ship.setSpeed(new float[] {0, 0, 0});
-				}
+				  //case KeyEvent.VK_N: new SpaceShip(space);
+				case KeyEvent.VK_SPACE: if(ship!=null) ship.fire(); break;
 		
 		}
 //				

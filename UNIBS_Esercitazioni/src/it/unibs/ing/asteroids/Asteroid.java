@@ -13,7 +13,7 @@ public class Asteroid extends SpaceObject {
 	Random rdm= new Random();
 	
 	public Asteroid(Space space, int radius){
-		super();
+		super(space);
 		this.shape=new Area(CreateRandomShape(radius, 10+rdm.nextInt(5)));
 		this.color=Color.GREEN;
 		this.isShip=false;

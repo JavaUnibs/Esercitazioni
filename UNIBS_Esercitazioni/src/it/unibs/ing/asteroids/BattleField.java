@@ -13,7 +13,7 @@ public class BattleField implements Space {
 	public BattleField(){
 		objects= new ArrayList<SpaceObject>();
 		this.borders = new Rectangle2D.Float(-500f, -500f, 1000f, 1000f);
-		ship= new SpaceShip();
+		ship= new SpaceShip(this);
 		objects.add(ship);
 		objects.add(newAsteroid(50, -400, -400, 1f, 1f, 0.1f));
 		objects.add(newAsteroid(60, -300, 300, 1f, -1f, -0.5f));
@@ -58,13 +58,14 @@ public class BattleField implements Space {
 		for(int i=0;i<nobjs;i++){
 			for(int j=i+1;j<nobjs;j++){
 			if(objs[i].checkCollision(objs[j])){
-				if(!objs[i].isShip&&!objs[j].isShip()){
+				if(objs[i] instanceof Asteroid&&objs[j] instanceof Asteroid){
 					objs[i].setSpeed(-objs[i].getSpeedX(), -objs[i].getSpeedY(), objs[i].getSpeedR());
 				    objs[j].setSpeed(-objs[j].getSpeedX(), -objs[j].getSpeedY(), objs[j].getSpeedR());
 				}
 			    else {
 			objs[i].collision();
 			objs[j].collision();
+			
 			    }
 			
 			}
@@ -84,6 +85,12 @@ public class BattleField implements Space {
 	
 	public String toString(){
 		return ship !=null? ship.toString() : "";
+	}
+
+	@Override
+	public void add(SpaceObject o) {
+		objects.add(o);
+		
 	}
 	
 	}

@@ -10,6 +10,11 @@ public class SpaceObject {
 	public Area shape;
 	float[] position ={0, 0, 0}; //x, y, r
 	float[] speed ={0, 0, 0}; //x, y, r
+	Space space;
+	
+	public SpaceObject(Space space){
+		this.space= space;
+	}
 	
 
 	float[] maxSpeed ={10, 10, 1}; //x, y, r
@@ -96,9 +101,6 @@ public class SpaceObject {
 		return isAlive;
 	}
 	
-	public boolean isShip(){
-		return isShip;
-	}
 }
 
 
